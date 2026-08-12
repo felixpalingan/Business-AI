@@ -261,14 +261,14 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
           </label>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {REVENUE_BRACKETS.map((opt) => {
-              const isSelected = formData.annualRevenue.includes(opt.label);
+              const isSelected = formData.annualRevenue === opt.id || formData.annualRevenue.startsWith(opt.id) || formData.annualRevenue.includes(opt.id);
               return (
                 <div
                   key={opt.id}
-                  onClick={() => setFormData({ ...formData, annualRevenue: opt.id })}
+                  onClick={() => setFormData((prev) => ({ ...prev, annualRevenue: opt.id }))}
                   className={`cursor-pointer rounded-2xl border p-3.5 transition-all duration-200 ${
                     isSelected
-                      ? "border-indigo-500 bg-indigo-950/50 shadow-lg shadow-indigo-500/20 -translate-y-0.5"
+                      ? "border-indigo-500 bg-indigo-950/60 shadow-lg shadow-indigo-500/30 -translate-y-1 ring-1 ring-indigo-400"
                       : "border-white/10 bg-slate-950/40 hover:border-slate-700 hover:bg-slate-900/60"
                   }`}
                 >

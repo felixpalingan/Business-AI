@@ -1,4 +1,3 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { BusinessDiagnosticSchema } from "@/lib/schemas/analysis";
 import type { BusinessDiagnosticResult, BusinessDiagnosticInputFormData } from "@/types/business-analysis";
 
@@ -13,7 +12,7 @@ export async function generateBusinessDiagnostic(
 ): Promise<BusinessDiagnosticResult> {
   if (!GEMINI_API_KEY) {
     throw new Error(
-      "GEMINI_API_KEY is not configured in .env.local. Please check your Google AI Studio API credentials."
+      "GEMINI_API_KEY is not configured in .env.local. Please provide your Google AI Studio API key."
     );
   }
 
@@ -68,42 +67,48 @@ Perform a rigorous, holistic, and deeply analytical Business Health Diagnostic &
 
 Return ONLY a pure JSON object conforming strictly to the requested schema.`;
 
-  const candidateModels = ["gemini-flash-latest", "gemini-1.5-flash", "gemini-2.0-flash"];
-  let lastError: any = null;
+  const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent";
 
-  for (const modelName of candidateModels) {
-    try {
-      console.log(`📡 [OK OCE AI] Querying Google AI Studio (${modelName})...`);
-      const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({
-        model: modelName,
-        generationConfig: {
-          responseMimeType: "application/json",
-          temperature: 0.3,
-        },
-      });
+  console.log(`📡 [OK OCE AI] Querying Google AI Studio (gemini-flash-latest)...`);
 
-      const result = await model.generateContent(prompt);
-      const responseText = result.response.text();
-      console.log(`✅ [OK OCE AI] Successfully generated diagnostic report via ${modelName}!`);
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-goog-api-key": GEMINI_API_KEY,
+    },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: {
+        responseMimeType: "application/json",
+        temperature: 0.25,
+      },
+    }),
+  });
 
-      const parsedJson = JSON.parse(responseText);
-      const validatedData = BusinessDiagnosticSchema.parse(parsedJson);
-
-      return {
-        ...validatedData,
-        slug: generateSlug(input.businessName),
-        input,
-        createdAt: new Date().toISOString(),
-      };
-    } catch (err: any) {
-      console.error(`❌ [OK OCE AI] Error on model '${modelName}':`, err?.message || err);
-      lastError = err;
-    }
+  if (!response.ok) {
+    const errorJson = await response.json().catch(() => ({}));
+    const errorMessage = errorJson?.error?.message || response.statusText || `HTTP ${response.status}`;
+    console.error(`❌ [OK OCE AI] Google AI API Error: ${errorMessage}`);
+    throw new Error(`Google AI Studio Error: ${errorMessage}`);
   }
 
-  // If live calls fail, throw explicit error per user instructions (no fake fallback data)
-  throw new Error(
-    `AI Diagnostic Engine is temporarily unavailable. Details: ${lastError?.message || "Google AI Studio connection failed"}. Please verify your network and GEMINI_API_KEY.`
-  );
+  const resultData = await response.json();
+  const rawText = resultData?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+  if (!rawText) {
+    throw new Error("No output received from Google AI Studio. Please retry.");
+  }
+
+  console.log(`✅ [OK OCE AI] Successfully received response from Google AI Studio!`);
+
+  const parsedJson = JSON.parse(rawText);
+  const validatedData = BusinessDiagnosticSchema.parse(parsedJson);
+
+  return {
+    ...validatedData,
+    slug: generateSlug(input.businessName),
+    input,
+    createdAt: new Date().toISOString(),
+  };
 }
