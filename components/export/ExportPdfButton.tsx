@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Printer, Loader2 } from "lucide-react";
-import confetti from "canvas-confetti";
+import { Download, Loader2, Check } from "lucide-react";
 
 interface ExportPdfButtonProps {
   ideaName: string;
@@ -10,34 +9,36 @@ interface ExportPdfButtonProps {
 
 export function ExportPdfButton({ ideaName }: ExportPdfButtonProps) {
   const [isExporting, setIsExporting] = useState(false);
+  const [exported, setExported] = useState(false);
 
-  const handlePrint = () => {
+  const handleExportPdf = () => {
     setIsExporting(true);
-    confetti({
-      particleCount: 50,
-      spread: 60,
-      origin: { y: 0.85 },
-    });
-
+    // Trigger standard clean print dialog which exports full layout cleanly to PDF
     setTimeout(() => {
       window.print();
       setIsExporting(false);
-    }, 400);
+      setExported(true);
+      setTimeout(() => setExported(false), 2500);
+    }, 300);
   };
 
   return (
     <button
-      onClick={handlePrint}
+      onClick={handleExportPdf}
       disabled={isExporting}
-      className="flex items-center gap-2 rounded-xl border border-white/10 bg-slate-800/80 px-4 py-2 text-xs font-semibold text-slate-200 backdrop-blur-md transition-all hover:border-indigo-500/50 hover:bg-slate-700 hover:text-white no-print"
-      title="Cetak / Ekspor Laporan PDF Eksekutif"
+      className="inline-flex items-center gap-2 rounded-xl border border-indigo-500/40 bg-indigo-600/20 px-4 py-2 text-xs font-bold text-indigo-200 backdrop-blur-md shadow-sm transition-all hover:bg-indigo-600 hover:text-white active:scale-95 disabled:opacity-50 whitespace-nowrap no-print"
+      title="Download Dashboard Analisis Bisnis Menjadi PDF"
     >
       {isExporting ? (
-        <Loader2 className="h-3.5 w-3.5 animate-spin text-indigo-400" />
+        <Loader2 className="h-4 w-4 animate-spin text-indigo-300" />
+      ) : exported ? (
+        <Check className="h-4 w-4 text-emerald-400" />
       ) : (
-        <Printer className="h-3.5 w-3.5 text-indigo-400" />
+        <Download className="h-4 w-4 text-indigo-400" />
       )}
-      <span>Ekspor Laporan PDF</span>
+      <span>{isExporting ? "Menyiapkan PDF..." : exported ? "PDF Siap!" : "Ekspor PDF"}</span>
     </button>
   );
 }
+
+export default ExportPdfButton;

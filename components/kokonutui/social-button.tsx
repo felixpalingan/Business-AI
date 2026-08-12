@@ -34,32 +34,36 @@ export function SocialButton({ ideaName, slug }: SocialButtonProps) {
   };
 
   return (
-    <div className="flex items-center gap-1.5 no-print">
+    <div className="flex flex-wrap items-center gap-2.5 no-print">
       <button
         onClick={shareWA}
-        className="flex items-center gap-1 rounded-xl border border-emerald-500/30 bg-emerald-950/40 px-2.5 py-1.5 text-xs font-semibold text-emerald-300 hover:bg-emerald-900/60 hover:text-white transition-all"
+        className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-emerald-950/50 px-3.5 py-2 text-xs font-semibold text-emerald-200 hover:border-emerald-400 hover:bg-emerald-900/80 hover:text-white transition-all whitespace-nowrap"
         title="Bagikan ke WhatsApp"
       >
-        <MessageCircle className="h-3.5 w-3.5" />
-        <span className="hidden sm:inline">WhatsApp</span>
+        <MessageCircle className="h-4 w-4 shrink-0 text-emerald-400" />
+        <span>WhatsApp</span>
       </button>
 
       <button
         onClick={shareTwitter}
-        className="flex items-center gap-1 rounded-xl border border-cyan-500/30 bg-cyan-950/40 px-2.5 py-1.5 text-xs font-semibold text-cyan-300 hover:bg-cyan-900/60 hover:text-white transition-all"
+        className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/40 bg-cyan-950/50 px-3.5 py-2 text-xs font-semibold text-cyan-200 hover:border-cyan-400 hover:bg-cyan-900/80 hover:text-white transition-all whitespace-nowrap"
         title="Bagikan ke Twitter / X"
       >
-        <Send className="h-3.5 w-3.5" />
-        <span className="hidden sm:inline">X / Twitter</span>
+        <Send className="h-4 w-4 shrink-0 text-cyan-400" />
+        <span>X / Twitter</span>
       </button>
 
       <button
         onClick={copyLink}
-        className="flex items-center gap-1 rounded-xl border border-purple-500/30 bg-purple-950/40 px-2.5 py-1.5 text-xs font-semibold text-purple-300 hover:bg-purple-900/60 hover:text-white transition-all"
+        className="inline-flex items-center gap-2 rounded-xl border border-purple-500/40 bg-purple-950/50 px-3.5 py-2 text-xs font-semibold text-purple-200 hover:border-purple-400 hover:bg-purple-900/80 hover:text-white transition-all whitespace-nowrap"
         title="Salin Link Berbagi"
       >
-        {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Share2 className="h-3.5 w-3.5" />}
-        <span>{copied ? "Tersalin!" : "Salin Link"}</span>
+        {copied ? (
+          <Check className="h-4 w-4 shrink-0 text-emerald-400" />
+        ) : (
+          <Share2 className="h-4 w-4 shrink-0 text-purple-400" />
+        )}
+        <span>{copied ? "Link Tersalin!" : "Salin Link"}</span>
       </button>
     </div>
   );
