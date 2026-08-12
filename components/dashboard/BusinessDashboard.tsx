@@ -11,15 +11,16 @@ import { TabFinancials } from "@/components/dashboard/TabFinancials";
 interface BusinessDashboardProps {
   analysis: BusinessAnalysisResult;
   onReset: () => void;
+  onOpenHistory?: () => void;
 }
 
-export function BusinessDashboard({ analysis, onReset }: BusinessDashboardProps) {
+export function BusinessDashboard({ analysis, onReset, onOpenHistory }: BusinessDashboardProps) {
   const [activeTab, setActiveTab] = useState<"strategic" | "mvp" | "financials">("strategic");
 
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Header with Title, Meta, and Action Buttons */}
-      <DashboardHeader analysis={analysis} onReset={onReset} />
+      <DashboardHeader analysis={analysis} onReset={onReset} onOpenHistory={onOpenHistory} />
 
       {/* Main Tab Navigation Bar */}
       <div className="flex items-center justify-start border-b border-white/10 pb-px no-print">
@@ -33,7 +34,7 @@ export function BusinessDashboard({ analysis, onReset }: BusinessDashboardProps)
             }`}
           >
             <Compass className="h-4 w-4" />
-            <span>Tab 1: Kanvas Strategis</span>
+            <span>Tab 1: Kanvas Strategis & Lean Canvas</span>
           </button>
 
           <button
@@ -45,7 +46,7 @@ export function BusinessDashboard({ analysis, onReset }: BusinessDashboardProps)
             }`}
           >
             <Cpu className="h-4 w-4" />
-            <span>Tab 2: Scope MVP & Rencana Aksi</span>
+            <span>Tab 2: Scope MVP & Validasi 14 Hari</span>
           </button>
 
           <button
@@ -57,7 +58,7 @@ export function BusinessDashboard({ analysis, onReset }: BusinessDashboardProps)
             }`}
           >
             <DollarSign className="h-4 w-4" />
-            <span>Tab 3: Keuangan & Proyeksi Growth</span>
+            <span>Tab 3: Unit Economics & Proyeksi Keuangan</span>
           </button>
         </div>
       </div>

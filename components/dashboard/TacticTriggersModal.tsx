@@ -1,23 +1,23 @@
 "use client";
 
 import React, { useState } from "react";
-import { Copy, Check, X, Database, Mic, Users, Rocket } from "lucide-react";
+import { Copy, Check, X, Database, Mic, MessageSquare, HelpCircle, Users, Rocket } from "lucide-react";
 import type { BusinessAnalysisResult } from "@/types/business-analysis";
 
 interface TacticTriggersModalProps {
   analysis: BusinessAnalysisResult;
-  initialTab?: "pitch" | "schema" | "personas" | "growth";
+  initialTab?: "schema" | "interview" | "outreach" | "pitch" | "personas";
   isOpen: boolean;
   onClose: () => void;
 }
 
 export function TacticTriggersModal({
   analysis,
-  initialTab = "pitch",
+  initialTab = "schema",
   isOpen,
   onClose,
 }: TacticTriggersModalProps) {
-  const [activeTab, setActiveTab] = useState<"pitch" | "schema" | "personas" | "growth">(initialTab);
+  const [activeTab, setActiveTab] = useState<"schema" | "interview" | "outreach" | "pitch" | "personas">(initialTab);
   const [copied, setCopied] = useState<string | null>(null);
 
   if (!isOpen) return null;
@@ -32,6 +32,10 @@ export function TacticTriggersModal({
 
   const formattedPitch = `[HOOK]\n${tacticTriggers.elevatorPitch.hook}\n\n[MASALAH]\n${tacticTriggers.elevatorPitch.problem}\n\n[SOLUSI]\n${tacticTriggers.elevatorPitch.solution}\n\n[CALL TO ACTION]\n${tacticTriggers.elevatorPitch.callToAction}`;
 
+  const formattedQuestions = tacticTriggers.validationInterviewQuestions
+    ?.map((q, i) => `${i + 1}. ${q.question}\n   Tujuan: ${q.goal}`)
+    .join("\n\n") || "";
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn no-print">
       <div className="relative w-full max-w-3xl overflow-hidden rounded-3xl border border-white/10 bg-slate-900 shadow-2xl">
@@ -43,7 +47,7 @@ export function TacticTriggersModal({
             </div>
             <div>
               <h3 className="text-base font-bold text-white font-heading">
-                Toolkit Eksekusi Taktis
+                Deliverables Taktis & Generator AI
               </h3>
               <p className="text-xs text-slate-400">{analysis.input.ideaName}</p>
             </div>
@@ -58,58 +62,171 @@ export function TacticTriggersModal({
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-white/10 bg-slate-950/40 px-6 py-2">
+        <div className="flex border-b border-white/10 bg-slate-950/40 px-6 py-2 overflow-x-auto">
           <div className="flex gap-2">
             <button
-              onClick={() => setActiveTab("pitch")}
-              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
-                activeTab === "pitch"
-                  ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              <Mic className="h-3.5 w-3.5" />
-              Elevator Pitch
-            </button>
-            <button
               onClick={() => setActiveTab("schema")}
-              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all ${
                 activeTab === "schema"
                   ? "bg-indigo-600 text-white shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
               <Database className="h-3.5 w-3.5" />
-              Schema DB MVP
+              1. Skema DB MVP
             </button>
             <button
-              onClick={() => setActiveTab("personas")}
-              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
-                activeTab === "personas"
+              onClick={() => setActiveTab("interview")}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all ${
+                activeTab === "interview"
                   ? "bg-indigo-600 text-white shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
-              <Users className="h-3.5 w-3.5" />
-              Persona Pelanggan
+              <HelpCircle className="h-3.5 w-3.5" />
+              2. 5 Pertanyaan Wawancara
             </button>
             <button
-              onClick={() => setActiveTab("growth")}
-              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
-                activeTab === "growth"
+              onClick={() => setActiveTab("outreach")}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all ${
+                activeTab === "outreach"
                   ? "bg-indigo-600 text-white shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
-              <Rocket className="h-3.5 w-3.5" />
-              Saluran Pertumbuhan
+              <MessageSquare className="h-3.5 w-3.5" />
+              3. WhatsApp / Outreach
+            </button>
+            <button
+              onClick={() => setActiveTab("pitch")}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all ${
+                activeTab === "pitch"
+                  ? "bg-indigo-600 text-white shadow-sm"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              <Mic className="h-3.5 w-3.5" />
+              4. Elevator Pitch
             </button>
           </div>
         </div>
 
         {/* Modal Content */}
         <div className="max-h-[60vh] overflow-y-auto p-6">
-          {/* Pitch Tab */}
+          {/* 1. Database Schema Tab */}
+          {activeTab === "schema" && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-slate-400">
+                  Skema database PostgreSQL / Prisma ORM yang siap langsung di-copy untuk ide bisnis ini.
+                </p>
+                <button
+                  onClick={() => copyToClipboard(tacticTriggers.mvpDatabaseSchema, "schema")}
+                  className="flex items-center gap-1.5 rounded-lg bg-indigo-600/20 px-3 py-1.5 text-xs font-semibold text-indigo-400 border border-indigo-500/30 hover:bg-indigo-600 hover:text-white transition-all"
+                >
+                  {copied === "schema" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                  <span>{copied === "schema" ? "Tersalin!" : "Salin Skema DB"}</span>
+                </button>
+              </div>
+
+              <pre className="overflow-x-auto rounded-2xl border border-white/10 bg-slate-950 p-4 font-mono text-xs text-indigo-200 leading-relaxed">
+                {tacticTriggers.mvpDatabaseSchema}
+              </pre>
+            </div>
+          )}
+
+          {/* 2. Validation Interview Questions */}
+          {activeTab === "interview" && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-slate-400">
+                  5 pertanyaan wawancara terstruktur (The Mom Test framework) untuk memvalidasi masalah ke calon kustomer pertama.
+                </p>
+                <button
+                  onClick={() => copyToClipboard(formattedQuestions, "questions")}
+                  className="flex items-center gap-1.5 rounded-lg bg-indigo-600/20 px-3 py-1.5 text-xs font-semibold text-indigo-400 border border-indigo-500/30 hover:bg-indigo-600 hover:text-white transition-all"
+                >
+                  {copied === "questions" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                  <span>{copied === "questions" ? "Tersalin!" : "Salin Semua Pertanyaan"}</span>
+                </button>
+              </div>
+
+              <div className="space-y-3">
+                {tacticTriggers.validationInterviewQuestions?.map((q, idx) => (
+                  <div
+                    key={idx}
+                    className="rounded-2xl border border-white/10 bg-slate-950/80 p-4 space-y-2"
+                  >
+                    <div className="flex items-start gap-2.5">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-indigo-500/20 text-xs font-bold text-indigo-400">
+                        {idx + 1}
+                      </span>
+                      <div>
+                        <h4 className="text-sm font-bold text-white">"{q.question}"</h4>
+                        <p className="mt-1 text-xs text-emerald-400 flex items-center gap-1">
+                          <strong>Tujuan Psikologis:</strong> {q.goal}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* 3. WhatsApp & Cold Outreach Tab */}
+          {activeTab === "outreach" && (
+            <div className="space-y-5">
+              <p className="text-xs text-slate-400">
+                Draft pesan penawaran / kemitraan awal yang terbukti menghasilkan respon tinggi di pasar Indonesia.
+              </p>
+
+              {/* WhatsApp Template */}
+              <div className="space-y-2 rounded-2xl border border-emerald-500/30 bg-slate-950/80 p-4">
+                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                  <span className="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+                    <MessageSquare className="h-3.5 w-3.5" />
+                    Template Pesan WhatsApp (Rekomendasi Utama)
+                  </span>
+                  <button
+                    onClick={() =>
+                      copyToClipboard(tacticTriggers.coldOutreachTemplates?.whatsapp || "", "wa")
+                    }
+                    className="flex items-center gap-1 text-[11px] font-semibold text-emerald-400 hover:text-emerald-300"
+                  >
+                    {copied === "wa" ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                    <span>{copied === "wa" ? "Tersalin!" : "Salin WA"}</span>
+                  </button>
+                </div>
+                <pre className="whitespace-pre-wrap font-sans text-xs text-slate-200 leading-relaxed">
+                  {tacticTriggers.coldOutreachTemplates?.whatsapp}
+                </pre>
+              </div>
+
+              {/* Email Template */}
+              <div className="space-y-2 rounded-2xl border border-white/10 bg-slate-950/80 p-4">
+                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                  <span className="text-xs font-bold text-indigo-400">
+                    Template Cold Email B2B
+                  </span>
+                  <button
+                    onClick={() =>
+                      copyToClipboard(tacticTriggers.coldOutreachTemplates?.email || "", "email")
+                    }
+                    className="flex items-center gap-1 text-[11px] font-semibold text-indigo-400 hover:text-indigo-300"
+                  >
+                    {copied === "email" ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                    <span>{copied === "email" ? "Tersalin!" : "Salin Email"}</span>
+                  </button>
+                </div>
+                <pre className="whitespace-pre-wrap font-sans text-xs text-slate-200 leading-relaxed">
+                  {tacticTriggers.coldOutreachTemplates?.email}
+                </pre>
+              </div>
+            </div>
+          )}
+
+          {/* 4. Elevator Pitch Tab */}
           {activeTab === "pitch" && (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
@@ -118,7 +235,7 @@ export function TacticTriggersModal({
                 </p>
                 <button
                   onClick={() => copyToClipboard(formattedPitch, "pitch")}
-                  className="flex items-center gap-1.5 rounded-lg bg-indigo-600/20 px-3 py-1 text-xs font-semibold text-indigo-400 border border-indigo-500/30 hover:bg-indigo-600 hover:text-white transition-all"
+                  className="flex items-center gap-1.5 rounded-lg bg-indigo-600/20 px-3 py-1.5 text-xs font-semibold text-indigo-400 border border-indigo-500/30 hover:bg-indigo-600 hover:text-white transition-all"
                 >
                   {copied === "pitch" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                   <span>{copied === "pitch" ? "Tersalin!" : "Salin Pitch"}</span>
@@ -152,91 +269,6 @@ export function TacticTriggersModal({
                     {tacticTriggers.elevatorPitch.callToAction}
                   </p>
                 </div>
-              </div>
-            </div>
-          )}
-
-          {/* Database Schema Tab */}
-          {activeTab === "schema" && (
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <p className="text-xs text-slate-400">
-                  Schema database Prisma / PostgreSQL yang siap langsung digunakan untuk fase MVP.
-                </p>
-                <button
-                  onClick={() => copyToClipboard(tacticTriggers.mvpDatabaseSchema, "schema")}
-                  className="flex items-center gap-1.5 rounded-lg bg-indigo-600/20 px-3 py-1 text-xs font-semibold text-indigo-400 border border-indigo-500/30 hover:bg-indigo-600 hover:text-white transition-all"
-                >
-                  {copied === "schema" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                  <span>{copied === "schema" ? "Tersalin!" : "Salin Schema"}</span>
-                </button>
-              </div>
-
-              <pre className="overflow-x-auto rounded-2xl border border-white/10 bg-slate-950 p-4 font-mono text-xs text-indigo-200 leading-relaxed">
-                {tacticTriggers.mvpDatabaseSchema}
-              </pre>
-            </div>
-          )}
-
-          {/* Target Personas Tab */}
-          {activeTab === "personas" && (
-            <div className="space-y-4">
-              <p className="text-xs text-slate-400">
-                Profil persona calon pelanggan ideal yang dipetakan ke pemicu psikologis pembelian.
-              </p>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {tacticTriggers.targetPersonas.map((persona, idx) => (
-                  <div
-                    key={idx}
-                    className="rounded-2xl border border-white/10 bg-slate-950/80 p-4 space-y-2.5"
-                  >
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-500/20 text-indigo-400 text-xs font-bold">
-                        #{idx + 1}
-                      </div>
-                      <h4 className="text-sm font-bold text-white">{persona.role}</h4>
-                    </div>
-                    <div className="text-xs space-y-1">
-                      <span className="text-slate-400 font-medium">Frustrasi Utama:</span>
-                      <p className="text-slate-200">{persona.painPoint}</p>
-                    </div>
-                    <div className="text-xs space-y-1 rounded-xl bg-emerald-950/30 border border-emerald-500/20 p-2.5">
-                      <span className="text-emerald-400 font-semibold">Pemicu Keputusan Membeli:</span>
-                      <p className="text-slate-300">{persona.triggerToBuy}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Growth Channels Tab */}
-          {activeTab === "growth" && (
-            <div className="space-y-4">
-              <p className="text-xs text-slate-400">
-                Saluran akuisisi pelanggan ber-ROI tertinggi yang diprioritaskan untuk pasar Indonesia.
-              </p>
-              <div className="space-y-3">
-                {tacticTriggers.growthChannels.map((channel, idx) => (
-                  <div
-                    key={idx}
-                    className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-slate-950/80 p-4 md:flex-row md:items-center md:justify-between"
-                  >
-                    <div className="space-y-1">
-                      <h4 className="text-sm font-bold text-white">{channel.channel}</h4>
-                      <p className="text-xs text-slate-300">{channel.tactic}</p>
-                    </div>
-                    <span
-                      className={`inline-flex self-start md:self-auto rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
-                        channel.expectedEffectiveness === "High"
-                          ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
-                          : "border-amber-500/30 bg-amber-500/10 text-amber-400"
-                      }`}
-                    >
-                      ROI {channel.expectedEffectiveness === "High" ? "Tinggi" : "Sedang"}
-                    </span>
-                  </div>
-                ))}
               </div>
             </div>
           )}

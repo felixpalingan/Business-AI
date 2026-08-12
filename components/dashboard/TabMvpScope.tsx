@@ -9,6 +9,8 @@ import {
   Calendar,
   CheckCircle2,
   Flame,
+  Star,
+  Layers,
 } from "lucide-react";
 import type { BusinessAnalysisResult } from "@/types/business-analysis";
 import { GlowCard } from "@/components/kokonut/GlowCard";
@@ -20,17 +22,28 @@ interface TabMvpScopeProps {
 }
 
 export function TabMvpScope({ analysis }: TabMvpScopeProps) {
-  const { mvpScope, actionPlan } = analysis;
+  const { mvpScope, actionPlan, slug } = analysis;
 
+  const storageKey = `sprint_state_${slug || "default"}`;
   const [completedTasks, setCompletedTasks] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     animateStaggerEntrance(".mvp-card", 80);
-  }, []);
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (saved) {
+        setCompletedTasks(JSON.parse(saved));
+      }
+    } catch (e) {}
+  }, [storageKey]);
 
   const toggleTask = (taskId: string) => {
     setCompletedTasks((prev) => {
       const next = { ...prev, [taskId]: !prev[taskId] };
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(next));
+      } catch (e) {}
+
       const totalTasksCount = actionPlan.sprintPhases.reduce(
         (acc, p) => acc + p.tasks.length,
         0
@@ -54,6 +67,27 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
   const doneSprintTasks = Object.values(completedTasks).filter(Boolean).length;
   const sprintProgressPercent =
     totalSprintTasks > 0 ? Math.round((doneSprintTasks / totalSprintTasks) * 100) : 0;
+
+  const renderDifficultyDots = (difficulty: number = 3) => {
+    return (
+      <div className="flex items-center gap-0.5" title={`Kesulitan Dev: ${difficulty}/5`}>
+        {[1, 2, 3, 4, 5].map((level) => (
+          <span
+            key={level}
+            className={`h-1.5 w-1.5 rounded-full ${
+              level <= difficulty
+                ? level <= 2
+                  ? "bg-emerald-400"
+                  : level <= 3
+                  ? "bg-amber-400"
+                  : "bg-rose-400"
+                : "bg-slate-700"
+            }`}
+          />
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="space-y-6">
@@ -109,87 +143,88 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
         </div>
       </div>
 
-      {/* Feature Scope Matrix */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        {/* Must Have Features Table */}
-        <div className="mvp-card lg:col-span-7">
-          <GlowCard glowColor="indigo" className="h-full">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <div className="flex items-center gap-2">
-                <Flame className="h-4 w-4 text-amber-400" />
-                <h3 className="text-sm font-bold text-white font-heading">
-                  Matriks Scope Fitur Wajib MVP
-                </h3>
-              </div>
-              <span className="rounded-full bg-indigo-500/20 px-2.5 py-0.5 text-[10px] font-bold text-indigo-300">
-                Prioritas P0
-              </span>
+      {/* Feature Scope Matrix Table */}
+      <div className="mvp-card">
+        <GlowCard glowColor="indigo">
+          <div className="flex items-center justify-between border-b border-white/10 pb-3">
+            <div className="flex items-center gap-2">
+              <Layers className="h-4 w-4 text-indigo-400" />
+              <h3 className="text-sm font-bold text-white font-heading">
+                Tabel Matriks Fitur MVP (Wajib vs Bisa Nanti)
+              </h3>
             </div>
+            <span className="text-[11px] font-semibold text-slate-400">
+              Prioritas & Kompleksitas
+            </span>
+          </div>
 
-            <div className="mt-4 space-y-3">
-              {mvpScope.mustHaveFeatures.map((feat, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-xl border border-white/5 bg-slate-950/60 p-3.5 transition-colors hover:border-slate-700"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-white">{feat.title}</span>
-                        <span className="rounded-full bg-slate-800 px-2 py-0.2 text-[9px] font-semibold text-slate-300">
-                          {feat.category}
-                        </span>
-                      </div>
-                      <p className="mt-1 text-xs text-slate-300 leading-relaxed">
-                        {feat.description}
-                      </p>
-                    </div>
-                    <span className="shrink-0 rounded-lg bg-indigo-950/60 border border-indigo-500/30 px-2 py-1 text-xs font-bold text-indigo-300">
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full text-left text-xs">
+              <thead>
+                <tr className="border-b border-white/10 text-slate-400">
+                  <th className="pb-3 font-semibold">Nama Fitur & Deskripsi</th>
+                  <th className="pb-3 font-semibold">Kategori Prioritas</th>
+                  <th className="pb-3 font-semibold">Tipe Modul</th>
+                  <th className="pb-3 font-semibold">Kesulitan (1-5)</th>
+                  <th className="pb-3 font-semibold text-right">Estimasi Dev</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {/* Must-Haves */}
+                {mvpScope.mustHaveFeatures.map((feat, idx) => (
+                  <tr key={`must-${idx}`} className="text-slate-200 hover:bg-slate-900/40">
+                    <td className="py-3 pr-4">
+                      <p className="font-bold text-white">{feat.title}</p>
+                      <p className="text-[11px] text-slate-400 mt-0.5">{feat.description}</p>
+                    </td>
+                    <td className="py-3">
+                      <span className="rounded-full bg-rose-500/10 border border-rose-500/30 px-2.5 py-0.5 text-[10px] font-bold text-rose-300">
+                        WAJIB (Must-Have)
+                      </span>
+                    </td>
+                    <td className="py-3">
+                      <span className="rounded-md bg-slate-800 px-2 py-0.5 text-[10px] text-slate-300">
+                        {feat.category}
+                      </span>
+                    </td>
+                    <td className="py-3">
+                      {renderDifficultyDots(feat.devDifficulty || 2)}
+                    </td>
+                    <td className="py-3 text-right font-bold text-indigo-400">
                       {feat.estimatedDays} Hari
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </GlowCard>
-        </div>
+                    </td>
+                  </tr>
+                ))}
 
-        {/* Nice to Have & Post MVP */}
-        <div className="mvp-card lg:col-span-5 space-y-4">
-          <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-5 backdrop-blur-md">
-            <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
-              <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-                Fitur Tambahan Nice-to-Have (P1 / Beta)
-              </h4>
-              <span className="text-[10px] text-slate-400">Pasca Rilis</span>
-            </div>
-            <div className="mt-3 space-y-2.5">
-              {mvpScope.niceToHaveFeatures.map((feat, idx) => (
-                <div key={idx} className="rounded-xl bg-slate-950/40 p-3 text-xs">
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-white">{feat.title}</span>
-                    <span className="text-[10px] text-slate-400">{feat.estimatedDays} Hari</span>
-                  </div>
-                  <p className="mt-1 text-[11px] text-slate-400">{feat.description}</p>
-                </div>
-              ))}
-            </div>
+                {/* Nice-To-Haves */}
+                {mvpScope.niceToHaveFeatures.map((feat, idx) => (
+                  <tr key={`nice-${idx}`} className="text-slate-200 hover:bg-slate-900/40 opacity-80">
+                    <td className="py-3 pr-4">
+                      <p className="font-semibold text-slate-200">{feat.title}</p>
+                      <p className="text-[11px] text-slate-400 mt-0.5">{feat.description}</p>
+                    </td>
+                    <td className="py-3">
+                      <span className="rounded-full bg-slate-800 border border-white/10 px-2.5 py-0.5 text-[10px] font-medium text-slate-400">
+                        Bisa Nanti (Nice-to-Have)
+                      </span>
+                    </td>
+                    <td className="py-3">
+                      <span className="rounded-md bg-slate-800/60 px-2 py-0.5 text-[10px] text-slate-400">
+                        {feat.category}
+                      </span>
+                    </td>
+                    <td className="py-3">
+                      {renderDifficultyDots(feat.devDifficulty || 3)}
+                    </td>
+                    <td className="py-3 text-right text-slate-400">
+                      {feat.estimatedDays} Hari
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-
-          <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-5 backdrop-blur-md">
-            <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-2.5">
-              Peta Jalan Pasca-MVP (Roadmap v2.0)
-            </h4>
-            <ul className="space-y-1.5 text-xs text-slate-300">
-              {mvpScope.postMvpFeatures.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-slate-500" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        </GlowCard>
       </div>
 
       {/* 14-Day Validation Sprint Interactive Section */}
@@ -204,14 +239,14 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
                 Checklist Sprint Validasi Taktis 14 Hari
               </h3>
               <p className="text-xs text-slate-400">
-                Eksekusi milestone harian ini untuk mencapai validasi riil dari 0 ke 1.
+                Eksekusi milestone 2 minggu pertama. Centang task yang selesai (status tersimpan otomatis).
               </p>
             </div>
           </div>
 
           {/* Progress Bar */}
           <div className="flex items-center gap-3">
-            <div className="w-32 rounded-full bg-slate-800 h-2.5 overflow-hidden">
+            <div className="w-36 rounded-full bg-slate-800 h-2.5 overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-emerald-500 to-indigo-500 transition-all duration-300"
                 style={{ width: `${sprintProgressPercent}%` }}

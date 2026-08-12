@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   DollarSign,
   TrendingUp,
@@ -9,12 +9,14 @@ import {
   Calendar,
   ChevronDown,
   ChevronUp,
+  Tag,
+  Scale,
 } from "lucide-react";
 import type { BusinessAnalysisResult } from "@/types/business-analysis";
 import { GlowCard } from "@/components/kokonut/GlowCard";
 import { FinancialGrowthChart } from "@/components/charts/FinancialGrowthChart";
 import { formatCurrency, formatNumber } from "@/lib/utils";
-import { animateStaggerEntrance } from "@/lib/animations/anime-helpers";
+import { animateStaggerEntrance, animateCounter } from "@/lib/animations/anime-helpers";
 
 interface TabFinancialsProps {
   analysis: BusinessAnalysisResult;
@@ -32,51 +34,57 @@ export function TabFinancials({ analysis }: TabFinancialsProps) {
     <div className="space-y-6">
       {/* Unit Economics Key Metrics Row */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {/* Target Price */}
         <div className="financial-card rounded-2xl border border-white/10 bg-slate-900/60 p-4 backdrop-blur-xl">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-indigo-400 uppercase tracking-wider">
-            <DollarSign className="h-4 w-4" />
-            <span>Estimasi CAC</span>
+            <Tag className="h-4 w-4" />
+            <span>Target Harga / Pelanggan</span>
           </div>
-          <p className="mt-2 text-2xl font-black text-white font-heading">
-            {financials.estimatedCac}
+          <p className="mt-2 text-xl font-black text-white font-heading">
+            {financials.targetPricePerCustomer || "Rp 299.000 / bln"}
           </p>
-          <p className="text-[10px] text-slate-400">Target Biaya Akuisisi Pelanggan</p>
+          <p className="text-[10px] text-slate-400">Rekomendasi pricing ideal</p>
         </div>
 
+        {/* CAC vs LTV Ratio */}
         <div className="financial-card rounded-2xl border border-white/10 bg-slate-900/60 p-4 backdrop-blur-xl">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
-            <TrendingUp className="h-4 w-4" />
-            <span>Estimasi LTV</span>
+            <Scale className="h-4 w-4" />
+            <span>CAC vs LTV (Rasio {financials.ltvCacRatio || "3.2x"})</span>
           </div>
-          <p className="mt-2 text-2xl font-black text-white font-heading">
-            {financials.estimatedLtv}
-          </p>
-          <p className="text-[10px] text-slate-400">Estimasi Nilai Seumur Hidup Pelanggan</p>
+          <div className="mt-2 flex items-baseline gap-2">
+            <span className="text-sm font-bold text-slate-300">CAC: {financials.estimatedCac}</span>
+            <span className="text-xs text-slate-500">|</span>
+            <span className="text-sm font-bold text-emerald-400">LTV: {financials.estimatedLtv}</span>
+          </div>
+          <p className="text-[10px] text-slate-400 mt-1">Metrik kesehatan unit ekonomi</p>
         </div>
 
+        {/* Break-Even Month */}
         <div className="financial-card rounded-2xl border border-white/10 bg-slate-900/60 p-4 backdrop-blur-xl">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-400 uppercase tracking-wider">
             <Calendar className="h-4 w-4" />
-            <span>Bulan Break-Even</span>
+            <span>Titik Impas (BEP)</span>
           </div>
-          <p className="mt-2 text-2xl font-black text-white font-heading">
+          <p className="mt-2 text-xl font-black text-white font-heading">
             Bulan Ke-{financials.breakEvenMonth}
           </p>
-          <p className="text-[10px] text-slate-400">Target Titik Impas Laba Bersih</p>
+          <p className="text-[10px] text-slate-400">Estimasi target net profit positif</p>
         </div>
 
+        {/* Month 12 MRR */}
         <div className="financial-card rounded-2xl border border-white/10 bg-slate-900/60 p-4 backdrop-blur-xl">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-cyan-400 uppercase tracking-wider">
             <Calculator className="h-4 w-4" />
             <span>Run-Rate MRR Bulan 12</span>
           </div>
-          <p className="mt-2 text-2xl font-black text-white font-heading">
+          <p className="mt-2 text-xl font-black text-white font-heading">
             {formatCurrency(
               financials.monthlyProjections[11]?.mrr || 0,
               financials.currency || "IDR"
             )}
           </p>
-          <p className="text-[10px] text-slate-400">Proyeksi Trajektori Pendapatan Tahunan</p>
+          <p className="text-[10px] text-slate-400">Proyeksi pendapatan akhir tahun ke-1</p>
         </div>
       </div>
 

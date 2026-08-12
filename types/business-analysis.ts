@@ -15,6 +15,7 @@ export interface MvpFeature {
   title: string;
   description: string;
   estimatedDays: number;
+  devDifficulty: number; // 1 to 5
   category: "Core Flow" | "Auth & Security" | "Payment" | "AI Engine" | "UI/UX" | "Analytics";
 }
 
@@ -57,16 +58,42 @@ export interface GrowthChannel {
   expectedEffectiveness: "High" | "Medium" | "Low";
 }
 
+export interface LeanCanvas {
+  problem: string[];
+  solution: string[];
+  uniqueValueProp: string;
+  unfairAdvantage: string;
+  customerSegments: string[];
+  keyMetrics: string[];
+  channels: string[];
+  costStructure: string[];
+  revenueStreams: string[];
+}
+
+export interface ValidationInterviewQuestion {
+  question: string;
+  goal: string;
+}
+
+export interface ColdOutreachTemplates {
+  whatsapp: string;
+  email: string;
+  linkedin: string;
+}
+
 export interface BusinessAnalysisResult {
   id?: string;
+  slug?: string;
   createdAt?: string;
   input: {
     ideaName: string;
-    targetMarket: string;
-    budget: string;
-    locationOrScale: string;
+    problemStatement: string;
     industry: string;
-    monetizationType: string;
+    targetMarket: string;
+    locationOrScale: string;
+    budget: string;
+    founderStrengths: string[];
+    monetizationType?: string;
   };
   meta: {
     tagline: string;
@@ -93,6 +120,7 @@ export interface BusinessAnalysisResult {
     monetizationSpeed: number; // 0 - 100
     summaryVerdict: string;
   };
+  leanCanvas: LeanCanvas;
   mvpScope: {
     mustHaveFeatures: MvpFeature[];
     niceToHaveFeatures: MvpFeature[];
@@ -103,8 +131,10 @@ export interface BusinessAnalysisResult {
   financials: {
     pricingStrategy: string;
     suggestedTiers: PricingTier[];
+    targetPricePerCustomer: string;
     estimatedCac: string;
     estimatedLtv: string;
+    ltvCacRatio: string;
     breakEvenMonth: number;
     currency: string;
     monthlyProjections: MonthlyProjectionPoint[];
@@ -120,6 +150,8 @@ export interface BusinessAnalysisResult {
       callToAction: string;
     };
     mvpDatabaseSchema: string;
+    validationInterviewQuestions: ValidationInterviewQuestion[];
+    coldOutreachTemplates: ColdOutreachTemplates;
     targetPersonas: TargetPersona[];
     growthChannels: GrowthChannel[];
   };
@@ -127,10 +159,11 @@ export interface BusinessAnalysisResult {
 
 export interface AnalysisInputFormData {
   ideaName: string;
-  targetMarket: string;
-  budget: string;
-  locationOrScale: string;
+  problemStatement: string;
   industry: string;
-  monetizationType: string;
-  problemStatement?: string;
+  targetMarket: string;
+  locationOrScale: string;
+  budget: string;
+  founderStrengths: string[];
+  monetizationType?: string;
 }

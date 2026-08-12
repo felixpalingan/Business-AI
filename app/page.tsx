@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Sparkles,
   ShieldAlert,
   Cpu,
   Compass,
   DollarSign,
+  History,
 } from "lucide-react";
 import type { BusinessAnalysisResult, AnalysisInputFormData } from "@/types/business-analysis";
 import { BusinessIdeaForm } from "@/components/form/BusinessIdeaForm";
@@ -14,6 +15,7 @@ import { BusinessDashboard } from "@/components/dashboard/BusinessDashboard";
 import { AiProcessingState } from "@/components/loading/AiProcessingState";
 import { MatrixBadge } from "@/components/kokonutui/matrix-badge";
 import { CardSpotlight } from "@/components/kokonutui/card-spotlight";
+import { HistoryDrawer } from "@/components/dashboard/HistoryDrawer";
 import confetti from "canvas-confetti";
 
 export default function HomePage() {
@@ -21,6 +23,20 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false);
   const [submittedIdeaName, setSubmittedIdeaName] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [historyOpen, setHistoryOpen] = useState(false);
+
+  const saveToLocalHistory = (newAnalysis: BusinessAnalysisResult) => {
+    try {
+      const existing = localStorage.getItem("idea_analyzer_history");
+      const list: BusinessAnalysisResult[] = existing ? JSON.parse(existing) : [];
+      // Remove duplicate if same idea name
+      const filtered = list.filter((item) => item.input?.ideaName !== newAnalysis.input?.ideaName);
+      const updated = [newAnalysis, ...filtered].slice(0, 20); // keep 20 latest
+      localStorage.setItem("idea_analyzer_history", JSON.stringify(updated));
+    } catch (e) {
+      console.error("Local history error:", e);
+    }
+  };
 
   const handleFormSubmit = async (formData: AnalysisInputFormData) => {
     setLoading(true);
@@ -43,6 +59,7 @@ export default function HomePage() {
 
       const data: BusinessAnalysisResult = await response.json();
       setAnalysis(data);
+      saveToLocalHistory(data);
 
       confetti({
         particleCount: 80,
@@ -54,12 +71,13 @@ export default function HomePage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          slug: data.slug,
           ideaName: formData.ideaName,
           targetMarket: formData.targetMarket,
           viabilityScore: data.meta.viabilityScore,
           payload: data,
         }),
-      }).catch((e) => console.log("Catatan latar belakang simpan:", e));
+      }).catch((e) => console.log("Catatan simpan Supabase:", e));
     } catch (err: any) {
       console.error("Kesalahan pengiriman:", err);
       setError(err.message || "Terjadi kesalahan tidak terduga. Silakan coba lagi.");
@@ -90,7 +108,11 @@ export default function HomePage() {
       {/* Case 2: Analysis Generated Result Dashboard */}
       {!loading && analysis && (
         <div className="py-4">
-          <BusinessDashboard analysis={analysis} onReset={handleReset} />
+          <BusinessDashboard
+            analysis={analysis}
+            onReset={handleReset}
+            onOpenHistory={() => setHistoryOpen(true)}
+          />
         </div>
       )}
 
@@ -99,12 +121,19 @@ export default function HomePage() {
         <div className="space-y-12 py-6">
           {/* Hero Header Section with KokonutUI MatrixBadge */}
           <div className="mx-auto max-w-3xl text-center space-y-4">
-            <div>
+            <div className="flex items-center justify-center gap-3">
               <MatrixBadge
                 text="Engine Analisis Strategi Bisnis Generasi Baru"
                 variant="indigo"
                 icon={Sparkles}
               />
+              <button
+                onClick={() => setHistoryOpen(true)}
+                className="flex items-center gap-1.5 rounded-full border border-white/10 bg-slate-900/60 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:border-indigo-500/50 hover:text-white transition-all"
+              >
+                <History className="h-3.5 w-3.5 text-indigo-400" />
+                <span>Riwayat Analisis</span>
+              </button>
             </div>
 
             <h1 className="text-3xl font-black tracking-tight text-white font-heading sm:text-5xl lg:text-6xl">
@@ -112,7 +141,7 @@ export default function HomePage() {
             </h1>
 
             <p className="mx-auto max-w-2xl text-sm text-slate-300 sm:text-base leading-relaxed">
-              Hasilkan skor kelayakan objektif, radar peluang multi-dimensi, rencana rilis 14 hari,
+              Hasilkan skor kelayakan objektif, 9-box Lean Canvas, matriks MVP, rencana validasi 14 hari,
               dan proyeksi keuangan 12 bulan dalam Rupiah berbasis penalaran terstruktur Gemini AI.
             </p>
           </div>
@@ -139,9 +168,9 @@ export default function HomePage() {
                 <div className="rounded-xl bg-indigo-600/20 p-2 text-indigo-400 w-fit mb-3">
                   <Compass className="h-4 w-4" />
                 </div>
-                <h4 className="text-sm font-bold text-white">Meter Kelayakan & Radar</h4>
+                <h4 className="text-sm font-bold text-white">Meter Kelayakan & Lean Canvas</h4>
                 <p className="mt-1 text-xs text-slate-400">
-                  Penilaian skor 1-10 & metrik radar multi-dimensi (permintaan, modal, teknologi, skalabilitas).
+                  Penilaian skor 0-10, metrik radar 4 sumbu & 9-Box Interactive Lean Canvas.
                 </p>
               </CardSpotlight>
 
@@ -149,9 +178,9 @@ export default function HomePage() {
                 <div className="rounded-xl bg-rose-600/20 p-2 text-rose-400 w-fit mb-3">
                   <ShieldAlert className="h-4 w-4" />
                 </div>
-                <h4 className="text-sm font-bold text-white">Reality Check & Risiko</h4>
+                <h4 className="text-sm font-bold text-white">Reality Check & Red Flags</h4>
                 <p className="mt-1 text-xs text-slate-400">
-                  Analisis faktor kegagalan riil di Indonesia, kejenuhan pasar, dan taktik mitigasi konkret.
+                  3 peringatan risiko kritis, analisis mengapa bisnis berpotensi gagal & mitigasi taktis.
                 </p>
               </CardSpotlight>
 
@@ -159,9 +188,9 @@ export default function HomePage() {
                 <div className="rounded-xl bg-cyan-600/20 p-2 text-cyan-400 w-fit mb-3">
                   <Cpu className="h-4 w-4" />
                 </div>
-                <h4 className="text-sm font-bold text-white">Fitur MVP & Sprint 14 Hari</h4>
+                <h4 className="text-sm font-bold text-white">Matriks MVP & Validasi 14 Hari</h4>
                 <p className="mt-1 text-xs text-slate-400">
-                  Matriks scope fitur Wajib vs Nice-to-Have dengan estimasi hari dev dan checklist rilis.
+                  Tabel fitur Wajib vs Bisa Nanti dengan tingkat kesulitan (1-5) & checklist 14 hari.
                 </p>
               </CardSpotlight>
 
@@ -169,15 +198,22 @@ export default function HomePage() {
                 <div className="rounded-xl bg-emerald-600/20 p-2 text-emerald-400 w-fit mb-3">
                   <DollarSign className="h-4 w-4" />
                 </div>
-                <h4 className="text-sm font-bold text-white">Model Keuangan (Rupiah)</h4>
+                <h4 className="text-sm font-bold text-white">Unit Economics & Proyeksi</h4>
                 <p className="mt-1 text-xs text-slate-400">
-                  Unit ekonomi CAC/LTV, penetapan harga tiered, dan grafik proyeksi MRR 12 bulan.
+                  Target harga, rasio CAC vs LTV, titik impas BEP, dan grafik proyeksi MRR 12 bulan.
                 </p>
               </CardSpotlight>
             </div>
           </div>
         </div>
       )}
+
+      {/* History Slide-Over Drawer */}
+      <HistoryDrawer
+        isOpen={historyOpen}
+        onClose={() => setHistoryOpen(false)}
+        onSelectAnalysis={(selected) => setAnalysis(selected)}
+      />
     </div>
   );
 }
