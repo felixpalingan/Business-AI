@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Sparkles, Building2 } from "lucide-react";
+import { Building2 } from "lucide-react";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "OK OCE Business Diagnostic & Health Check Tool | AI-Powered MSME Assessment",
@@ -52,6 +53,9 @@ export default function RootLayout({
             <p className="text-slate-400">Aligned with Indonesian MSME Law (UU UMKM No. 20/2008 & PP No. 7/2021)</p>
           </div>
         </footer>
+
+        {/* Vercel Analytics Tracker */}
+        <Analytics />
       </body>
     </html>
   );
