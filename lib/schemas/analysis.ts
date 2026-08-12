@@ -1,18 +1,13 @@
 import { z } from "zod";
 
 export const MsmeClassificationSchema = z.object({
-  category: z.enum([
-    "Micro Enterprise (Usaha Mikro)",
-    "Small Enterprise (Usaha Kecil)",
-    "Medium Enterprise (Usaha Menengah)",
-    "Large Enterprise (Usaha Besar)",
-  ]),
+  category: z.string(),
   legalBasis: z.string().default("Indonesian MSME Law No. 20/2008 & Government Regulation PP No. 7/2021"),
   annualRevenueCriteria: z.string(),
   netAssetCriteria: z.string(),
   employeeScaleCriteria: z.string(),
   formalizationStatus: z.string(),
-  regulatoryComplianceChecklist: z.array(z.string()).min(2),
+  regulatoryComplianceChecklist: z.array(z.string()).min(1),
 });
 
 export const PillarScoreBreakdownSchema = z.object({
@@ -25,15 +20,9 @@ export const PillarScoreBreakdownSchema = z.object({
 });
 
 export const CriticalGapItemSchema = z.object({
-  pillar: z.enum([
-    "Financial Health",
-    "Operations & SOP",
-    "Marketing & Sales",
-    "Human Capital",
-    "Legal & Compliance",
-  ]),
+  pillar: z.string(),
   issue: z.string(),
-  severity: z.enum(["Critical (P0)", "High (P1)", "Medium (P2)"]),
+  severity: z.string(),
   actionableFix: z.string(),
   estimatedTimeToSolve: z.string(),
   expectedBusinessImpact: z.string(),
@@ -55,9 +44,9 @@ export const TurnaroundPhaseSchema = z.object({
 export const FinancialDiagnosticsSchema = z.object({
   burnRateRunwayMonths: z.number(),
   grossMarginAssessment: z.string(),
-  cashFlowHealthVerdict: z.enum(["Healthy Positive", "Breakeven Volatile", "Distressed Negative"]),
+  cashFlowHealthVerdict: z.string(),
   workingCapitalStatus: z.string(),
-  debtLeverageRisk: z.enum(["Low Risk", "Moderate Risk", "High Risk"]),
+  debtLeverageRisk: z.string(),
   revenuePerEmployee: z.string(),
 });
 
@@ -75,17 +64,12 @@ export const MentorshipDiscussionQuestionSchema = z.object({
 });
 
 export const OkoceMentoringPathwaySchema = z.object({
-  recommendedTrack: z.enum([
-    "Financial Mastery & Capital Readiness",
-    "Digital Marketing & Sales Scaling",
-    "Operational SOPs & Supply Chain Scaling",
-    "Legal Formalization, Tax & Certification",
-  ]),
-  priorityLevel: z.enum(["Immediate (Week 1)", "Strategic (Month 1)", "Growth Scale (Month 3)"]),
+  recommendedTrack: z.string(),
+  priorityLevel: z.string(),
   matchedMentorSpecialty: z.string(),
-  coreMentoringModules: z.array(z.string()).min(2),
-  preMentoringActionItems: z.array(z.string()).min(2),
-  discussionQuestionsForMentor: z.array(MentorshipDiscussionQuestionSchema).min(3),
+  coreMentoringModules: z.array(z.string()).min(1),
+  preMentoringActionItems: z.array(z.string()).min(1),
+  discussionQuestionsForMentor: z.array(MentorshipDiscussionQuestionSchema).min(1),
 });
 
 export const BusinessDiagnosticSchema = z.object({
@@ -93,23 +77,18 @@ export const BusinessDiagnosticSchema = z.object({
     headline: z.string(),
     executiveSummary: z.string(),
     overallHealthScore: z.number().min(0).max(100),
-    healthVerdict: z.enum([
-      "Optimal Health & Scale-Ready",
-      "Stable with Operational Friction",
-      "Vulnerable & Cash Flow Strained",
-      "Critical Risk of Distress",
-    ]),
+    healthVerdict: z.string(),
     immediatePriorityAction: z.string(),
   }),
   msmeClassification: MsmeClassificationSchema,
   pillarScores: PillarScoreBreakdownSchema,
   financialDiagnostics: FinancialDiagnosticsSchema,
-  criticalGaps: z.array(CriticalGapItemSchema).min(3),
+  criticalGaps: z.array(CriticalGapItemSchema).min(1),
   turnaroundPlan: z.object({
-    phases: z.array(TurnaroundPhaseSchema).min(3),
+    phases: z.array(TurnaroundPhaseSchema).min(1),
   }),
   okoceMentorship: OkoceMentoringPathwaySchema,
-  twelveMonthForecast: z.array(MonthlySimulationPointSchema).length(12),
+  twelveMonthForecast: z.array(MonthlySimulationPointSchema).min(1),
   tacticDeliverables: z.object({
     standardOperatingProcedureSnippet: z.string(),
     cashFlowManagementGuideline: z.string(),

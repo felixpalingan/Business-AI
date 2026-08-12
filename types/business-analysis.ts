@@ -1,5 +1,5 @@
 export interface MsmeClassification {
-  category: "Micro Enterprise (Usaha Mikro)" | "Small Enterprise (Usaha Kecil)" | "Medium Enterprise (Usaha Menengah)" | "Large Enterprise (Usaha Besar)";
+  category: string;
   legalBasis: string;
   annualRevenueCriteria: string;
   netAssetCriteria: string;
@@ -18,9 +18,9 @@ export interface PillarScoreBreakdown {
 }
 
 export interface CriticalGapItem {
-  pillar: "Financial Health" | "Operations & SOP" | "Marketing & Sales" | "Human Capital" | "Legal & Compliance";
+  pillar: string;
   issue: string;
-  severity: "Critical (P0)" | "High (P1)" | "Medium (P2)";
+  severity: string;
   actionableFix: string;
   estimatedTimeToSolve: string;
   expectedBusinessImpact: string;
@@ -42,9 +42,9 @@ export interface TurnaroundPhase {
 export interface FinancialDiagnostics {
   burnRateRunwayMonths: number;
   grossMarginAssessment: string;
-  cashFlowHealthVerdict: "Healthy Positive" | "Breakeven Volatile" | "Distressed Negative";
+  cashFlowHealthVerdict: string;
   workingCapitalStatus: string;
-  debtLeverageRisk: "Low Risk" | "Moderate Risk" | "High Risk";
+  debtLeverageRisk: string;
   revenuePerEmployee: string;
 }
 
@@ -70,8 +70,8 @@ export interface MentorshipDiscussionQuestion {
 }
 
 export interface OkoceMentoringPathway {
-  recommendedTrack: "Financial Mastery & Capital Readiness" | "Digital Marketing & Sales Scaling" | "Operational SOPs & Supply Chain Scaling" | "Legal Formalization, Tax & Certification";
-  priorityLevel: "Immediate (Week 1)" | "Strategic (Month 1)" | "Growth Scale (Month 3)";
+  recommendedTrack: string;
+  priorityLevel: string;
   matchedMentorSpecialty: string;
   coreMentoringModules: string[];
   preMentoringActionItems: string[];
@@ -98,7 +98,7 @@ export interface BusinessDiagnosticResult {
     headline: string;
     executiveSummary: string;
     overallHealthScore: number; // 0 - 100
-    healthVerdict: "Optimal Health & Scale-Ready" | "Stable with Operational Friction" | "Vulnerable & Cash Flow Strained" | "Critical Risk of Distress";
+    healthVerdict: string;
     immediatePriorityAction: string;
   };
   msmeClassification: MsmeClassification;
@@ -145,7 +145,7 @@ export interface LeanCanvas {
 
 export interface CriticalRisk {
   risk: string;
-  severity: "Medium" | "High" | "Critical";
+  severity: string;
   mitigationStrategy: string;
 }
 

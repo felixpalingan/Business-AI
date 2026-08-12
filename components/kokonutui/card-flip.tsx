@@ -35,7 +35,7 @@ export function CardFlip({ riskItem, index }: CardFlipProps) {
     },
   };
 
-  const config = severityConfig[riskItem.severity] || severityConfig.Medium;
+  const config = (severityConfig as Record<string, any>)[riskItem.severity] || severityConfig.Medium;
   const IconComp = config.icon;
 
   return (
