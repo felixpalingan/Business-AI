@@ -21,9 +21,13 @@ export default function RootLayout({
         <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl no-print">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 shadow-md shadow-indigo-500/20">
-                <Building2 className="h-5 w-5 text-white" />
+              {/* OK OCE & USCM Partner Logos */}
+              <div className="flex items-center gap-2.5 bg-white/5 px-2.5 py-1 rounded-xl border border-white/10">
+                <img src="/okoce.png" alt="OK OCE Indonesia Logo" className="h-8 w-auto object-contain" />
+                <div className="h-5 w-[1px] bg-white/20" />
+                <img src="/uscm.png" alt="USCM Logo" className="h-8 w-auto object-contain" />
               </div>
+
               <div className="flex flex-col">
                 <span className="text-sm font-extrabold text-white font-heading tracking-tight">
                   OK OCE <span className="text-indigo-400">Diagnostic</span>
