@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Sparkles, Lightbulb, ArrowRight, DollarSign, MapPin, Layers, Target, Briefcase, Zap } from "lucide-react";
 import type { AnalysisInputFormData } from "@/types/business-analysis";
+import { ParticleButton } from "@/components/kokonutui/particle-button";
 
 interface BusinessIdeaFormProps {
   onSubmit: (formData: AnalysisInputFormData) => void;
@@ -248,17 +249,17 @@ export function BusinessIdeaForm({ onSubmit, isLoading }: BusinessIdeaFormProps)
           />
         </div>
 
-        {/* Action Button */}
+        {/* Action Button using KokonutUI ParticleButton */}
         <div className="mt-6 flex items-center justify-end">
-          <button
+          <ParticleButton
             type="submit"
+            loading={isLoading}
             disabled={isLoading || !formData.ideaName || !formData.targetMarket}
-            className="brand-gradient brand-gradient-hover flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-600/30 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none"
           >
             <Sparkles className="h-4 w-4" />
             <span>Mulai Analisis Kecerdasan Bisnis</span>
             <ArrowRight className="h-4 w-4" />
-          </button>
+          </ParticleButton>
         </div>
       </form>
     </div>

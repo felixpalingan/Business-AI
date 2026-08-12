@@ -12,6 +12,8 @@ import type { BusinessAnalysisResult, AnalysisInputFormData } from "@/types/busi
 import { BusinessIdeaForm } from "@/components/form/BusinessIdeaForm";
 import { BusinessDashboard } from "@/components/dashboard/BusinessDashboard";
 import { AiProcessingState } from "@/components/loading/AiProcessingState";
+import { MatrixBadge } from "@/components/kokonutui/matrix-badge";
+import { CardSpotlight } from "@/components/kokonutui/card-spotlight";
 import confetti from "canvas-confetti";
 
 export default function HomePage() {
@@ -95,11 +97,14 @@ export default function HomePage() {
       {/* Case 3: Initial Input Form View */}
       {!loading && !analysis && (
         <div className="space-y-12 py-6">
-          {/* Hero Header Section */}
+          {/* Hero Header Section with KokonutUI MatrixBadge */}
           <div className="mx-auto max-w-3xl text-center space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-950/50 px-4 py-1.5 text-xs font-semibold text-indigo-300 backdrop-blur-md">
-              <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
-              <span>Engine Analisis Strategi Bisnis Generasi Baru</span>
+            <div>
+              <MatrixBadge
+                text="Engine Analisis Strategi Bisnis Generasi Baru"
+                variant="indigo"
+                icon={Sparkles}
+              />
             </div>
 
             <h1 className="text-3xl font-black tracking-tight text-white font-heading sm:text-5xl lg:text-6xl">
@@ -123,14 +128,14 @@ export default function HomePage() {
           {/* Business Idea Input Form */}
           <BusinessIdeaForm onSubmit={handleFormSubmit} isLoading={loading} />
 
-          {/* Feature Showcase Grid */}
+          {/* Feature Showcase Grid with KokonutUI CardSpotlight */}
           <div className="mx-auto max-w-5xl pt-8 border-t border-white/10">
             <h2 className="mb-6 text-center text-xs font-bold uppercase tracking-widest text-slate-400">
               Arsitektur Validasi Bisnis 4 Pilar Utama
             </h2>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-4 backdrop-blur-md">
+              <CardSpotlight spotlightColor="rgba(99, 102, 241, 0.25)">
                 <div className="rounded-xl bg-indigo-600/20 p-2 text-indigo-400 w-fit mb-3">
                   <Compass className="h-4 w-4" />
                 </div>
@@ -138,9 +143,9 @@ export default function HomePage() {
                 <p className="mt-1 text-xs text-slate-400">
                   Penilaian skor 1-10 & metrik radar multi-dimensi (permintaan, modal, teknologi, skalabilitas).
                 </p>
-              </div>
+              </CardSpotlight>
 
-              <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-4 backdrop-blur-md">
+              <CardSpotlight spotlightColor="rgba(244, 63, 94, 0.25)">
                 <div className="rounded-xl bg-rose-600/20 p-2 text-rose-400 w-fit mb-3">
                   <ShieldAlert className="h-4 w-4" />
                 </div>
@@ -148,9 +153,9 @@ export default function HomePage() {
                 <p className="mt-1 text-xs text-slate-400">
                   Analisis faktor kegagalan riil di Indonesia, kejenuhan pasar, dan taktik mitigasi konkret.
                 </p>
-              </div>
+              </CardSpotlight>
 
-              <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-4 backdrop-blur-md">
+              <CardSpotlight spotlightColor="rgba(6, 182, 212, 0.25)">
                 <div className="rounded-xl bg-cyan-600/20 p-2 text-cyan-400 w-fit mb-3">
                   <Cpu className="h-4 w-4" />
                 </div>
@@ -158,9 +163,9 @@ export default function HomePage() {
                 <p className="mt-1 text-xs text-slate-400">
                   Matriks scope fitur Wajib vs Nice-to-Have dengan estimasi hari dev dan checklist rilis.
                 </p>
-              </div>
+              </CardSpotlight>
 
-              <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-4 backdrop-blur-md">
+              <CardSpotlight spotlightColor="rgba(16, 185, 129, 0.25)">
                 <div className="rounded-xl bg-emerald-600/20 p-2 text-emerald-400 w-fit mb-3">
                   <DollarSign className="h-4 w-4" />
                 </div>
@@ -168,7 +173,7 @@ export default function HomePage() {
                 <p className="mt-1 text-xs text-slate-400">
                   Unit ekonomi CAC/LTV, penetapan harga tiered, dan grafik proyeksi MRR 12 bulan.
                 </p>
-              </div>
+              </CardSpotlight>
             </div>
           </div>
         </div>
