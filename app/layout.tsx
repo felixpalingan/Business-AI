@@ -30,10 +30,10 @@ export default function RootLayout({
 
               <div className="flex flex-col">
                 <span className="text-sm font-extrabold text-white font-heading tracking-tight">
-                  OK OCE <span className="text-indigo-400">Diagnostic</span>
+                  Business <span className="text-indigo-400">Diagnostic</span>
                 </span>
                 <span className="text-[10px] text-slate-400 font-medium">
-                  Business Health & Mentorship Gateway
+                  Health & Mentorship Gateway
                 </span>
               </div>
             </div>
