@@ -62,16 +62,20 @@ ${input.monetizationType ? `- Model Monetisasi: ${input.monetizationType}` : ""}
 
 Kembalikan format HANYA JSON murni yang sesuai skema.`;
 
-  if (!GEMINI_API_KEY) {
-    console.warn("⚠️ [GEMINI DEBUG] GEMINI_API_KEY tidak dikonfigurasi di .env.local!");
-    return generateFallbackAnalysis(input, "API Key belum diisi di .env.local");
+  if (!GEMINI_API_KEY || !GEMINI_API_KEY.startsWith("AIzaSy")) {
+    const invalidReason = !GEMINI_API_KEY
+      ? "GEMINI_API_KEY belum diisi di .env.local"
+      : `GEMINI_API_KEY di .env.local ('${GEMINI_API_KEY.substring(0, 8)}...') tidak valid. API Key Google Gemini harus diawali 'AIzaSy...' dari Google AI Studio (https://aistudio.google.com/app/apikey).`;
+    
+    console.warn(`⚠️ [GEMINI DIAGNOSTIC] ${invalidReason}`);
+    return generateFallbackAnalysis(input, invalidReason);
   }
 
   // List candidate model identifiers to try in order
   const candidateModels = [
     "gemini-1.5-flash",
     "gemini-1.5-pro",
-    "gemini-2.0-flash-exp",
+    "gemini-2.0-flash",
     "gemini-1.0-pro",
   ];
 
@@ -79,7 +83,7 @@ Kembalikan format HANYA JSON murni yang sesuai skema.`;
 
   for (const modelName of candidateModels) {
     try {
-      console.log(`📡 [GEMINI DEBUG] Mencoba memanggil model Google AI Studio: ${modelName}...`);
+      console.log(`📡 [GEMINI DIAGNOSTIC] Mencoba memanggil Google AI Studio Live: ${modelName}...`);
       const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
       const model = genAI.getGenerativeModel({
         model: modelName,
@@ -91,7 +95,7 @@ Kembalikan format HANYA JSON murni yang sesuai skema.`;
 
       const result = await model.generateContent(prompt);
       const responseText = result.response.text();
-      console.log(`✅ [GEMINI DEBUG] Respon sukses dari model: ${modelName}!`);
+      console.log(`✅ [GEMINI DIAGNOSTIC] Respon sukses dari Google AI Studio (${modelName})!`);
 
       const parsedJson = JSON.parse(responseText);
       const validatedData = BusinessAnalysisSchema.parse(parsedJson);
@@ -103,18 +107,17 @@ Kembalikan format HANYA JSON murni yang sesuai skema.`;
         createdAt: new Date().toISOString(),
         meta: {
           ...validatedData.meta,
-          scoreVerdict: `${validatedData.meta.scoreVerdict} (Live API: ${modelName})`,
+          scoreVerdict: `${validatedData.meta.scoreVerdict} (Google AI Studio Live: ${modelName})`,
         },
       };
     } catch (err: any) {
-      const errMsg = `Model '${modelName}' gagal: status ${err?.status || "unk"} - ${err?.message || String(err)}`;
-      console.error(`❌ [GEMINI DEBUG] ${errMsg}`);
+      const errMsg = `Model '${modelName}' error: ${err?.message || String(err)}`;
+      console.error(`❌ [GEMINI DIAGNOSTIC] ${errMsg}`);
       errorLogs.push(errMsg);
     }
   }
 
-  // If all live models failed, return fallback with explicit debug info
-  console.warn("⚠️ [GEMINI DEBUG] Seluruh model candidate Gemini merespon error. Mengaktifkan fallback engine.");
+  console.warn("⚠️ [GEMINI DIAGNOSTIC] Seluruh model candidate Gemini merespon error. Mengaktifkan fallback engine.");
   return generateFallbackAnalysis(input, errorLogs.join(" | "));
 }
 
@@ -135,7 +138,7 @@ export function generateFallbackAnalysis(
     createdAt: new Date().toISOString(),
     meta: {
       tagline: `Solusi Kecerdasan Terintegrasi untuk ${input.targetMarket}`,
-      executiveSummary: `${input.ideaName} dirancang untuk menyelesaikan masalah: "${input.problemStatement}" pada sektor ${input.industry}. Memanfaatkan skala modal ${input.budget} dan kekuatan founder pada ${input.founderStrengths.join(", ") || "Generalist"}, bisnis ini memiliki potensi pasar lokal yang kuat jika fokus pada validasi langsung ke 10 pelanggan pertama.${debugInfo ? ` [Debug Info: ${debugInfo}]` : ""}`,
+      executiveSummary: `${input.ideaName} dirancang untuk menyelesaikan masalah: "${input.problemStatement}" pada sektor ${input.industry}. Memanfaatkan skala modal ${input.budget} dan kekuatan founder pada ${input.founderStrengths.join(", ") || "Generalist"}, bisnis ini memiliki potensi pasar lokal yang kuat jika fokus pada validasi langsung ke 10 pelanggan pertama.${debugInfo ? ` [Catatan Diagnostic: ${debugInfo}]` : ""}`,
       viabilityScore: 7.9,
       scoreVerdict: "Peluang Sangat Bagus dengan Eksekusi Niche Terfokus (Engine Fallback Cerdas)",
       executionDifficulty: "Moderate",
