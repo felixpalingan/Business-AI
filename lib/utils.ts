@@ -5,21 +5,22 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatCurrency(amount: number, currency: string = "USD"): string {
-  if (currency === "IDR") {
-    return new Intl.NumberFormat("id-ID", {
+export function formatCurrency(amount: number, currency: string = "IDR"): string {
+  if (currency === "USD") {
+    return new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: "IDR",
+      currency: "USD",
       maximumFractionDigits: 0,
     }).format(amount);
   }
-  return new Intl.NumberFormat("en-US", {
+  
+  return new Intl.NumberFormat("id-ID", {
     style: "currency",
-    currency: "USD",
+    currency: "IDR",
     maximumFractionDigits: 0,
   }).format(amount);
 }
 
 export function formatNumber(value: number): string {
-  return new Intl.NumberFormat("en-US").format(value);
+  return new Intl.NumberFormat("id-ID").format(value);
 }

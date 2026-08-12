@@ -4,13 +4,10 @@ import React, { useState, useEffect } from "react";
 import {
   CheckSquare,
   Square,
-  Layers,
   Clock,
   Code2,
   Calendar,
   CheckCircle2,
-  ListTodo,
-  Sparkles,
   Flame,
 } from "lucide-react";
 import type { BusinessAnalysisResult } from "@/types/business-analysis";
@@ -25,7 +22,6 @@ interface TabMvpScopeProps {
 export function TabMvpScope({ analysis }: TabMvpScopeProps) {
   const { mvpScope, actionPlan } = analysis;
 
-  // Track completed sprint tasks state
   const [completedTasks, setCompletedTasks] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
@@ -35,7 +31,6 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
   const toggleTask = (taskId: string) => {
     setCompletedTasks((prev) => {
       const next = { ...prev, [taskId]: !prev[taskId] };
-      // Check if all are completed to trigger celebratory confetti
       const totalTasksCount = actionPlan.sprintPhases.reduce(
         (acc, p) => acc + p.tasks.length,
         0
@@ -68,15 +63,15 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
           <div className="flex items-center gap-2 text-indigo-400">
             <Clock className="h-4 w-4" />
             <span className="text-xs font-semibold uppercase tracking-wider">
-              Total MVP Dev Velocity
+              Total Kecepatan Dev MVP
             </span>
           </div>
           <p className="mt-2 text-2xl font-black text-white font-heading">
             {mvpScope.totalMvpDevDays}{" "}
-            <span className="text-sm font-medium text-slate-400">Days</span>
+            <span className="text-sm font-medium text-slate-400">Hari Kerja</span>
           </p>
           <p className="text-[11px] text-slate-400">
-            Calculated for a solo senior full-stack engineer
+            Dihitung untuk 1 senior full-stack developer
           </p>
         </div>
 
@@ -84,21 +79,21 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
           <div className="flex items-center gap-2 text-emerald-400">
             <CheckCircle2 className="h-4 w-4" />
             <span className="text-xs font-semibold uppercase tracking-wider">
-              Must-Have Core Features
+              Fitur Wajib MVP (P0)
             </span>
           </div>
           <p className="mt-2 text-2xl font-black text-white font-heading">
             {mvpScope.mustHaveFeatures.length}{" "}
-            <span className="text-sm font-medium text-slate-400">Modules</span>
+            <span className="text-sm font-medium text-slate-400">Modul Utama</span>
           </p>
-          <p className="text-[11px] text-slate-400">Essential for first paying customer cohort</p>
+          <p className="text-[11px] text-slate-400">Sangat penting untuk transaksi pertama</p>
         </div>
 
         <div className="mvp-card rounded-2xl border border-white/10 bg-slate-900/60 p-4 backdrop-blur-xl">
           <div className="flex items-center gap-2 text-cyan-400">
             <Code2 className="h-4 w-4" />
             <span className="text-xs font-semibold uppercase tracking-wider">
-              Recommended Stack
+              Rekomendasi Tech Stack
             </span>
           </div>
           <div className="mt-2 flex flex-wrap gap-1.5">
@@ -123,11 +118,11 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
               <div className="flex items-center gap-2">
                 <Flame className="h-4 w-4 text-amber-400" />
                 <h3 className="text-sm font-bold text-white font-heading">
-                  Must-Have MVP Scope Matrix
+                  Matriks Scope Fitur Wajib MVP
                 </h3>
               </div>
               <span className="rounded-full bg-indigo-500/20 px-2.5 py-0.5 text-[10px] font-bold text-indigo-300">
-                P0 Priority
+                Prioritas P0
               </span>
             </div>
 
@@ -150,7 +145,7 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
                       </p>
                     </div>
                     <span className="shrink-0 rounded-lg bg-indigo-950/60 border border-indigo-500/30 px-2 py-1 text-xs font-bold text-indigo-300">
-                      {feat.estimatedDays}d
+                      {feat.estimatedDays} Hari
                     </span>
                   </div>
                 </div>
@@ -164,16 +159,16 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
           <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-5 backdrop-blur-md">
             <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
               <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-                Nice-to-Have (P1 / Beta)
+                Fitur Tambahan Nice-to-Have (P1 / Beta)
               </h4>
-              <span className="text-[10px] text-slate-400">Post-Launch</span>
+              <span className="text-[10px] text-slate-400">Pasca Rilis</span>
             </div>
             <div className="mt-3 space-y-2.5">
               {mvpScope.niceToHaveFeatures.map((feat, idx) => (
                 <div key={idx} className="rounded-xl bg-slate-950/40 p-3 text-xs">
                   <div className="flex items-center justify-between">
                     <span className="font-semibold text-white">{feat.title}</span>
-                    <span className="text-[10px] text-slate-400">{feat.estimatedDays}d</span>
+                    <span className="text-[10px] text-slate-400">{feat.estimatedDays} Hari</span>
                   </div>
                   <p className="mt-1 text-[11px] text-slate-400">{feat.description}</p>
                 </div>
@@ -183,7 +178,7 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
 
           <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-5 backdrop-blur-md">
             <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-2.5">
-              Post-MVP Roadmap (v2.0)
+              Peta Jalan Pasca-MVP (Roadmap v2.0)
             </h4>
             <ul className="space-y-1.5 text-xs text-slate-300">
               {mvpScope.postMvpFeatures.map((item, idx) => (
@@ -206,10 +201,10 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
             </div>
             <div>
               <h3 className="text-base font-bold text-white font-heading md:text-lg">
-                14-Day Tactical Validation Sprint Checklist
+                Checklist Sprint Validasi Taktis 14 Hari
               </h3>
               <p className="text-xs text-slate-400">
-                Execute this sprint to achieve zero-to-one validation with real customers.
+                Eksekusi milestone harian ini untuk mencapai validasi riil dari 0 ke 1.
               </p>
             </div>
           </div>
@@ -223,7 +218,7 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
               />
             </div>
             <span className="text-xs font-bold text-emerald-400">
-              {doneSprintTasks}/{totalSprintTasks} Done ({sprintProgressPercent}%)
+              {doneSprintTasks}/{totalSprintTasks} Selesai ({sprintProgressPercent}%)
             </span>
           </div>
         </div>
@@ -275,7 +270,7 @@ export function TabMvpScope({ analysis }: TabMvpScopeProps) {
                           {task.task}
                         </p>
                         <p className="text-[11px] text-slate-400">
-                          <strong className="text-indigo-400 font-semibold">Deliverable: </strong>
+                          <strong className="text-indigo-400 font-semibold">Hasil Nyata (Deliverable): </strong>
                           {task.deliverable}
                         </p>
                       </div>

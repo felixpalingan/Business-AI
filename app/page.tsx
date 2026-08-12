@@ -3,12 +3,8 @@
 import React, { useState } from "react";
 import {
   Sparkles,
-  Zap,
-  TrendingUp,
   ShieldAlert,
   Cpu,
-  Layers,
-  ArrowRight,
   Compass,
   DollarSign,
 } from "lucide-react";
@@ -40,20 +36,18 @@ export default function HomePage() {
 
       if (!response.ok) {
         const errJson = await response.json().catch(() => ({}));
-        throw new Error(errJson.error || "Failed to analyze business idea.");
+        throw new Error(errJson.error || "Gagal menganalisis ide bisnis. Silakan periksa input Anda.");
       }
 
       const data: BusinessAnalysisResult = await response.json();
       setAnalysis(data);
 
-      // Trigger Confetti Celebration
       confetti({
         particleCount: 80,
         spread: 80,
         origin: { y: 0.6 },
       });
 
-      // Save to Supabase in background
       fetch("/api/save", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -63,10 +57,10 @@ export default function HomePage() {
           viabilityScore: data.meta.viabilityScore,
           payload: data,
         }),
-      }).catch((e) => console.log("Save background note:", e));
+      }).catch((e) => console.log("Catatan latar belakang simpan:", e));
     } catch (err: any) {
-      console.error("Submission error:", err);
-      setError(err.message || "An unexpected error occurred. Please retry.");
+      console.error("Kesalahan pengiriman:", err);
+      setError(err.message || "Terjadi kesalahan tidak terduga. Silakan coba lagi.");
     } finally {
       setLoading(false);
     }
@@ -105,23 +99,23 @@ export default function HomePage() {
           <div className="mx-auto max-w-3xl text-center space-y-4">
             <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-950/50 px-4 py-1.5 text-xs font-semibold text-indigo-300 backdrop-blur-md">
               <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
-              <span>Next-Gen Strategic Business Engine</span>
+              <span>Engine Analisis Strategi Bisnis Generasi Baru</span>
             </div>
 
             <h1 className="text-3xl font-black tracking-tight text-white font-heading sm:text-5xl lg:text-6xl">
-              Turn Raw Ideas into <span className="glow-gradient-text">Tactical SaaS Blueprints</span>
+              Ubah Ide Dasar Jadi <span className="glow-gradient-text">Blueprint Eksekusi Taktis</span>
             </h1>
 
             <p className="mx-auto max-w-2xl text-sm text-slate-300 sm:text-base leading-relaxed">
-              Generate rigorous viability scoring, multi-axis radar charts, 14-day launch sprints,
-              and 12-month financial projections backed by Gemini structured reasoning.
+              Hasilkan skor kelayakan objektif, radar peluang multi-dimensi, rencana rilis 14 hari,
+              dan proyeksi keuangan 12 bulan dalam Rupiah berbasis penalaran terstruktur Gemini AI.
             </p>
           </div>
 
           {/* Error Banner if any */}
           {error && (
             <div className="mx-auto max-w-2xl rounded-2xl border border-rose-500/30 bg-rose-950/40 p-4 text-xs text-rose-300 backdrop-blur-md">
-              <p className="font-semibold">Analysis Notice:</p>
+              <p className="font-semibold">Catatan Analisis:</p>
               <p>{error}</p>
             </div>
           )}
@@ -132,7 +126,7 @@ export default function HomePage() {
           {/* Feature Showcase Grid */}
           <div className="mx-auto max-w-5xl pt-8 border-t border-white/10">
             <h2 className="mb-6 text-center text-xs font-bold uppercase tracking-widest text-slate-400">
-              Rigorous 4-Pillar Validation Architecture
+              Arsitektur Validasi Bisnis 4 Pilar Utama
             </h2>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -140,9 +134,9 @@ export default function HomePage() {
                 <div className="rounded-xl bg-indigo-600/20 p-2 text-indigo-400 w-fit mb-3">
                   <Compass className="h-4 w-4" />
                 </div>
-                <h4 className="text-sm font-bold text-white">Viability Gauge & Radar</h4>
+                <h4 className="text-sm font-bold text-white">Meter Kelayakan & Radar</h4>
                 <p className="mt-1 text-xs text-slate-400">
-                  Real 1-10 scoring & multi-axis metrics across demand, tech, capital, and scalability.
+                  Penilaian skor 1-10 & metrik radar multi-dimensi (permintaan, modal, teknologi, skalabilitas).
                 </p>
               </div>
 
@@ -150,9 +144,9 @@ export default function HomePage() {
                 <div className="rounded-xl bg-rose-600/20 p-2 text-rose-400 w-fit mb-3">
                   <ShieldAlert className="h-4 w-4" />
                 </div>
-                <h4 className="text-sm font-bold text-white">Critical Reality Check</h4>
+                <h4 className="text-sm font-bold text-white">Reality Check & Risiko</h4>
                 <p className="mt-1 text-xs text-slate-400">
-                  True failure risks, market saturation warnings, and non-obvious mitigation tactics.
+                  Analisis faktor kegagalan riil di Indonesia, kejenuhan pasar, dan taktik mitigasi konkret.
                 </p>
               </div>
 
@@ -160,9 +154,9 @@ export default function HomePage() {
                 <div className="rounded-xl bg-cyan-600/20 p-2 text-cyan-400 w-fit mb-3">
                   <Cpu className="h-4 w-4" />
                 </div>
-                <h4 className="text-sm font-bold text-white">MVP Matrix & 14-Day Sprint</h4>
+                <h4 className="text-sm font-bold text-white">Fitur MVP & Sprint 14 Hari</h4>
                 <p className="mt-1 text-xs text-slate-400">
-                  Must-have vs nice-to-have scope breakdown with dev days and step-by-step checklist.
+                  Matriks scope fitur Wajib vs Nice-to-Have dengan estimasi hari dev dan checklist rilis.
                 </p>
               </div>
 
@@ -170,9 +164,9 @@ export default function HomePage() {
                 <div className="rounded-xl bg-emerald-600/20 p-2 text-emerald-400 w-fit mb-3">
                   <DollarSign className="h-4 w-4" />
                 </div>
-                <h4 className="text-sm font-bold text-white">12-Mo Financial Model</h4>
+                <h4 className="text-sm font-bold text-white">Model Keuangan (Rupiah)</h4>
                 <p className="mt-1 text-xs text-slate-400">
-                  Unit economics (CAC/LTV), pricing tier architecture, and interactive MRR projections.
+                  Unit ekonomi CAC/LTV, penetapan harga tiered, dan grafik proyeksi MRR 12 bulan.
                 </p>
               </div>
             </div>

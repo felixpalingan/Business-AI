@@ -4,10 +4,7 @@ import React, { useState } from "react";
 import {
   Sparkles,
   ArrowLeft,
-  Share2,
-  FileText,
   Database,
-  Check,
   TrendingUp,
   Clock,
   Briefcase,
@@ -41,7 +38,7 @@ export function DashboardHeader({ analysis, onReset }: DashboardHeaderProps) {
             className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-slate-800/60 px-3.5 py-1.5 text-xs font-semibold text-slate-300 transition-all hover:bg-slate-700 hover:text-white"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            <span>Analyze Another Idea</span>
+            <span>Analisis Ide Lainnya</span>
           </button>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -58,7 +55,7 @@ export function DashboardHeader({ analysis, onReset }: DashboardHeaderProps) {
               className="flex items-center gap-1.5 rounded-xl border border-cyan-500/30 bg-cyan-950/40 px-3.5 py-1.5 text-xs font-semibold text-cyan-300 transition-all hover:bg-cyan-900/60 hover:text-white"
             >
               <Database className="h-3.5 w-3.5" />
-              <span>DB Schema</span>
+              <span>Schema DB</span>
             </button>
 
             <ExportPdfButton ideaName={analysis.input.ideaName} />
@@ -86,8 +83,16 @@ export function DashboardHeader({ analysis, onReset }: DashboardHeaderProps) {
         {/* Quick Stat Chips */}
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 border-t border-white/10 pt-4">
           <StatChip
-            label="Execution Difficulty"
-            value={analysis.meta.executionDifficulty}
+            label="Tingkat Kesulitan Eksekusi"
+            value={
+              analysis.meta.executionDifficulty === "Easy"
+                ? "Mudah"
+                : analysis.meta.executionDifficulty === "Moderate"
+                ? "Sedang"
+                : analysis.meta.executionDifficulty === "Hard"
+                ? "Sangat Sulit"
+                : "Ekstrem"
+            }
             icon={TrendingUp}
             variant={
               analysis.meta.executionDifficulty === "Easy"
@@ -98,26 +103,25 @@ export function DashboardHeader({ analysis, onReset }: DashboardHeaderProps) {
             }
           />
           <StatChip
-            label="Time to MVP Launch"
-            value={`${analysis.meta.timeToMarketMonths} Months`}
+            label="Waktu hingga Rilis MVP"
+            value={`${analysis.meta.timeToMarketMonths} Bulan`}
             icon={Clock}
             variant="default"
           />
           <StatChip
-            label="Estimated Initial Capital"
+            label="Estimasi Modal Awal"
             value={analysis.meta.estimatedInitialCapital}
             icon={Briefcase}
             variant="default"
           />
           <StatChip
-            label="Target Audience"
+            label="Target Konsumen"
             value={analysis.input.targetMarket}
             variant="default"
           />
         </div>
       </div>
 
-      {/* Toolkit Modal */}
       <TacticTriggersModal
         analysis={analysis}
         initialTab={modalTab}

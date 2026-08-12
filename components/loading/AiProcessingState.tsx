@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import anime from "animejs";
 import { Sparkles, Brain, Compass, Cpu, DollarSign, CheckCircle2 } from "lucide-react";
 
 interface AiProcessingStateProps {
@@ -13,11 +12,11 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const steps = [
-    { title: "Deconstructing Market Signals", icon: Compass, desc: "Scanning demand, saturation & target segment dynamics..." },
-    { title: "Analyzing Competitor & Risk Matrix", icon: Brain, desc: "Isolating failure vectors, moat opportunities & regulatory risks..." },
-    { title: "Architecting Lean MVP Scope", icon: Cpu, desc: "Filtering Must-Haves vs Nice-to-Haves with dev day estimates..." },
-    { title: "Projecting 12-Month Unit Economics", icon: DollarSign, desc: "Calculating MRR trajectories, CAC/LTV benchmarks & break-even..." },
-    { title: "Compiling Strategic Dashboard", icon: Sparkles, desc: "Finalizing charts, validation sprint checklist & pitch deck..." },
+    { title: "Mendeduksi Sinyal & Permintaan Pasar", icon: Compass, desc: "Memindai dinamika pasar, tingkat kejenuhan & target segmen..." },
+    { title: "Menganalisis Grafik Kompetitor & Matriks Risiko", icon: Brain, desc: "Mengisolasi faktor risiko kegagalan, keunggulan & regulasi..." },
+    { title: "Merancang Scope MVP Lean & Matriks Fitur", icon: Cpu, desc: "Memilah fitur Wajib vs Nice-to-Have dengan estimasi hari dev..." },
+    { title: "Memproyeksikan Model Keuangan 12 Bulan (Rupiah)", icon: DollarSign, desc: "Menghitung proyeksi MRR, rasio CAC/LTV & titik impas..." },
+    { title: "Finalisasi Dashboard Strategis & Pitch Deck", icon: Sparkles, desc: "Menyiapkan grafik visual, checklist 14 hari & skema database..." },
   ];
 
   useEffect(() => {
@@ -28,7 +27,6 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
     return () => clearInterval(interval);
   }, [steps.length]);
 
-  // Anime.js node & data-flow canvas animation
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -64,7 +62,6 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Draw connection lines
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -82,7 +79,6 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
         }
       }
 
-      // Draw particles
       particles.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
@@ -110,13 +106,11 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
 
   return (
     <div className="relative flex flex-col items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-slate-950/80 p-8 shadow-2xl backdrop-blur-2xl md:p-12">
-      {/* Background Interactive Particle Node Canvas */}
       <canvas
         ref={canvasRef}
         className="pointer-events-none absolute inset-0 h-full w-full opacity-60"
       />
 
-      {/* Central Glowing AI Pulse Core */}
       <div className="relative z-10 flex flex-col items-center text-center">
         <div className="relative mb-6 flex h-20 w-20 items-center justify-center">
           <div className="absolute inset-0 animate-ping rounded-full bg-indigo-500/20" />
@@ -127,13 +121,12 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
         </div>
 
         <h3 className="text-xl font-bold text-white font-heading md:text-2xl">
-          Synthesizing Intelligence for <span className="text-indigo-400">"{ideaName}"</span>
+          Menganalisis Strategi untuk <span className="text-indigo-400">"{ideaName}"</span>
         </h3>
         <p className="mt-1 text-sm text-slate-400">
-          Our Gemini AI reasoning engine is computing structured validation matrices...
+          Engine penalaran Gemini AI sedang menghitung matriks validasi terstruktur...
         </p>
 
-        {/* Dynamic Pipeline Steps Progression */}
         <div className="mt-8 w-full max-w-md space-y-3">
           {steps.map((step, idx) => {
             const isDone = idx < activeStep;

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Compass, Cpu, DollarSign, Sparkles } from "lucide-react";
+import { Compass, Cpu, DollarSign } from "lucide-react";
 import type { BusinessAnalysisResult } from "@/types/business-analysis";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { TabStrategicCanvas } from "@/components/dashboard/TabStrategicCanvas";
@@ -33,7 +33,7 @@ export function BusinessDashboard({ analysis, onReset }: BusinessDashboardProps)
             }`}
           >
             <Compass className="h-4 w-4" />
-            <span>Tab 1: Strategic Canvas</span>
+            <span>Tab 1: Kanvas Strategis</span>
           </button>
 
           <button
@@ -45,7 +45,7 @@ export function BusinessDashboard({ analysis, onReset }: BusinessDashboardProps)
             }`}
           >
             <Cpu className="h-4 w-4" />
-            <span>Tab 2: MVP Scope & Action Plan</span>
+            <span>Tab 2: Scope MVP & Rencana Aksi</span>
           </button>
 
           <button
@@ -57,7 +57,7 @@ export function BusinessDashboard({ analysis, onReset }: BusinessDashboardProps)
             }`}
           >
             <DollarSign className="h-4 w-4" />
-            <span>Tab 3: Financials & Growth</span>
+            <span>Tab 3: Keuangan & Proyeksi Growth</span>
           </button>
         </div>
       </div>

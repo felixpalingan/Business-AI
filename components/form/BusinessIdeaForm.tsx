@@ -15,42 +15,42 @@ const PRESET_IDEAS: Array<{
   data: AnalysisInputFormData;
 }> = [
   {
-    name: "AI Dental Patient Reactivator",
+    name: "AI Dental Booking & WA Reminder",
     tag: "B2B SaaS",
     data: {
       ideaName: "DentalPulse AI",
-      targetMarket: "Independent Dental Clinics & Practice Owners (5-20 staff)",
-      budget: "$5,000",
-      locationOrScale: "National (US & Canada)",
+      targetMarket: "Pemilik Klinik Gigi Mandiri & Dokter Gigi (5-20 Staf)",
+      budget: "Rp 10 Juta - Rp 50 Juta",
+      locationOrScale: "Nasional (Seluruh Indonesia)",
       industry: "HealthTech & B2B SaaS",
-      monetizationType: "Monthly Subscription ($199/month)",
-      problemStatement: "Dental practices lose 30% of existing patients each year due to lack of automated WhatsApp/SMS recall sequences.",
+      monetizationType: "Langganan Bulanan (Rp 299.000 / bulan)",
+      problemStatement: "Klinik gigi kehilangan 30% pasien lama setiap tahun karena tidak ada pengingat kontrol otomatis via WhatsApp.",
     },
   },
   {
-    name: "Micro-SaaS for Barbershop Bookings",
+    name: "SaaS Kasir & Manajemen Stok Kedai Kopi",
     tag: "SMB Tool",
     data: {
-      ideaName: "FadeCraft App",
-      targetMarket: "Independent Barbershops & Solo Stylists",
-      budget: "$2,500",
-      locationOrScale: "Local & Regional (Indonesia & SEA)",
-      industry: "Lifestyle & SMB Software",
-      monetizationType: "Freemium + Flat $25/mo for Pro",
-      problemStatement: "Barbers waste 2 hours daily answering manual WhatsApp chats for appointments and deal with 20% no-shows.",
+      ideaName: "KopiFlow App",
+      targetMarket: "Pemilik Kedai Kopi Niche & Cafe Mandiri",
+      budget: "Bootstrapped (< Rp 10 Juta)",
+      locationOrScale: "Regional (Jabodetabek & Kota Besar)",
+      industry: "F&B & Retail Software",
+      monetizationType: "Freemium + Flat Rp 149.000/bln untuk Pro",
+      problemStatement: "Pemilik kedai kopi membuang 2 jam setiap hari mencatat stok manual dan sering kecurian bahan baku.",
     },
   },
   {
-    name: "Autonomous B2B Procurement API",
+    name: "API AI Pengadaan Barang & Tender B2B",
     tag: "Enterprise AI",
     data: {
-      ideaName: "VendorFlow API",
-      targetMarket: "Mid-Market Manufacturing Companies ($10M-$50M ARR)",
-      budget: "$15,000",
-      locationOrScale: "Global Remote",
+      ideaName: "VendorTender API",
+      targetMarket: "Tim Procurement Perusahaan Manufaktur & Konstruksi",
+      budget: "Rp 50 Juta - Rp 200 Juta",
+      locationOrScale: "Nasional & Asia Tenggara",
       industry: "Supply Chain & FinTech",
-      monetizationType: "Usage-Based API + Annual License",
-      problemStatement: "Procurement teams take 4 days to negotiate supplier quotes manually without real-time price intelligence.",
+      monetizationType: "Penggunaan API (Metered) + Lisensi Tahunan",
+      problemStatement: "Tim pengadaan membutuhkan 4 hari hanya untuk membandingkan penawaran vendor secara manual tanpa pembanding harga otomatis.",
     },
   },
 ];
@@ -59,10 +59,10 @@ export function BusinessIdeaForm({ onSubmit, isLoading }: BusinessIdeaFormProps)
   const [formData, setFormData] = useState<AnalysisInputFormData>({
     ideaName: "",
     targetMarket: "",
-    budget: "$3,000 - $10,000",
-    locationOrScale: "Global / Remote SaaS",
-    industry: "B2B SaaS & AI",
-    monetizationType: "Monthly Subscription (SaaS)",
+    budget: "Rp 10 Juta - Rp 50 Juta",
+    locationOrScale: "Nasional (Seluruh Indonesia)",
+    industry: "B2B SaaS & AI Workflow",
+    monetizationType: "Langganan Bulanan (SaaS)",
     problemStatement: "",
   });
 
@@ -82,7 +82,7 @@ export function BusinessIdeaForm({ onSubmit, isLoading }: BusinessIdeaFormProps)
       <div className="mb-6 flex flex-wrap items-center gap-2">
         <div className="flex items-center gap-1 text-xs font-semibold text-indigo-400">
           <Zap className="h-3.5 w-3.5" />
-          <span>Quick Inspiration Presets:</span>
+          <span>Contoh Presets Ide Bisnis:</span>
         </div>
         {PRESET_IDEAS.map((preset, idx) => (
           <button
@@ -110,15 +110,15 @@ export function BusinessIdeaForm({ onSubmit, isLoading }: BusinessIdeaFormProps)
             </div>
             <div>
               <h2 className="text-lg font-bold text-white font-heading">
-                Business Idea Context Generator
+                Formulir Parameter Ide Bisnis
               </h2>
               <p className="text-xs text-slate-400">
-                Feed multi-dimensional parameters for an objective, investor-grade analysis.
+                Masukkan konteks bisnis Anda untuk menghasilkan analisis mendalam berstandar investor.
               </p>
             </div>
           </div>
           <span className="hidden rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-[11px] font-semibold text-indigo-300 md:inline-block">
-            Gemini Structured Engine
+            Engine AI Terstruktur
           </span>
         </div>
 
@@ -127,12 +127,12 @@ export function BusinessIdeaForm({ onSubmit, isLoading }: BusinessIdeaFormProps)
           <div className="space-y-1.5">
             <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
               <Briefcase className="h-3.5 w-3.5 text-indigo-400" />
-              Idea / Project Name <span className="text-rose-400">*</span>
+              Nama Ide / Bisnis <span className="text-rose-400">*</span>
             </label>
             <input
               type="text"
               required
-              placeholder="e.g. DentalPulse AI or AutoSEO Studio"
+              placeholder="Contoh: DentalPulse AI atau KopiFlow App"
               value={formData.ideaName}
               onChange={(e) => setFormData({ ...formData, ideaName: e.target.value })}
               className="w-full rounded-xl border border-white/10 bg-slate-950/60 px-4 py-2.5 text-sm text-white placeholder-slate-500 backdrop-blur-md transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
@@ -143,33 +143,33 @@ export function BusinessIdeaForm({ onSubmit, isLoading }: BusinessIdeaFormProps)
           <div className="space-y-1.5">
             <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
               <Target className="h-3.5 w-3.5 text-indigo-400" />
-              Target Customer / ICP <span className="text-rose-400">*</span>
+              Target Pasar / Pembeli Ideal <span className="text-rose-400">*</span>
             </label>
             <input
               type="text"
               required
-              placeholder="e.g. Independent Dentists, Shopify Sellers, Solo Lawyers"
+              placeholder="Contoh: Pemilik Klinik Gigi, Kedai Kopi Niche, UMKM Fashion"
               value={formData.targetMarket}
               onChange={(e) => setFormData({ ...formData, targetMarket: e.target.value })}
               className="w-full rounded-xl border border-white/10 bg-slate-950/60 px-4 py-2.5 text-sm text-white placeholder-slate-500 backdrop-blur-md transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </div>
 
-          {/* Early Stage Budget */}
+          {/* Early Stage Budget in Rupiah */}
           <div className="space-y-1.5">
             <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
               <DollarSign className="h-3.5 w-3.5 text-emerald-400" />
-              Estimated Early-Stage Budget
+              Perkiraan Modal Awal (Rupiah)
             </label>
             <select
               value={formData.budget}
               onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
               className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-4 py-2.5 text-sm text-white backdrop-blur-md transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             >
-              <option value="Bootstrapped (< $1,000)">Bootstrapped (&lt; $1,000)</option>
-              <option value="$1,000 - $5,000">$1,000 - $5,000 (Lean MVP)</option>
-              <option value="$5,000 - $20,000">$5,000 - $20,000 (Funded Launch)</option>
-              <option value="$20,000 - $100,000+">$20,000 - $100,000+ (Venture Scale)</option>
+              <option value="Bootstrapped (< Rp 10 Juta)">Bootstrapped (&lt; Rp 10 Juta)</option>
+              <option value="Rp 10 Juta - Rp 50 Juta">Rp 10 Juta - Rp 50 Juta (MVP Lean)</option>
+              <option value="Rp 50 Juta - Rp 200 Juta">Rp 50 Juta - Rp 200 Juta (Modal Rilis)</option>
+              <option value="Rp 200 Juta+">Rp 200 Juta+ (Skala Venture Capital)</option>
             </select>
           </div>
 
@@ -177,17 +177,17 @@ export function BusinessIdeaForm({ onSubmit, isLoading }: BusinessIdeaFormProps)
           <div className="space-y-1.5">
             <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
               <MapPin className="h-3.5 w-3.5 text-amber-400" />
-              Operational Scale & Location
+              Skala & Lokasi Operasional
             </label>
             <select
               value={formData.locationOrScale}
               onChange={(e) => setFormData({ ...formData, locationOrScale: e.target.value })}
               className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-4 py-2.5 text-sm text-white backdrop-blur-md transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             >
-              <option value="Global / Remote SaaS">Global / Remote Digital SaaS</option>
-              <option value="National (Indonesia / US / Specific Country)">National (Specific Country)</option>
-              <option value="Hyperlocal / City-Level">Hyperlocal / City-Level</option>
-              <option value="Regional (Southeast Asia / North America)">Regional (SEA / North America)</option>
+              <option value="Nasional (Seluruh Indonesia)">Nasional (Seluruh Indonesia)</option>
+              <option value="Regional (Jabodetabek / Kota Besar)">Regional (Jabodetabek / Kota Besar)</option>
+              <option value="Hyperlocal / Tingkat Kota">Hyperlocal / Tingkat Kota</option>
+              <option value="Global Remote SaaS">Global / Remote Digital SaaS</option>
             </select>
           </div>
 
@@ -195,7 +195,7 @@ export function BusinessIdeaForm({ onSubmit, isLoading }: BusinessIdeaFormProps)
           <div className="space-y-1.5">
             <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
               <Layers className="h-3.5 w-3.5 text-cyan-400" />
-              Industry / Sector
+              Industri / Sektor
             </label>
             <select
               value={formData.industry}
@@ -203,12 +203,13 @@ export function BusinessIdeaForm({ onSubmit, isLoading }: BusinessIdeaFormProps)
               className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-4 py-2.5 text-sm text-white backdrop-blur-md transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             >
               <option value="B2B SaaS & AI Workflow">B2B SaaS & AI Workflow</option>
-              <option value="FinTech & Payments">FinTech & Payments</option>
-              <option value="HealthTech & Wellness">HealthTech & Wellness</option>
-              <option value="E-Commerce & DTC Tools">E-Commerce & DTC Tools</option>
-              <option value="Marketplace & Aggregator">Marketplace & Aggregator</option>
-              <option value="EdTech & Knowledge Monetization">EdTech & Knowledge Monetization</option>
-              <option value="Service Agency / Productized Consulting">Service Agency / Productized Consulting</option>
+              <option value="F&B & Retail Software">F&B & Retail Software</option>
+              <option value="FinTech & Pembayaran">FinTech & Pembayaran</option>
+              <option value="HealthTech & Kesehatan">HealthTech & Kesehatan</option>
+              <option value="E-Commerce & Alat UMKM">E-Commerce & Alat UMKM</option>
+              <option value="Marketplace & Agregator">Marketplace & Agregator</option>
+              <option value="EdTech & Edukasi Digital">EdTech & Edukasi Digital</option>
+              <option value="Agensi Jasa / Layanan Terproduk">Agensi Jasa / Layanan Terproduk</option>
             </select>
           </div>
 
@@ -216,18 +217,18 @@ export function BusinessIdeaForm({ onSubmit, isLoading }: BusinessIdeaFormProps)
           <div className="space-y-1.5">
             <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
               <DollarSign className="h-3.5 w-3.5 text-purple-400" />
-              Planned Monetization Model
+              Model Monetisasi Utama
             </label>
             <select
               value={formData.monetizationType}
               onChange={(e) => setFormData({ ...formData, monetizationType: e.target.value })}
               className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-4 py-2.5 text-sm text-white backdrop-blur-md transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             >
-              <option value="Monthly Subscription (SaaS)">Monthly Recurring Subscription (SaaS)</option>
-              <option value="Usage-Based / Metered API">Usage-Based / Metered API</option>
-              <option value="Transaction Fee / Take-Rate %">Transaction Fee / Take-Rate %</option>
-              <option value="One-Time Lifetime License">One-Time Lifetime License</option>
-              <option value="Freemium + Enterprise Add-ons">Freemium + Enterprise Add-ons</option>
+              <option value="Langganan Bulanan (SaaS)">Langganan Bulanan Berulang (SaaS)</option>
+              <option value="Penggunaan API (Metered/Pay-as-you-go)">Penggunaan API (Pay-as-you-go)</option>
+              <option value="Komisi Transaksi (Take-Rate %)">Komisi Transaksi / Take-Rate %</option>
+              <option value="Lisensi Sekali Bayar (Lifetime)">Lisensi Sekali Bayar (Lifetime)</option>
+              <option value="Freemium + Modul Tambahan Pro">Freemium + Modul Tambahan Pro</option>
             </select>
           </div>
         </div>
@@ -236,11 +237,11 @@ export function BusinessIdeaForm({ onSubmit, isLoading }: BusinessIdeaFormProps)
         <div className="mt-5 space-y-1.5">
           <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
             <Lightbulb className="h-3.5 w-3.5 text-amber-400" />
-            Core Problem & Differentiation (Optional Context)
+            Penjelasan Masalah Utama (Konteks Tambahan - Opsional)
           </label>
           <textarea
             rows={2}
-            placeholder="What acute pain point are you solving? What makes your approach 10x better or faster than existing alternatives?"
+            placeholder="Apa masalah paling mendesak yang ingin Anda selesaikan? Mengapa cara Anda 10x lebih cepat atau lebih efisien?"
             value={formData.problemStatement || ""}
             onChange={(e) => setFormData({ ...formData, problemStatement: e.target.value })}
             className="w-full rounded-xl border border-white/10 bg-slate-950/60 p-3 text-sm text-white placeholder-slate-500 backdrop-blur-md transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
@@ -255,7 +256,7 @@ export function BusinessIdeaForm({ onSubmit, isLoading }: BusinessIdeaFormProps)
             className="brand-gradient brand-gradient-hover flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-600/30 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none"
           >
             <Sparkles className="h-4 w-4" />
-            <span>Generate Deep Business Intelligence</span>
+            <span>Mulai Analisis Kecerdasan Bisnis</span>
             <ArrowRight className="h-4 w-4" />
           </button>
         </div>

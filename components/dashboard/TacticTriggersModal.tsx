@@ -30,7 +30,7 @@ export function TacticTriggersModal({
     setTimeout(() => setCopied(null), 2000);
   };
 
-  const formattedPitch = `[HOOK]\n${tacticTriggers.elevatorPitch.hook}\n\n[PROBLEM]\n${tacticTriggers.elevatorPitch.problem}\n\n[SOLUTION]\n${tacticTriggers.elevatorPitch.solution}\n\n[CALL TO ACTION]\n${tacticTriggers.elevatorPitch.callToAction}`;
+  const formattedPitch = `[HOOK]\n${tacticTriggers.elevatorPitch.hook}\n\n[MASALAH]\n${tacticTriggers.elevatorPitch.problem}\n\n[SOLUSI]\n${tacticTriggers.elevatorPitch.solution}\n\n[CALL TO ACTION]\n${tacticTriggers.elevatorPitch.callToAction}`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn no-print">
@@ -43,7 +43,7 @@ export function TacticTriggersModal({
             </div>
             <div>
               <h3 className="text-base font-bold text-white font-heading">
-                Tactical Execution Toolkit
+                Toolkit Eksekusi Taktis
               </h3>
               <p className="text-xs text-slate-400">{analysis.input.ideaName}</p>
             </div>
@@ -80,7 +80,7 @@ export function TacticTriggersModal({
               }`}
             >
               <Database className="h-3.5 w-3.5" />
-              MVP DB Schema
+              Schema DB MVP
             </button>
             <button
               onClick={() => setActiveTab("personas")}
@@ -91,7 +91,7 @@ export function TacticTriggersModal({
               }`}
             >
               <Users className="h-3.5 w-3.5" />
-              Target Personas
+              Persona Pelanggan
             </button>
             <button
               onClick={() => setActiveTab("growth")}
@@ -102,7 +102,7 @@ export function TacticTriggersModal({
               }`}
             >
               <Rocket className="h-3.5 w-3.5" />
-              Growth Channels
+              Saluran Pertumbuhan
             </button>
           </div>
         </div>
@@ -114,39 +114,39 @@ export function TacticTriggersModal({
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <p className="text-xs text-slate-400">
-                  A high-converting 30-second elevator pitch crafted for investors & customers.
+                  Elevator pitch 30 detik berkonversi tinggi untuk investor & calon pelanggan.
                 </p>
                 <button
                   onClick={() => copyToClipboard(formattedPitch, "pitch")}
                   className="flex items-center gap-1.5 rounded-lg bg-indigo-600/20 px-3 py-1 text-xs font-semibold text-indigo-400 border border-indigo-500/30 hover:bg-indigo-600 hover:text-white transition-all"
                 >
                   {copied === "pitch" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                  <span>{copied === "pitch" ? "Copied!" : "Copy Pitch"}</span>
+                  <span>{copied === "pitch" ? "Tersalin!" : "Salin Pitch"}</span>
                 </button>
               </div>
 
               <div className="space-y-3 rounded-2xl border border-white/10 bg-slate-950/80 p-4">
                 <div className="border-b border-white/5 pb-2.5">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-400">
-                    Hook
+                    Hook (Daya Tarik Awal)
                   </span>
                   <p className="mt-1 text-sm text-slate-200">{tacticTriggers.elevatorPitch.hook}</p>
                 </div>
                 <div className="border-b border-white/5 pb-2.5">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-rose-400">
-                    Problem
+                    Masalah Utama
                   </span>
                   <p className="mt-1 text-sm text-slate-200">{tacticTriggers.elevatorPitch.problem}</p>
                 </div>
                 <div className="border-b border-white/5 pb-2.5">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
-                    Solution
+                    Solusi Terproduk
                   </span>
                   <p className="mt-1 text-sm text-slate-200">{tacticTriggers.elevatorPitch.solution}</p>
                 </div>
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">
-                    Call To Action
+                    Call To Action (Ajak Penawaran)
                   </span>
                   <p className="mt-1 text-sm text-slate-200">
                     {tacticTriggers.elevatorPitch.callToAction}
@@ -161,14 +161,14 @@ export function TacticTriggersModal({
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <p className="text-xs text-slate-400">
-                  Ready-to-use Prisma / PostgreSQL database schema for the MVP phase.
+                  Schema database Prisma / PostgreSQL yang siap langsung digunakan untuk fase MVP.
                 </p>
                 <button
                   onClick={() => copyToClipboard(tacticTriggers.mvpDatabaseSchema, "schema")}
                   className="flex items-center gap-1.5 rounded-lg bg-indigo-600/20 px-3 py-1 text-xs font-semibold text-indigo-400 border border-indigo-500/30 hover:bg-indigo-600 hover:text-white transition-all"
                 >
                   {copied === "schema" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                  <span>{copied === "schema" ? "Copied!" : "Copy Schema"}</span>
+                  <span>{copied === "schema" ? "Tersalin!" : "Salin Schema"}</span>
                 </button>
               </div>
 
@@ -182,7 +182,7 @@ export function TacticTriggersModal({
           {activeTab === "personas" && (
             <div className="space-y-4">
               <p className="text-xs text-slate-400">
-                Detailed customer personas mapped to psychological buying triggers.
+                Profil persona calon pelanggan ideal yang dipetakan ke pemicu psikologis pembelian.
               </p>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 {tacticTriggers.targetPersonas.map((persona, idx) => (
@@ -197,11 +197,11 @@ export function TacticTriggersModal({
                       <h4 className="text-sm font-bold text-white">{persona.role}</h4>
                     </div>
                     <div className="text-xs space-y-1">
-                      <span className="text-slate-400 font-medium">Core Frustration:</span>
+                      <span className="text-slate-400 font-medium">Frustrasi Utama:</span>
                       <p className="text-slate-200">{persona.painPoint}</p>
                     </div>
                     <div className="text-xs space-y-1 rounded-xl bg-emerald-950/30 border border-emerald-500/20 p-2.5">
-                      <span className="text-emerald-400 font-semibold">Trigger to Buy / Upgrade:</span>
+                      <span className="text-emerald-400 font-semibold">Pemicu Keputusan Membeli:</span>
                       <p className="text-slate-300">{persona.triggerToBuy}</p>
                     </div>
                   </div>
@@ -214,7 +214,7 @@ export function TacticTriggersModal({
           {activeTab === "growth" && (
             <div className="space-y-4">
               <p className="text-xs text-slate-400">
-                Highest-leverage customer acquisition channels prioritized by expected ROI.
+                Saluran akuisisi pelanggan ber-ROI tertinggi yang diprioritaskan untuk pasar Indonesia.
               </p>
               <div className="space-y-3">
                 {tacticTriggers.growthChannels.map((channel, idx) => (
@@ -233,7 +233,7 @@ export function TacticTriggersModal({
                           : "border-amber-500/30 bg-amber-500/10 text-amber-400"
                       }`}
                     >
-                      {channel.expectedEffectiveness} ROI
+                      ROI {channel.expectedEffectiveness === "High" ? "Tinggi" : "Sedang"}
                     </span>
                   </div>
                 ))}

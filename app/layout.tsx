@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Sparkles, Bot, Rocket, ShieldCheck } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "AI Business Idea Analyzer | Tactical SaaS Intelligence & MVP Roadmap",
+  title: "AI Business Idea Analyzer | Analisis Kelayakan Bisnis & Blueprint SaaS Taktis",
   description:
-    "Transform basic business concepts into structured, visual, tactical validation roadmaps with Viability Scores, Radar Opportunity Matrix, MVP Scopes, and 12-Month Financial Models.",
+    "Ubah ide bisnis dasar menjadi rencana eksekusi bisnis taktis dan visual lengkap dengan Skor Kelayakan, Radar Peluang, Scope MVP, dan Proyeksi Keuangan 12 Bulan (Rupiah).",
 };
 
 export default function RootLayout({
@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="id" className="dark">
       <body className="antialiased selection:bg-indigo-500 selection:text-white">
         {/* Navigation Navbar */}
         <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl no-print">
@@ -28,7 +28,7 @@ export default function RootLayout({
                   IdeaMatrix <span className="text-indigo-400">AI</span>
                 </span>
                 <span className="text-[10px] text-slate-400 font-medium">
-                  Business Idea Analyzer SaaS
+                  AI Business Idea Analyzer (SaaS)
                 </span>
               </div>
             </div>
@@ -36,7 +36,7 @@ export default function RootLayout({
             <div className="flex items-center gap-3">
               <div className="hidden sm:flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-semibold text-emerald-400">
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Gemini 2.5 Structured JSON Engine</span>
+                <span>Engine Gemini 2.5 Structured JSON</span>
               </div>
             </div>
           </div>
@@ -48,11 +48,11 @@ export default function RootLayout({
         {/* Footer */}
         <footer className="border-t border-white/5 bg-slate-950/90 py-8 text-center text-xs text-slate-500 no-print">
           <div className="mx-auto max-w-7xl px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>© {new Date().getFullYear()} AI Business Idea Analyzer. Built for High-Velocity Founders.</p>
+            <p>© {new Date().getFullYear()} AI Business Idea Analyzer. Dibuat untuk Founder & Eksekutor Berkecepatan Tinggi.</p>
             <div className="flex items-center gap-4 text-[11px]">
-              <span className="hover:text-slate-400 transition-colors">Zero AI Slop Policy</span>
+              <span className="hover:text-slate-400 transition-colors">Bebas AI Slop & Klise</span>
               <span>•</span>
-              <span className="hover:text-slate-400 transition-colors">Y-Combinator & Lean Validation Standards</span>
+              <span className="hover:text-slate-400 transition-colors">Standar Validasi Lean Startup</span>
             </div>
           </div>
         </footer>

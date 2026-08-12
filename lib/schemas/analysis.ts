@@ -91,7 +91,7 @@ export const BusinessAnalysisSchema = z.object({
     estimatedCac: z.string(),
     estimatedLtv: z.string(),
     breakEvenMonth: z.number().int().positive(),
-    currency: z.string().default("USD"),
+    currency: z.string().default("IDR"),
     monthlyProjections: z.array(MonthlyProjectionPointSchema).length(12),
   }),
   actionPlan: z.object({
