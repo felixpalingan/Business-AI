@@ -6,7 +6,7 @@ import { ArrowLeft, Loader2, AlertCircle } from "lucide-react";
 import type { BusinessDiagnosticResult } from "@/types/business-analysis";
 import { BusinessDashboard } from "@/components/dashboard/BusinessDashboard";
 
-export default function SharedIdeaRedirectPage() {
+export default function SharedDiagnosticPage() {
   const params = useParams();
   const router = useRouter();
   const id = params?.id as string;
@@ -18,6 +18,7 @@ export default function SharedIdeaRedirectPage() {
   useEffect(() => {
     if (!id) return;
 
+    // First try local storage
     try {
       const local = localStorage.getItem("okoce_diagnostic_history");
       if (local) {
@@ -33,9 +34,10 @@ export default function SharedIdeaRedirectPage() {
       }
     } catch (e) {}
 
+    // Next try fetching from API
     fetch(`/api/idea/${id}`)
       .then((res) => {
-        if (!res.ok) throw new Error("Report not found");
+        if (!res.ok) throw new Error("Diagnostic report not found on server.");
         return res.json();
       })
       .then((data) => {
@@ -43,7 +45,7 @@ export default function SharedIdeaRedirectPage() {
         setLoading(false);
       })
       .catch((err) => {
-        setError("Diagnostic report could not be found.");
+        setError("Diagnostic report could not be found. You may perform a new assessment on the home page.");
         setLoading(false);
       });
   }, [id]);
@@ -52,7 +54,7 @@ export default function SharedIdeaRedirectPage() {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-3">
         <Loader2 className="h-8 w-8 animate-spin text-indigo-400" />
-        <p className="text-xs text-slate-400">Loading OK OCE Diagnostic Report...</p>
+        <p className="text-xs text-slate-400">Loading OK OCE Business Diagnostic Report...</p>
       </div>
     );
   }
@@ -63,14 +65,16 @@ export default function SharedIdeaRedirectPage() {
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/20 text-amber-400">
           <AlertCircle className="h-6 w-6" />
         </div>
-        <h2 className="text-xl font-bold text-white font-heading">Report Not Found</h2>
+        <h2 className="text-xl font-bold text-white font-heading">
+          Report Not Found
+        </h2>
         <p className="text-xs text-slate-400">{error}</p>
         <button
           onClick={() => router.push("/")}
           className="brand-gradient brand-gradient-hover inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-bold text-white"
         >
           <ArrowLeft className="h-4 w-4" />
-          <span>Return Home</span>
+          <span>Return to Diagnostic Home</span>
         </button>
       </div>
     );
@@ -86,7 +90,11 @@ export default function SharedIdeaRedirectPage() {
           <ArrowLeft className="h-3.5 w-3.5" />
           <span>Assess Your Own Business</span>
         </button>
+        <span className="text-[11px] text-indigo-300 font-semibold bg-indigo-950/40 border border-indigo-500/30 rounded-full px-3 py-0.5">
+          OK OCE Shared Mentoring Report
+        </span>
       </div>
+
       <BusinessDashboard diagnostic={diagnostic} onReset={() => router.push("/")} />
     </div>
   );

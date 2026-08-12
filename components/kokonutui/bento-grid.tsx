@@ -1,18 +1,18 @@
 "use client";
 
 import React from "react";
-import { Compass, ShieldAlert, Cpu, DollarSign, Sparkles } from "lucide-react";
+import { Compass, ShieldAlert, Cpu, GraduationCap, Building2 } from "lucide-react";
 import { CardSpotlight } from "@/components/kokonutui/card-spotlight";
 
 export function BentoGrid() {
   return (
     <div className="mx-auto max-w-5xl pt-8 border-t border-white/10">
       <h2 className="mb-6 text-center text-xs font-bold uppercase tracking-widest text-slate-400">
-        Arsitektur Validasi Bisnis 4 Pilar Utama (KokonutUI Bento Grid)
+        OK OCE 4-Pillar Business Diagnostic Architecture
       </h2>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2">
-        {/* Pillar 1: Viability Meter (Spans 2 columns) */}
+        {/* Pillar 1: Health Index & UU UMKM (Spans 2 columns) */}
         <CardSpotlight
           spotlightColor="rgba(99, 102, 241, 0.25)"
           className="md:col-span-2 md:row-span-1"
@@ -22,18 +22,18 @@ export function BentoGrid() {
               <Compass className="h-5 w-5" />
             </div>
             <span className="rounded-full bg-indigo-500/20 px-2.5 py-0.5 text-[10px] font-bold text-indigo-300">
-              Pilar #1
+              Diagnostic Pillar 1
             </span>
           </div>
           <h4 className="text-base font-bold text-white font-heading">
-            Meter Kelayakan Viabilitas & 9-Box Lean Canvas
+            Enterprise Health Index & UU UMKM Classification
           </h4>
           <p className="mt-1.5 text-xs text-slate-300 leading-relaxed">
-            Penilaian skor objektif 0-10, radar peluang 4 sumbu (demand, tech, modal, persaingan), serta matriks 9-box Lean Canvas interaktif.
+            Holistic 0-100 health assessment mapped against Indonesian MSME Law (UU No. 20/2008 & PP 7/2021) into Micro, Small, or Medium categories.
           </p>
         </CardSpotlight>
 
-        {/* Pillar 2: Red Flag Alerts */}
+        {/* Pillar 2: 5-Pillar Vulnerability Radar */}
         <CardSpotlight
           spotlightColor="rgba(244, 63, 94, 0.25)"
           className="md:col-span-1 md:row-span-1"
@@ -43,18 +43,18 @@ export function BentoGrid() {
               <ShieldAlert className="h-5 w-5" />
             </div>
             <span className="rounded-full bg-rose-500/20 px-2.5 py-0.5 text-[10px] font-bold text-rose-300">
-              Pilar #2
+              Diagnostic Pillar 2
             </span>
           </div>
           <h4 className="text-sm font-bold text-white font-heading">
-            Reality Check & Red Flags
+            5-Pillar Operational Radar
           </h4>
           <p className="mt-1 text-xs text-slate-300 leading-relaxed">
-            3 peringatan risiko kritis kegagalan dengan kartu 3D flip mitigasi taktis & analisis kritis.
+            Deep multi-axis evaluation across Financials, Ops/SOPs, Marketing, Human Capital, and Legal Compliance.
           </p>
         </CardSpotlight>
 
-        {/* Pillar 3: MVP Matrix */}
+        {/* Pillar 3: Gap Analysis & 30-Day Turnaround */}
         <CardSpotlight
           spotlightColor="rgba(6, 182, 212, 0.25)"
           className="md:col-span-1 md:row-span-1"
@@ -64,35 +64,35 @@ export function BentoGrid() {
               <Cpu className="h-5 w-5" />
             </div>
             <span className="rounded-full bg-cyan-500/20 px-2.5 py-0.5 text-[10px] font-bold text-cyan-300">
-              Pilar #3
+              Diagnostic Pillar 3
             </span>
           </div>
           <h4 className="text-sm font-bold text-white font-heading">
-            Fitur MVP & Validasi 14 Hari
+            Prioritized Gap Remediation Matrix
           </h4>
           <p className="mt-1 text-xs text-slate-300 leading-relaxed">
-            Matriks scope fitur Wajib vs Bisa Nanti dengan rating kesulitan dev (1-5) & checklist rilis.
+            Ranked P0/P1/P2 actionable solutions with time estimates and a step-by-step 30-day turnaround sprint.
           </p>
         </CardSpotlight>
 
-        {/* Pillar 4: Financial Model (Spans 2 columns) */}
+        {/* Pillar 4: OK OCE Mentorship Roadmap (Spans 2 columns) */}
         <CardSpotlight
           spotlightColor="rgba(16, 185, 129, 0.25)"
           className="md:col-span-2 md:row-span-1"
         >
           <div className="flex items-center gap-2 mb-3">
             <div className="rounded-xl bg-emerald-600/20 p-2 text-emerald-400">
-              <DollarSign className="h-5 w-5" />
+              <GraduationCap className="h-5 w-5" />
             </div>
             <span className="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[10px] font-bold text-emerald-300">
-              Pilar #4
+              Diagnostic Pillar 4
             </span>
           </div>
           <h4 className="text-base font-bold text-white font-heading">
-            Unit Economics & Proyeksi Keuangan 12 Bulan (Rupiah)
+            Tailored OK OCE Mentorship Roadmap & 12-Month Simulation
           </h4>
           <p className="mt-1.5 text-xs text-slate-300 leading-relaxed">
-            Target harga ideal, rasio CAC vs LTV, titik impas BEP, serta grafik interaktif proyeksi MRR & pertumbuhan pengguna.
+            Direct gateway to matched OK OCE mentors, custom training modules, and 12-month projected financial & operational recovery curves.
           </p>
         </CardSpotlight>
       </div>

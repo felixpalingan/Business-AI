@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sparkles, History } from "lucide-react";
-import type { BusinessAnalysisResult, AnalysisInputFormData } from "@/types/business-analysis";
-import { BusinessIdeaForm } from "@/components/form/BusinessIdeaForm";
+import { Sparkles, History, AlertTriangle, WifiOff, RefreshCw } from "lucide-react";
+import type { BusinessDiagnosticResult, BusinessDiagnosticInputFormData } from "@/types/business-analysis";
+import { BusinessDiagnosticForm } from "@/components/form/BusinessDiagnosticForm";
 import { BusinessDashboard } from "@/components/dashboard/BusinessDashboard";
 import { AiProcessingState } from "@/components/loading/AiProcessingState";
 import { MatrixBadge } from "@/components/kokonutui/matrix-badge";
@@ -13,28 +13,28 @@ import { HistoryDrawer } from "@/components/dashboard/HistoryDrawer";
 import confetti from "canvas-confetti";
 
 export default function HomePage() {
-  const [analysis, setAnalysis] = useState<BusinessAnalysisResult | null>(null);
+  const [diagnostic, setDiagnostic] = useState<BusinessDiagnosticResult | null>(null);
   const [loading, setLoading] = useState(false);
-  const [submittedIdeaName, setSubmittedIdeaName] = useState("");
+  const [submittedBusinessName, setSubmittedBusinessName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [historyOpen, setHistoryOpen] = useState(false);
 
-  const saveToLocalHistory = (newAnalysis: BusinessAnalysisResult) => {
+  const saveToLocalHistory = (newDiagnostic: BusinessDiagnosticResult) => {
     try {
-      const existing = localStorage.getItem("idea_analyzer_history");
-      const list: BusinessAnalysisResult[] = existing ? JSON.parse(existing) : [];
-      const filtered = list.filter((item) => item.input?.ideaName !== newAnalysis.input?.ideaName);
-      const updated = [newAnalysis, ...filtered].slice(0, 20);
-      localStorage.setItem("idea_analyzer_history", JSON.stringify(updated));
+      const existing = localStorage.getItem("okoce_diagnostic_history");
+      const list: BusinessDiagnosticResult[] = existing ? JSON.parse(existing) : [];
+      const filtered = list.filter((item) => item.input?.businessName !== newDiagnostic.input?.businessName);
+      const updated = [newDiagnostic, ...filtered].slice(0, 20);
+      localStorage.setItem("okoce_diagnostic_history", JSON.stringify(updated));
     } catch (e) {
       console.error("Local history error:", e);
     }
   };
 
-  const handleFormSubmit = async (formData: AnalysisInputFormData) => {
+  const handleFormSubmit = async (formData: BusinessDiagnosticInputFormData) => {
     setLoading(true);
     setError(null);
-    setSubmittedIdeaName(formData.ideaName);
+    setSubmittedBusinessName(formData.businessName);
 
     try {
       const response = await fetch("/api/analyze", {
@@ -47,11 +47,13 @@ export default function HomePage() {
 
       if (!response.ok) {
         const errJson = await response.json().catch(() => ({}));
-        throw new Error(errJson.error || "Gagal menganalisis ide bisnis. Silakan periksa input Anda.");
+        throw new Error(
+          errJson.error || "Failed to generate business diagnostic. Please verify your connection & credentials."
+        );
       }
 
-      const data: BusinessAnalysisResult = await response.json();
-      setAnalysis(data);
+      const data: BusinessDiagnosticResult = await response.json();
+      setDiagnostic(data);
       saveToLocalHistory(data);
 
       confetti({
@@ -65,22 +67,22 @@ export default function HomePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           slug: data.slug,
-          ideaName: formData.ideaName,
-          targetMarket: formData.targetMarket,
-          viabilityScore: data.meta.viabilityScore,
+          ideaName: formData.businessName,
+          targetMarket: formData.industrySector,
+          viabilityScore: data.executiveOverview.overallHealthScore / 10,
           payload: data,
         }),
-      }).catch((e) => console.log("Catatan simpan Supabase:", e));
+      }).catch((e) => console.log("Supabase background save notice:", e));
     } catch (err: any) {
-      console.error("Kesalahan pengiriman:", err);
-      setError(err.message || "Terjadi kesalahan tidak terduga. Silakan coba lagi.");
+      console.error("Diagnostic generation error:", err);
+      setError(err.message || "An unexpected error occurred while communicating with the AI Engine.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleReset = () => {
-    setAnalysis(null);
+    setDiagnostic(null);
     setError(null);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -93,15 +95,15 @@ export default function HomePage() {
       {/* Case 1: Processing AI Loading State */}
       {loading && (
         <div className="py-12">
-          <AiProcessingState ideaName={submittedIdeaName} />
+          <AiProcessingState ideaName={submittedBusinessName} />
         </div>
       )}
 
-      {/* Case 2: Analysis Generated Result Dashboard */}
-      {!loading && analysis && (
+      {/* Case 2: Diagnostic Generated Result Dashboard */}
+      {!loading && diagnostic && (
         <div className="py-4">
           <BusinessDashboard
-            analysis={analysis}
+            diagnostic={diagnostic}
             onReset={handleReset}
             onOpenHistory={() => setHistoryOpen(true)}
           />
@@ -109,45 +111,60 @@ export default function HomePage() {
       )}
 
       {/* Case 3: Initial Input Form View */}
-      {!loading && !analysis && (
+      {!loading && !diagnostic && (
         <div className="space-y-12 py-6">
-          {/* Hero Header Section with KokonutUI MatrixBadge */}
+          {/* Hero Header Section */}
           <div className="mx-auto max-w-3xl text-center space-y-4">
             <div className="flex items-center justify-center gap-3">
               <MatrixBadge
-                text="Engine Analisis Strategi Bisnis Generasi Baru"
+                text="OK OCE Business Health Diagnostic Platform"
                 variant="indigo"
                 icon={Sparkles}
               />
               <button
                 onClick={() => setHistoryOpen(true)}
-                className="flex items-center gap-1.5 rounded-full border border-white/10 bg-slate-900/60 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:border-indigo-500/50 hover:text-white transition-all"
+                className="flex items-center gap-1.5 rounded-full border border-white/10 bg-slate-900/70 px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:border-indigo-500/50 hover:text-white transition-all"
               >
                 <History className="h-3.5 w-3.5 text-indigo-400" />
-                <span>Riwayat Analisis</span>
+                <span>Diagnostic History</span>
               </button>
             </div>
 
             <h1 className="text-3xl font-black tracking-tight text-white font-heading sm:text-5xl lg:text-6xl">
-              Ubah Ide Dasar Jadi <span className="glow-gradient-text">Blueprint Eksekusi Taktis</span>
+              Enterprise Health Check & <span className="glow-gradient-text">MSME Diagnostic Engine</span>
             </h1>
 
             <p className="mx-auto max-w-2xl text-sm text-slate-300 sm:text-base leading-relaxed">
-              Hasikan skor kelayakan objektif, 9-box Lean Canvas, matriks MVP, rencana validasi 14 hari,
-              dan proyeksi keuangan 12 bulan dalam Rupiah berbasis penalaran terstruktur Gemini AI.
+              Assess your enterprise health index, classify official scale under Indonesian MSME Law (*UU UMKM No. 20/2008 & PP 7/2021*), identify operational gaps, and unlock a tailored OK OCE Mentorship Pathway.
             </p>
           </div>
 
-          {/* Error Banner if any */}
+          {/* Offline / Error Diagnostic Banner */}
           {error && (
-            <div className="mx-auto max-w-2xl rounded-2xl border border-rose-500/30 bg-rose-950/40 p-4 text-xs text-rose-300 backdrop-blur-md">
-              <p className="font-semibold">Catatan Analisis:</p>
-              <p>{error}</p>
+            <div className="mx-auto max-w-3xl rounded-3xl border border-rose-500/40 bg-rose-950/50 p-6 text-xs text-rose-200 backdrop-blur-xl shadow-2xl space-y-3">
+              <div className="flex items-center gap-2 text-rose-400 font-bold text-sm">
+                <WifiOff className="h-5 w-5" />
+                <span>AI Diagnostic Engine Offline / Service Notice:</span>
+              </div>
+              <p className="leading-relaxed bg-black/30 p-3.5 rounded-xl font-mono text-[11px] text-rose-300">
+                {error}
+              </p>
+              <div className="flex items-center justify-between pt-1">
+                <span className="text-[11px] text-slate-400">
+                  Please verify your network connection or try selecting a Quick Demo Profile below.
+                </span>
+                <button
+                  onClick={() => setError(null)}
+                  className="rounded-lg bg-rose-600/30 px-3 py-1 text-xs font-semibold text-white hover:bg-rose-600/50 transition-colors"
+                >
+                  Dismiss
+                </button>
+              </div>
             </div>
           )}
 
-          {/* Business Idea Input Form */}
-          <BusinessIdeaForm onSubmit={handleFormSubmit} isLoading={loading} />
+          {/* Business Diagnostic Input Form */}
+          <BusinessDiagnosticForm onSubmit={handleFormSubmit} isLoading={loading} />
 
           {/* KokonutUI BentoGrid 4-Pillar Validation Showcase */}
           <BentoGrid />
@@ -158,7 +175,7 @@ export default function HomePage() {
       <HistoryDrawer
         isOpen={historyOpen}
         onClose={() => setHistoryOpen(false)}
-        onSelectAnalysis={(selected) => setAnalysis(selected)}
+        onSelectDiagnostic={(selected) => setDiagnostic(selected)}
       />
     </div>
   );

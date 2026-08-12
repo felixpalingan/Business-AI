@@ -1,30 +1,51 @@
-export interface CriticalRisk {
-  risk: string;
-  severity: "Medium" | "High" | "Critical";
-  mitigationStrategy: string;
+export interface MsmeClassification {
+  category: "Micro Enterprise (Usaha Mikro)" | "Small Enterprise (Usaha Kecil)" | "Medium Enterprise (Usaha Menengah)" | "Large Enterprise (Usaha Besar)";
+  legalBasis: string;
+  annualRevenueCriteria: string;
+  netAssetCriteria: string;
+  employeeScaleCriteria: string;
+  formalizationStatus: string;
+  regulatoryComplianceChecklist: string[];
 }
 
-export interface RadarMetricPoint {
-  subject: string;
-  score: number;
-  fullMark: number;
-  benchmark: number;
+export interface PillarScoreBreakdown {
+  financialHealth: number;         // 0 - 100
+  operationalEfficiency: number;   // 0 - 100
+  marketingAndSales: number;       // 0 - 100
+  humanCapitalAndSop: number;      // 0 - 100
+  legalAndCompliance: number;      // 0 - 100
+  summaryVerdict: string;
 }
 
-export interface MvpFeature {
-  title: string;
-  description: string;
-  estimatedDays: number;
-  devDifficulty: number; // 1 to 5
-  category: "Core Flow" | "Auth & Security" | "Payment" | "AI Engine" | "UI/UX" | "Analytics";
+export interface CriticalGapItem {
+  pillar: "Financial Health" | "Operations & SOP" | "Marketing & Sales" | "Human Capital" | "Legal & Compliance";
+  issue: string;
+  severity: "Critical (P0)" | "High (P1)" | "Medium (P2)";
+  actionableFix: string;
+  estimatedTimeToSolve: string;
+  expectedBusinessImpact: string;
 }
 
-export interface PricingTier {
-  tierName: string;
-  price: string;
-  billingInterval: string;
-  features: string[];
-  targetAudience: string;
+export interface TurnaroundTask {
+  dayRange: string;
+  taskTitle: string;
+  actionDetails: string;
+  deliverable: string;
+}
+
+export interface TurnaroundPhase {
+  phaseTitle: string;
+  timeframe: string;
+  tasks: TurnaroundTask[];
+}
+
+export interface FinancialDiagnostics {
+  burnRateRunwayMonths: number;
+  grossMarginAssessment: string;
+  cashFlowHealthVerdict: "Healthy Positive" | "Breakeven Volatile" | "Distressed Negative";
+  workingCapitalStatus: string;
+  debtLeverageRisk: "Low Risk" | "Moderate Risk" | "High Risk";
+  revenuePerEmployee: string;
 }
 
 export interface MonthlyProjectionPoint {
@@ -35,29 +56,81 @@ export interface MonthlyProjectionPoint {
   netProfit: number;
 }
 
-export interface SprintTask {
-  task: string;
-  deliverable: string;
+export interface MonthlySimulationPoint {
+  month: string;
+  projectedHealthScore: number;
+  projectedRevenue: number;
+  estimatedProfitMargin: number;
+  keyMilestone: string;
 }
 
-export interface SprintPhase {
-  phaseName: string;
-  dayRange: string;
-  tasks: SprintTask[];
+export interface MentorshipDiscussionQuestion {
+  question: string;
+  contextAndGoal: string;
 }
 
-export interface TargetPersona {
-  role: string;
-  painPoint: string;
-  triggerToBuy: string;
+export interface OkoceMentoringPathway {
+  recommendedTrack: "Financial Mastery & Capital Readiness" | "Digital Marketing & Sales Scaling" | "Operational SOPs & Supply Chain Scaling" | "Legal Formalization, Tax & Certification";
+  priorityLevel: "Immediate (Week 1)" | "Strategic (Month 1)" | "Growth Scale (Month 3)";
+  matchedMentorSpecialty: string;
+  coreMentoringModules: string[];
+  preMentoringActionItems: string[];
+  discussionQuestionsForMentor: MentorshipDiscussionQuestion[];
 }
 
-export interface GrowthChannel {
-  channel: string;
-  tactic: string;
-  expectedEffectiveness: "High" | "Medium" | "Low";
+export interface BusinessDiagnosticResult {
+  id?: string;
+  slug: string;
+  createdAt: string;
+  input: {
+    businessName: string;
+    industrySector: string;
+    operatingYears: string;
+    annualRevenue: string;
+    netAssetValue: string;
+    totalEmployees: number;
+    primaryChallenge: string;
+    financialRecordQuality: string;
+    legalEntityStatus: string;
+    targetMarketLocation: string;
+  };
+  executiveOverview: {
+    headline: string;
+    executiveSummary: string;
+    overallHealthScore: number; // 0 - 100
+    healthVerdict: "Optimal Health & Scale-Ready" | "Stable with Operational Friction" | "Vulnerable & Cash Flow Strained" | "Critical Risk of Distress";
+    immediatePriorityAction: string;
+  };
+  msmeClassification: MsmeClassification;
+  pillarScores: PillarScoreBreakdown;
+  financialDiagnostics: FinancialDiagnostics;
+  criticalGaps: CriticalGapItem[];
+  turnaroundPlan: {
+    phases: TurnaroundPhase[];
+  };
+  okoceMentorship: OkoceMentoringPathway;
+  twelveMonthForecast: MonthlySimulationPoint[];
+  tacticDeliverables: {
+    standardOperatingProcedureSnippet: string;
+    cashFlowManagementGuideline: string;
+    pitchOrFinancingReadinessSummary: string;
+  };
 }
 
+export interface BusinessDiagnosticInputFormData {
+  businessName: string;
+  industrySector: string;
+  operatingYears: string;
+  annualRevenue: string;
+  netAssetValue: string;
+  totalEmployees: number;
+  primaryChallenge: string;
+  financialRecordQuality: string;
+  legalEntityStatus: string;
+  targetMarketLocation: string;
+}
+
+// Legacy Compatibility Aliases
 export interface LeanCanvas {
   problem: string[];
   solution: string[];
@@ -70,100 +143,27 @@ export interface LeanCanvas {
   revenueStreams: string[];
 }
 
-export interface ValidationInterviewQuestion {
-  question: string;
-  goal: string;
+export interface CriticalRisk {
+  risk: string;
+  severity: "Medium" | "High" | "Critical";
+  mitigationStrategy: string;
 }
 
-export interface ColdOutreachTemplates {
-  whatsapp: string;
-  email: string;
-  linkedin: string;
+export interface MvpFeature {
+  title: string;
+  description: string;
+  estimatedDays: number;
+  devDifficulty: number;
+  category: string;
 }
 
-export interface BusinessAnalysisResult {
-  id?: string;
-  slug?: string;
-  createdAt?: string;
-  input: {
-    ideaName: string;
-    problemStatement: string;
-    industry: string;
-    targetMarket: string;
-    locationOrScale: string;
-    budget: string;
-    founderStrengths: string[];
-    monetizationType?: string;
-  };
-  meta: {
-    tagline: string;
-    executiveSummary: string;
-    viabilityScore: number; // 1 - 10
-    scoreVerdict: string;
-    executionDifficulty: "Easy" | "Moderate" | "Hard" | "Extreme";
-    timeToMarketMonths: number;
-    estimatedInitialCapital: string;
-  };
-  realityCheck: {
-    marketSaturation: "Low" | "Moderate" | "High" | "Oversaturated";
-    marketSaturationExplanation: string;
-    criticalRisks: CriticalRisk[];
-    whyItMightFail: string[];
-    unfairAdvantageOpportunities: string[];
-  };
-  radarMetrics: {
-    marketDemand: number; // 0 - 100
-    techComplexity: number; // 0 - 100
-    capitalRequired: number; // 0 - 100
-    competitionLevel: number; // 0 - 100
-    scalability: number; // 0 - 100
-    monetizationSpeed: number; // 0 - 100
-    summaryVerdict: string;
-  };
-  leanCanvas: LeanCanvas;
-  mvpScope: {
-    mustHaveFeatures: MvpFeature[];
-    niceToHaveFeatures: MvpFeature[];
-    postMvpFeatures: string[];
-    totalMvpDevDays: number;
-    recommendedTechStack: string[];
-  };
-  financials: {
-    pricingStrategy: string;
-    suggestedTiers: PricingTier[];
-    targetPricePerCustomer: string;
-    estimatedCac: string;
-    estimatedLtv: string;
-    ltvCacRatio: string;
-    breakEvenMonth: number;
-    currency: string;
-    monthlyProjections: MonthlyProjectionPoint[];
-  };
-  actionPlan: {
-    sprintPhases: SprintPhase[];
-  };
-  tacticTriggers: {
-    elevatorPitch: {
-      hook: string;
-      problem: string;
-      solution: string;
-      callToAction: string;
-    };
-    mvpDatabaseSchema: string;
-    validationInterviewQuestions: ValidationInterviewQuestion[];
-    coldOutreachTemplates: ColdOutreachTemplates;
-    targetPersonas: TargetPersona[];
-    growthChannels: GrowthChannel[];
-  };
+export interface PricingTier {
+  tierName: string;
+  price: string;
+  billingInterval: string;
+  features: string[];
+  targetAudience: string;
 }
 
-export interface AnalysisInputFormData {
-  ideaName: string;
-  problemStatement: string;
-  industry: string;
-  targetMarket: string;
-  locationOrScale: string;
-  budget: string;
-  founderStrengths: string[];
-  monetizationType?: string;
-}
+export type BusinessAnalysisResult = any;
+export type AnalysisInputFormData = any;

@@ -1,151 +1,131 @@
 import { z } from "zod";
 
-export const CriticalRiskSchema = z.object({
-  risk: z.string(),
-  severity: z.enum(["Medium", "High", "Critical"]),
-  mitigationStrategy: z.string(),
+export const MsmeClassificationSchema = z.object({
+  category: z.enum([
+    "Micro Enterprise (Usaha Mikro)",
+    "Small Enterprise (Usaha Kecil)",
+    "Medium Enterprise (Usaha Menengah)",
+    "Large Enterprise (Usaha Besar)",
+  ]),
+  legalBasis: z.string().default("Indonesian MSME Law No. 20/2008 & Government Regulation PP No. 7/2021"),
+  annualRevenueCriteria: z.string(),
+  netAssetCriteria: z.string(),
+  employeeScaleCriteria: z.string(),
+  formalizationStatus: z.string(),
+  regulatoryComplianceChecklist: z.array(z.string()).min(2),
 });
 
-export const MvpFeatureSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  estimatedDays: z.number().int().positive(),
-  devDifficulty: z.number().min(1).max(5).default(3),
-  category: z.enum(["Core Flow", "Auth & Security", "Payment", "AI Engine", "UI/UX", "Analytics"]),
+export const PillarScoreBreakdownSchema = z.object({
+  financialHealth: z.number().min(0).max(100),
+  operationalEfficiency: z.number().min(0).max(100),
+  marketingAndSales: z.number().min(0).max(100),
+  humanCapitalAndSop: z.number().min(0).max(100),
+  legalAndCompliance: z.number().min(0).max(100),
+  summaryVerdict: z.string(),
 });
 
-export const PricingTierSchema = z.object({
-  tierName: z.string(),
-  price: z.string(),
-  billingInterval: z.string(),
-  features: z.array(z.string()),
-  targetAudience: z.string(),
+export const CriticalGapItemSchema = z.object({
+  pillar: z.enum([
+    "Financial Health",
+    "Operations & SOP",
+    "Marketing & Sales",
+    "Human Capital",
+    "Legal & Compliance",
+  ]),
+  issue: z.string(),
+  severity: z.enum(["Critical (P0)", "High (P1)", "Medium (P2)"]),
+  actionableFix: z.string(),
+  estimatedTimeToSolve: z.string(),
+  expectedBusinessImpact: z.string(),
 });
 
-export const MonthlyProjectionPointSchema = z.object({
-  month: z.string(),
-  mrr: z.number().nonnegative(),
-  activeUsers: z.number().nonnegative(),
-  burnRate: z.number().nonnegative(),
-  netProfit: z.number(),
-});
-
-export const SprintTaskSchema = z.object({
-  task: z.string(),
+export const TurnaroundTaskSchema = z.object({
+  dayRange: z.string(),
+  taskTitle: z.string(),
+  actionDetails: z.string(),
   deliverable: z.string(),
 });
 
-export const SprintPhaseSchema = z.object({
-  phaseName: z.string(),
-  dayRange: z.string(),
-  tasks: z.array(SprintTaskSchema),
+export const TurnaroundPhaseSchema = z.object({
+  phaseTitle: z.string(),
+  timeframe: z.string(),
+  tasks: z.array(TurnaroundTaskSchema),
 });
 
-export const TargetPersonaSchema = z.object({
-  role: z.string(),
-  painPoint: z.string(),
-  triggerToBuy: z.string(),
+export const FinancialDiagnosticsSchema = z.object({
+  burnRateRunwayMonths: z.number(),
+  grossMarginAssessment: z.string(),
+  cashFlowHealthVerdict: z.enum(["Healthy Positive", "Breakeven Volatile", "Distressed Negative"]),
+  workingCapitalStatus: z.string(),
+  debtLeverageRisk: z.enum(["Low Risk", "Moderate Risk", "High Risk"]),
+  revenuePerEmployee: z.string(),
 });
 
-export const GrowthChannelSchema = z.object({
-  channel: z.string(),
-  tactic: z.string(),
-  expectedEffectiveness: z.enum(["High", "Medium", "Low"]),
+export const MonthlySimulationPointSchema = z.object({
+  month: z.string(),
+  projectedHealthScore: z.number().min(0).max(100),
+  projectedRevenue: z.number(),
+  estimatedProfitMargin: z.number(),
+  keyMilestone: z.string(),
 });
 
-export const ValidationInterviewQuestionSchema = z.object({
+export const MentorshipDiscussionQuestionSchema = z.object({
   question: z.string(),
-  goal: z.string(),
+  contextAndGoal: z.string(),
 });
 
-export const ColdOutreachTemplatesSchema = z.object({
-  whatsapp: z.string(),
-  email: z.string(),
-  linkedin: z.string(),
+export const OkoceMentoringPathwaySchema = z.object({
+  recommendedTrack: z.enum([
+    "Financial Mastery & Capital Readiness",
+    "Digital Marketing & Sales Scaling",
+    "Operational SOPs & Supply Chain Scaling",
+    "Legal Formalization, Tax & Certification",
+  ]),
+  priorityLevel: z.enum(["Immediate (Week 1)", "Strategic (Month 1)", "Growth Scale (Month 3)"]),
+  matchedMentorSpecialty: z.string(),
+  coreMentoringModules: z.array(z.string()).min(2),
+  preMentoringActionItems: z.array(z.string()).min(2),
+  discussionQuestionsForMentor: z.array(MentorshipDiscussionQuestionSchema).min(3),
 });
 
-export const LeanCanvasSchema = z.object({
-  problem: z.array(z.string()).min(2),
-  solution: z.array(z.string()).min(2),
-  uniqueValueProp: z.string(),
-  unfairAdvantage: z.string(),
-  customerSegments: z.array(z.string()).min(2),
-  keyMetrics: z.array(z.string()).min(2),
-  channels: z.array(z.string()).min(2),
-  costStructure: z.array(z.string()).min(2),
-  revenueStreams: z.array(z.string()).min(2),
-});
-
-export const BusinessAnalysisSchema = z.object({
-  meta: z.object({
-    tagline: z.string(),
+export const BusinessDiagnosticSchema = z.object({
+  executiveOverview: z.object({
+    headline: z.string(),
     executiveSummary: z.string(),
-    viabilityScore: z.number().min(1).max(10),
-    scoreVerdict: z.string(),
-    executionDifficulty: z.enum(["Easy", "Moderate", "Hard", "Extreme"]),
-    timeToMarketMonths: z.number(),
-    estimatedInitialCapital: z.string(),
+    overallHealthScore: z.number().min(0).max(100),
+    healthVerdict: z.enum([
+      "Optimal Health & Scale-Ready",
+      "Stable with Operational Friction",
+      "Vulnerable & Cash Flow Strained",
+      "Critical Risk of Distress",
+    ]),
+    immediatePriorityAction: z.string(),
   }),
-  realityCheck: z.object({
-    marketSaturation: z.enum(["Low", "Moderate", "High", "Oversaturated"]),
-    marketSaturationExplanation: z.string(),
-    criticalRisks: z.array(CriticalRiskSchema).min(2).max(5),
-    whyItMightFail: z.array(z.string()).min(2),
-    unfairAdvantageOpportunities: z.array(z.string()).min(2),
+  msmeClassification: MsmeClassificationSchema,
+  pillarScores: PillarScoreBreakdownSchema,
+  financialDiagnostics: FinancialDiagnosticsSchema,
+  criticalGaps: z.array(CriticalGapItemSchema).min(3),
+  turnaroundPlan: z.object({
+    phases: z.array(TurnaroundPhaseSchema).min(3),
   }),
-  radarMetrics: z.object({
-    marketDemand: z.number().min(0).max(100),
-    techComplexity: z.number().min(0).max(100),
-    capitalRequired: z.number().min(0).max(100),
-    competitionLevel: z.number().min(0).max(100),
-    scalability: z.number().min(0).max(100),
-    monetizationSpeed: z.number().min(0).max(100),
-    summaryVerdict: z.string(),
-  }),
-  leanCanvas: LeanCanvasSchema,
-  mvpScope: z.object({
-    mustHaveFeatures: z.array(MvpFeatureSchema).min(3),
-    niceToHaveFeatures: z.array(MvpFeatureSchema).min(2),
-    postMvpFeatures: z.array(z.string()).min(2),
-    totalMvpDevDays: z.number().positive(),
-    recommendedTechStack: z.array(z.string()),
-  }),
-  financials: z.object({
-    pricingStrategy: z.string(),
-    suggestedTiers: z.array(PricingTierSchema).min(2),
-    targetPricePerCustomer: z.string().default("Rp 299.000"),
-    estimatedCac: z.string(),
-    estimatedLtv: z.string(),
-    ltvCacRatio: z.string().default("3.2x"),
-    breakEvenMonth: z.number().int().positive(),
-    currency: z.string().default("IDR"),
-    monthlyProjections: z.array(MonthlyProjectionPointSchema).length(12),
-  }),
-  actionPlan: z.object({
-    sprintPhases: z.array(SprintPhaseSchema).min(3),
-  }),
-  tacticTriggers: z.object({
-    elevatorPitch: z.object({
-      hook: z.string(),
-      problem: z.string(),
-      solution: z.string(),
-      callToAction: z.string(),
-    }),
-    mvpDatabaseSchema: z.string(),
-    validationInterviewQuestions: z.array(ValidationInterviewQuestionSchema).min(3),
-    coldOutreachTemplates: ColdOutreachTemplatesSchema,
-    targetPersonas: z.array(TargetPersonaSchema).min(2),
-    growthChannels: z.array(GrowthChannelSchema).min(3),
+  okoceMentorship: OkoceMentoringPathwaySchema,
+  twelveMonthForecast: z.array(MonthlySimulationPointSchema).length(12),
+  tacticDeliverables: z.object({
+    standardOperatingProcedureSnippet: z.string(),
+    cashFlowManagementGuideline: z.string(),
+    pitchOrFinancingReadinessSummary: z.string(),
   }),
 });
 
-export const BusinessInputFormSchema = z.object({
-  ideaName: z.string().min(2, "Nama ide harus diisi minimal 2 karakter"),
-  problemStatement: z.string().min(5, "Deskripsi masalah utama harus diisi"),
-  industry: z.string().min(2, "Kategori industri harus dipilih"),
-  targetMarket: z.string().min(3, "Target pasar harus diisi"),
-  locationOrScale: z.string().min(2, "Lokasi atau skala harus dipilih"),
-  budget: z.string().min(1, "Skala modal awal harus dipilih"),
-  founderStrengths: z.array(z.string()).default([]),
-  monetizationType: z.string().optional(),
+export const BusinessDiagnosticInputFormSchema = z.object({
+  businessName: z.string().min(2, "Business name is required (min 2 characters)"),
+  industrySector: z.string().min(2, "Industry sector is required"),
+  operatingYears: z.string().min(1, "Operating duration is required"),
+  annualRevenue: z.string().min(1, "Annual revenue scale is required"),
+  netAssetValue: z.string().min(1, "Net asset value is required"),
+  totalEmployees: z.number().min(1, "At least 1 employee/founder is required"),
+  primaryChallenge: z.string().min(5, "Primary challenge description is required"),
+  financialRecordQuality: z.string().min(1, "Accounting record quality is required"),
+  legalEntityStatus: z.string().min(1, "Legal entity status is required"),
+  targetMarketLocation: z.string().min(2, "Market location is required"),
 });
