@@ -22,10 +22,10 @@ export default function RootLayout({
           <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3">
               {/* OK OCE & USCM Partner Logos */}
-              <div className="flex items-center gap-2.5 bg-white/5 px-2.5 py-1 rounded-xl border border-white/10">
-                <img src="/okoce.png" alt="OK OCE Indonesia Logo" className="h-8 w-auto object-contain" />
-                <div className="h-5 w-[1px] bg-white/20" />
-                <img src="/uscm.png" alt="USCM Logo" className="h-8 w-auto object-contain" />
+              <div className="flex items-center gap-3 bg-white px-3 py-1.5 rounded-2xl shadow-md border border-slate-200 transition-all hover:scale-[1.02]">
+                <img src="/okoce.png" alt="OK OCE Indonesia Logo" className="h-8 w-auto object-contain drop-shadow-sm" />
+                <div className="h-5 w-[1px] bg-slate-300" />
+                <img src="/uscm.png" alt="USCM Logo" className="h-8 w-auto object-contain drop-shadow-sm" />
               </div>
 
               <div className="flex flex-col">
