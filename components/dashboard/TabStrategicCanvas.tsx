@@ -5,9 +5,10 @@ import { Sparkles, ShieldAlert, Compass, Target, AlertTriangle } from "lucide-re
 import type { BusinessAnalysisResult } from "@/types/business-analysis";
 import { ViabilityGaugeChart } from "@/components/charts/ViabilityGaugeChart";
 import { RadarMetricsChart } from "@/components/charts/RadarMetricsChart";
-import { RiskAlertCard } from "@/components/kokonut/RiskAlertCard";
 import { GlowCard } from "@/components/kokonut/GlowCard";
 import { LeanCanvasGrid } from "@/components/dashboard/LeanCanvasGrid";
+import { CardFlip } from "@/components/kokonutui/card-flip";
+import { AppleActivityCard } from "@/components/kokonutui/apple-activity-card";
 import { animateStaggerEntrance } from "@/lib/animations/anime-helpers";
 
 interface TabStrategicCanvasProps {
@@ -38,7 +39,7 @@ export function TabStrategicCanvas({ analysis }: TabStrategicCanvasProps) {
 
   return (
     <div className="space-y-8">
-      {/* Top Visual Row: Gauge + Radar Chart */}
+      {/* Top Row: Viability Gauge + KokonutUI AppleActivityCard */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         {/* Viability Gauge Score Card */}
         <div className="strategic-card lg:col-span-5">
@@ -82,68 +83,81 @@ export function TabStrategicCanvas({ analysis }: TabStrategicCanvasProps) {
           </GlowCard>
         </div>
 
-        {/* 4-Axis Opportunity Radar Card */}
+        {/* KokonutUI AppleActivityCard Ring Metrics */}
         <div className="strategic-card lg:col-span-7">
-          <GlowCard glowColor="cyan" className="flex h-full flex-col justify-between">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <div className="flex items-center gap-2">
-                <div className="rounded-lg bg-cyan-500/20 p-1.5 text-cyan-400">
-                  <Target className="h-4 w-4" />
-                </div>
-                <h3 className="text-sm font-bold text-white font-heading">
-                  Radar Metrik 4 Sumbu Utama
-                </h3>
-              </div>
-              <span className="text-[11px] font-semibold text-slate-400">Skala 0 - 100</span>
-            </div>
-
-            <div className="my-auto py-2">
-              <RadarMetricsChart metrics={radarMetrics} />
-            </div>
-
-            <div className="grid grid-cols-4 gap-2 border-t border-white/10 pt-3 text-center text-xs">
-              <div className="rounded-lg bg-slate-950/40 p-2">
-                <span className="text-[10px] text-slate-400 uppercase">Demand</span>
-                <p className="font-bold text-indigo-300">{radarMetrics.marketDemand}/100</p>
-              </div>
-              <div className="rounded-lg bg-slate-950/40 p-2">
-                <span className="text-[10px] text-slate-400 uppercase">Tech/Ops</span>
-                <p className="font-bold text-cyan-300">{radarMetrics.techComplexity}/100</p>
-              </div>
-              <div className="rounded-lg bg-slate-950/40 p-2">
-                <span className="text-[10px] text-slate-400 uppercase">Modal</span>
-                <p className="font-bold text-amber-300">{radarMetrics.capitalRequired}/100</p>
-              </div>
-              <div className="rounded-lg bg-slate-950/40 p-2">
-                <span className="text-[10px] text-slate-400 uppercase">Kompetisi</span>
-                <p className="font-bold text-rose-300">{radarMetrics.competitionLevel}/100</p>
-              </div>
-            </div>
-          </GlowCard>
+          <AppleActivityCard
+            viabilityScore={meta.viabilityScore}
+            marketDemand={radarMetrics.marketDemand}
+            scalability={radarMetrics.scalability}
+            monetizationSpeed={radarMetrics.monetizationSpeed}
+            scoreVerdict={radarMetrics.summaryVerdict || meta.scoreVerdict}
+          />
         </div>
       </div>
 
-      {/* Interactive 9-Box Lean Canvas */}
+      {/* Radar Metrics 4 Sumbu Utama */}
+      <div className="strategic-card">
+        <GlowCard glowColor="cyan">
+          <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+            <div className="flex items-center gap-2">
+              <div className="rounded-lg bg-cyan-500/20 p-1.5 text-cyan-400">
+                <Target className="h-4 w-4" />
+              </div>
+              <h3 className="text-sm font-bold text-white font-heading">
+                Radar Metrik 4 Sumbu Utama
+              </h3>
+            </div>
+            <span className="text-[11px] font-semibold text-slate-400">Skala 0 - 100</span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div className="lg:col-span-8">
+              <RadarMetricsChart metrics={radarMetrics} />
+            </div>
+
+            <div className="lg:col-span-4 space-y-2 text-xs">
+              <div className="rounded-xl bg-slate-950/60 p-3 border border-white/5">
+                <span className="text-[10px] text-slate-400 uppercase font-bold">1. Permintaan Pasar (Demand)</span>
+                <p className="font-extrabold text-indigo-300 text-sm mt-0.5">{radarMetrics.marketDemand}/100</p>
+              </div>
+              <div className="rounded-xl bg-slate-950/60 p-3 border border-white/5">
+                <span className="text-[10px] text-slate-400 uppercase font-bold">2. Keterumitan Eksekusi (Tech/Ops)</span>
+                <p className="font-extrabold text-cyan-300 text-sm mt-0.5">{radarMetrics.techComplexity}/100</p>
+              </div>
+              <div className="rounded-xl bg-slate-950/60 p-3 border border-white/5">
+                <span className="text-[10px] text-slate-400 uppercase font-bold">3. Kebutuhan Modal (Capital)</span>
+                <p className="font-extrabold text-amber-300 text-sm mt-0.5">{radarMetrics.capitalRequired}/100</p>
+              </div>
+              <div className="rounded-xl bg-slate-950/60 p-3 border border-white/5">
+                <span className="text-[10px] text-slate-400 uppercase font-bold">4. Kejenuhan Kompetitor</span>
+                <p className="font-extrabold text-rose-300 text-sm mt-0.5">{radarMetrics.competitionLevel}/100</p>
+              </div>
+            </div>
+          </div>
+        </GlowCard>
+      </div>
+
+      {/* Interactive 9-Box Lean Canvas Grid */}
       {leanCanvas && (
         <div className="strategic-card">
           <LeanCanvasGrid leanCanvas={leanCanvas} ideaName={input.ideaName} />
         </div>
       )}
 
-      {/* Critical Risks & Reality Check Section */}
+      {/* Critical Risks with KokonutUI CardFlip + Pitfalls */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        {/* Critical Risks Column */}
+        {/* KokonutUI CardFlip 3D Risk Cards */}
         <div className="strategic-card lg:col-span-7 space-y-3">
           <div className="flex items-center gap-2 px-1">
             <ShieldAlert className="h-4 w-4 text-rose-400" />
             <h3 className="text-sm font-bold text-white font-heading">
-              3 Peringatan Risiko Kritis (Red Flag Alerts) & Mitigasi
+              3 Peringatan Risiko Kritis (KokonutUI 3D Flip Card)
             </h3>
           </div>
 
           <div className="space-y-3">
             {realityCheck.criticalRisks.map((riskItem, idx) => (
-              <RiskAlertCard key={idx} riskItem={riskItem} index={idx} />
+              <CardFlip key={idx} riskItem={riskItem} index={idx} />
             ))}
           </div>
         </div>

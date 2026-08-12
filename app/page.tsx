@@ -1,20 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import {
-  Sparkles,
-  ShieldAlert,
-  Cpu,
-  Compass,
-  DollarSign,
-  History,
-} from "lucide-react";
+import React, { useState } from "react";
+import { Sparkles, History } from "lucide-react";
 import type { BusinessAnalysisResult, AnalysisInputFormData } from "@/types/business-analysis";
 import { BusinessIdeaForm } from "@/components/form/BusinessIdeaForm";
 import { BusinessDashboard } from "@/components/dashboard/BusinessDashboard";
 import { AiProcessingState } from "@/components/loading/AiProcessingState";
 import { MatrixBadge } from "@/components/kokonutui/matrix-badge";
-import { CardSpotlight } from "@/components/kokonutui/card-spotlight";
+import { BentoGrid } from "@/components/kokonutui/bento-grid";
+import { FlowField } from "@/components/kokonutui/flow-field";
 import { HistoryDrawer } from "@/components/dashboard/HistoryDrawer";
 import confetti from "canvas-confetti";
 
@@ -29,9 +23,8 @@ export default function HomePage() {
     try {
       const existing = localStorage.getItem("idea_analyzer_history");
       const list: BusinessAnalysisResult[] = existing ? JSON.parse(existing) : [];
-      // Remove duplicate if same idea name
       const filtered = list.filter((item) => item.input?.ideaName !== newAnalysis.input?.ideaName);
-      const updated = [newAnalysis, ...filtered].slice(0, 20); // keep 20 latest
+      const updated = [newAnalysis, ...filtered].slice(0, 20);
       localStorage.setItem("idea_analyzer_history", JSON.stringify(updated));
     } catch (e) {
       console.error("Local history error:", e);
@@ -94,9 +87,8 @@ export default function HomePage() {
 
   return (
     <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      {/* Background Decorative Glow Gradients */}
-      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-96 w-[600px] -translate-x-1/2 rounded-full bg-indigo-600/15 blur-[120px]" />
-      <div className="pointer-events-none absolute right-10 top-40 -z-10 h-72 w-72 rounded-full bg-cyan-500/10 blur-[100px]" />
+      {/* KokonutUI FlowField Interactive Animated Background Canvas */}
+      <FlowField />
 
       {/* Case 1: Processing AI Loading State */}
       {loading && (
@@ -141,7 +133,7 @@ export default function HomePage() {
             </h1>
 
             <p className="mx-auto max-w-2xl text-sm text-slate-300 sm:text-base leading-relaxed">
-              Hasilkan skor kelayakan objektif, 9-box Lean Canvas, matriks MVP, rencana validasi 14 hari,
+              Hasikan skor kelayakan objektif, 9-box Lean Canvas, matriks MVP, rencana validasi 14 hari,
               dan proyeksi keuangan 12 bulan dalam Rupiah berbasis penalaran terstruktur Gemini AI.
             </p>
           </div>
@@ -157,54 +149,8 @@ export default function HomePage() {
           {/* Business Idea Input Form */}
           <BusinessIdeaForm onSubmit={handleFormSubmit} isLoading={loading} />
 
-          {/* Feature Showcase Grid with KokonutUI CardSpotlight */}
-          <div className="mx-auto max-w-5xl pt-8 border-t border-white/10">
-            <h2 className="mb-6 text-center text-xs font-bold uppercase tracking-widest text-slate-400">
-              Arsitektur Validasi Bisnis 4 Pilar Utama
-            </h2>
-
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <CardSpotlight spotlightColor="rgba(99, 102, 241, 0.25)">
-                <div className="rounded-xl bg-indigo-600/20 p-2 text-indigo-400 w-fit mb-3">
-                  <Compass className="h-4 w-4" />
-                </div>
-                <h4 className="text-sm font-bold text-white">Meter Kelayakan & Lean Canvas</h4>
-                <p className="mt-1 text-xs text-slate-400">
-                  Penilaian skor 0-10, metrik radar 4 sumbu & 9-Box Interactive Lean Canvas.
-                </p>
-              </CardSpotlight>
-
-              <CardSpotlight spotlightColor="rgba(244, 63, 94, 0.25)">
-                <div className="rounded-xl bg-rose-600/20 p-2 text-rose-400 w-fit mb-3">
-                  <ShieldAlert className="h-4 w-4" />
-                </div>
-                <h4 className="text-sm font-bold text-white">Reality Check & Red Flags</h4>
-                <p className="mt-1 text-xs text-slate-400">
-                  3 peringatan risiko kritis, analisis mengapa bisnis berpotensi gagal & mitigasi taktis.
-                </p>
-              </CardSpotlight>
-
-              <CardSpotlight spotlightColor="rgba(6, 182, 212, 0.25)">
-                <div className="rounded-xl bg-cyan-600/20 p-2 text-cyan-400 w-fit mb-3">
-                  <Cpu className="h-4 w-4" />
-                </div>
-                <h4 className="text-sm font-bold text-white">Matriks MVP & Validasi 14 Hari</h4>
-                <p className="mt-1 text-xs text-slate-400">
-                  Tabel fitur Wajib vs Bisa Nanti dengan tingkat kesulitan (1-5) & checklist 14 hari.
-                </p>
-              </CardSpotlight>
-
-              <CardSpotlight spotlightColor="rgba(16, 185, 129, 0.25)">
-                <div className="rounded-xl bg-emerald-600/20 p-2 text-emerald-400 w-fit mb-3">
-                  <DollarSign className="h-4 w-4" />
-                </div>
-                <h4 className="text-sm font-bold text-white">Unit Economics & Proyeksi</h4>
-                <p className="mt-1 text-xs text-slate-400">
-                  Target harga, rasio CAC vs LTV, titik impas BEP, dan grafik proyeksi MRR 12 bulan.
-                </p>
-              </CardSpotlight>
-            </div>
-          </div>
+          {/* KokonutUI BentoGrid 4-Pillar Validation Showcase */}
+          <BentoGrid />
         </div>
       )}
 

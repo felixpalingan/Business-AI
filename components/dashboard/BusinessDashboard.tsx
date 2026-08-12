@@ -7,6 +7,7 @@ import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { TabStrategicCanvas } from "@/components/dashboard/TabStrategicCanvas";
 import { TabMvpScope } from "@/components/dashboard/TabMvpScope";
 import { TabFinancials } from "@/components/dashboard/TabFinancials";
+import { SmoothTab } from "@/components/kokonutui/smooth-tab";
 
 interface BusinessDashboardProps {
   analysis: BusinessAnalysisResult;
@@ -15,53 +16,25 @@ interface BusinessDashboardProps {
 }
 
 export function BusinessDashboard({ analysis, onReset, onOpenHistory }: BusinessDashboardProps) {
-  const [activeTab, setActiveTab] = useState<"strategic" | "mvp" | "financials">("strategic");
+  const [activeTab, setActiveTab] = useState<string>("strategic");
+
+  const tabs = [
+    { id: "strategic", label: "Tab 1: Kanvas Strategis & Lean Canvas", icon: Compass },
+    { id: "mvp", label: "Tab 2: Scope MVP & Validasi 14 Hari", icon: Cpu },
+    { id: "financials", label: "Tab 3: Unit Economics & Proyeksi Keuangan", icon: DollarSign },
+  ];
 
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Header with Title, Meta, and Action Buttons */}
       <DashboardHeader analysis={analysis} onReset={onReset} onOpenHistory={onOpenHistory} />
 
-      {/* Main Tab Navigation Bar */}
-      <div className="flex items-center justify-start border-b border-white/10 pb-px no-print">
-        <div className="flex gap-2">
-          <button
-            onClick={() => setActiveTab("strategic")}
-            className={`flex items-center gap-2 border-b-2 px-4 py-3 text-xs md:text-sm font-bold transition-all ${
-              activeTab === "strategic"
-                ? "border-indigo-500 text-indigo-400"
-                : "border-transparent text-slate-400 hover:text-slate-200"
-            }`}
-          >
-            <Compass className="h-4 w-4" />
-            <span>Tab 1: Kanvas Strategis & Lean Canvas</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("mvp")}
-            className={`flex items-center gap-2 border-b-2 px-4 py-3 text-xs md:text-sm font-bold transition-all ${
-              activeTab === "mvp"
-                ? "border-indigo-500 text-indigo-400"
-                : "border-transparent text-slate-400 hover:text-slate-200"
-            }`}
-          >
-            <Cpu className="h-4 w-4" />
-            <span>Tab 2: Scope MVP & Validasi 14 Hari</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("financials")}
-            className={`flex items-center gap-2 border-b-2 px-4 py-3 text-xs md:text-sm font-bold transition-all ${
-              activeTab === "financials"
-                ? "border-indigo-500 text-indigo-400"
-                : "border-transparent text-slate-400 hover:text-slate-200"
-            }`}
-          >
-            <DollarSign className="h-4 w-4" />
-            <span>Tab 3: Unit Economics & Proyeksi Keuangan</span>
-          </button>
-        </div>
-      </div>
+      {/* Main Tab Navigation Bar using KokonutUI SmoothTab */}
+      <SmoothTab
+        tabs={tabs}
+        activeTab={activeTab}
+        onChange={(id) => setActiveTab(id)}
+      />
 
       {/* Dynamic Tab Content */}
       <div className="mt-6">
