@@ -65,7 +65,88 @@ Perform a rigorous, holistic, and deeply analytical Business Health Diagnostic &
    - cashFlowManagementGuideline: Practical 1-page cash flow rule for the owner.
    - pitchOrFinancingReadinessSummary: An executive pitch/bank readiness summary.
 
-Return ONLY a pure JSON object conforming strictly to the requested schema.`;
+Conform strictly to this JSON schema template:
+{
+  "executiveOverview": {
+    "headline": "Strong Operational Footing",
+    "executiveSummary": "Summary test",
+    "overallHealthScore": 82,
+    "healthVerdict": "Optimal Health & Scale-Ready",
+    "immediatePriorityAction": "Audit inventory"
+  },
+  "msmeClassification": {
+    "category": "Small Enterprise (Usaha Kecil)",
+    "legalBasis": "Indonesian MSME Law No. 20/2008 & Government Regulation PP No. 7/2021",
+    "annualRevenueCriteria": "Rp 2B - Rp 15B",
+    "netAssetCriteria": "Rp 1B - Rp 5B",
+    "employeeScaleCriteria": "10-30 employees",
+    "formalizationStatus": "CV Registered",
+    "regulatoryComplianceChecklist": ["NIB OSS RBA", "Tax PPh Final 0.5%"]
+  },
+  "pillarScores": {
+    "financialHealth": 85,
+    "operationalEfficiency": 78,
+    "marketingAndSales": 80,
+    "humanCapitalAndSop": 75,
+    "legalAndCompliance": 90,
+    "summaryVerdict": "Balanced health"
+  },
+  "financialDiagnostics": {
+    "burnRateRunwayMonths": 8,
+    "grossMarginAssessment": "Healthy 42% margin",
+    "cashFlowHealthVerdict": "Healthy Positive",
+    "workingCapitalStatus": "Adequate for 90 days",
+    "debtLeverageRisk": "Low Risk",
+    "revenuePerEmployee": "Rp 250 Million / Staff"
+  },
+  "criticalGaps": [
+    {
+      "pillar": "Financial Health",
+      "issue": "Slow invoice collection",
+      "severity": "Critical (P0)",
+      "actionableFix": "Implement 14-day payment terms",
+      "estimatedTimeToSolve": "2 Weeks",
+      "expectedBusinessImpact": "+15% Working Capital"
+    },
+    {
+      "pillar": "Operations & SOP",
+      "issue": "Manual inventory log",
+      "severity": "High (P1)",
+      "actionableFix": "Deploy digital POS barcode scanning",
+      "estimatedTimeToSolve": "3 Weeks",
+      "expectedBusinessImpact": "-80% Stock Discrepancy"
+    }
+  ],
+  "turnaroundPlan": {
+    "phases": [
+      {
+        "phaseTitle": "Phase 1: Immediate Controls",
+        "timeframe": "Days 1-7",
+        "tasks": [{ "dayRange": "Days 1-3", "taskTitle": "Invoice audit", "actionDetails": "Audit outstanding AR", "deliverable": "AR Aging report" }]
+      }
+    ]
+  },
+  "okoceMentorship": {
+    "recommendedTrack": "Financial Mastery & Capital Readiness",
+    "priorityLevel": "Immediate (Week 1)",
+    "matchedMentorSpecialty": "Corporate Finance & Cash Flow Scaling",
+    "coreMentoringModules": ["Working Capital Optimization", "KUR Bank Readiness"],
+    "preMentoringActionItems": ["Compile last 6-month bank statements", "Draft current P&L sheet"],
+    "discussionQuestionsForMentor": [
+      { "question": "How to structure factoring for delayed B2B receivables?", "contextAndGoal": "Unlock trapped working capital." }
+    ]
+  },
+  "twelveMonthForecast": [
+    { "month": "M1", "projectedHealthScore": 65, "projectedRevenue": 200000000, "estimatedProfitMargin": 15, "keyMilestone": "AR Leak plugged" }
+  ],
+  "tacticDeliverables": {
+    "standardOperatingProcedureSnippet": "### Daily Operational Checklist\\n1. Reconcile daily cash against POS receipts\\n2. Verify cold storage temperatures",
+    "cashFlowManagementGuideline": "### Cash Flow Rule of Thumb\\nMaintain minimum 90-day cash buffer for payroll and fixed supplier commitments.",
+    "pitchOrFinancingReadinessSummary": "### Bank Loan Readiness Summary\\nBusiness demonstrates positive EBITDA with verified CV entity registration."
+  }
+}
+
+Return ONLY a pure JSON object conforming strictly to the requested schema. Ensure arrays have enough items as requested (e.g. 12 items for twelveMonthForecast).`;
 
   const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent";
 
