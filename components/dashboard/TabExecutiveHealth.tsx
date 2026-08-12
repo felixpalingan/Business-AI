@@ -15,7 +15,7 @@ import type { BusinessDiagnosticResult } from "@/types/business-analysis";
 import { ViabilityGaugeChart } from "@/components/charts/ViabilityGaugeChart";
 import { RadarMetricsChart } from "@/components/charts/RadarMetricsChart";
 import { GlowCard } from "@/components/kokonut/GlowCard";
-import { CardFlip } from "@/components/kokonutui/card-flip";
+import { RedFlagsCard } from "@/components/dashboard/RedFlagsCard";
 import { AppleActivityCard } from "@/components/kokonutui/apple-activity-card";
 import { animateStaggerEntrance } from "@/lib/animations/anime-helpers";
 
@@ -30,32 +30,31 @@ export function TabExecutiveHealth({ diagnostic }: TabExecutiveHealthProps) {
     animateStaggerEntrance(".health-card", 80);
   }, []);
 
-  // Format radar points for RadarMetricsChart
+  // Format 6-Axis Radar Metrics Chart
   const radarMetricsData = {
-    marketDemand: pillarScores.marketingAndSales,
-    techComplexity: pillarScores.operationalEfficiency,
-    capitalRequired: pillarScores.financialHealth,
-    competitionLevel: pillarScores.humanCapitalAndSop,
-    scalability: pillarScores.legalAndCompliance,
-    monetizationSpeed: Math.round(
-      (pillarScores.financialHealth + pillarScores.operationalEfficiency) / 2
+    marketDemand: pillarScores.marketingAndSales,         // 1. Digital Marketing
+    techComplexity: pillarScores.operationalEfficiency,    // 2. Operational Efficiency
+    capitalRequired: pillarScores.financialHealth,        // 3. Financial Management
+    competitionLevel: pillarScores.humanCapitalAndSop,     // 4. HR & Team Readiness
+    scalability: pillarScores.legalAndCompliance,          // 5. Legal & Compliance
+    monetizationSpeed: Math.round(                         // 6. Scalability Potential
+      (pillarScores.financialHealth + pillarScores.operationalEfficiency + pillarScores.marketingAndSales) / 3
     ),
     summaryVerdict: pillarScores.summaryVerdict,
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Optimal Health & Scale-Ready":
-        return "text-emerald-400 border-emerald-500/30 bg-emerald-950/40";
-      case "Stable with Operational Friction":
-        return "text-indigo-400 border-indigo-500/30 bg-indigo-950/40";
-      case "Vulnerable & Cash Flow Strained":
-        return "text-amber-400 border-amber-500/30 bg-amber-950/40";
-      case "Critical Risk of Distress":
-        return "text-rose-400 border-rose-500/30 bg-rose-950/40";
-      default:
-        return "text-indigo-400 border-indigo-500/30 bg-indigo-950/40";
+  // Color-coded UU UMKM Badges per PRD
+  const getMsmeBadgeStyle = (category: string) => {
+    if (category.includes("Mikro") || category.includes("Micro")) {
+      return "border-emerald-500/40 bg-emerald-950/40 text-emerald-300";
     }
+    if (category.includes("Kecil") || category.includes("Small")) {
+      return "border-cyan-500/40 bg-cyan-950/40 text-cyan-300";
+    }
+    if (category.includes("Menengah") || category.includes("Medium")) {
+      return "border-purple-500/40 bg-purple-950/40 text-purple-300";
+    }
+    return "border-amber-500/40 bg-amber-950/40 text-amber-300";
   };
 
   return (
@@ -118,8 +117,8 @@ export function TabExecutiveHealth({ diagnostic }: TabExecutiveHealthProps) {
                 <h3 className="text-lg font-bold text-white font-heading">
                   {msmeClassification.category}
                 </h3>
-                <span className="rounded-full bg-indigo-500/20 px-2.5 py-0.5 text-[10px] font-bold text-indigo-300">
-                  Official Tier
+                <span className={`rounded-full border px-3 py-0.5 text-[11px] font-bold ${getMsmeBadgeStyle(msmeClassification.category)}`}>
+                  Official Tier (PP 7/2021)
                 </span>
               </div>
               <p className="text-xs text-indigo-300 mt-0.5">
@@ -130,11 +129,11 @@ export function TabExecutiveHealth({ diagnostic }: TabExecutiveHealthProps) {
 
           <div className="flex flex-wrap gap-2 text-xs">
             <div className="rounded-xl bg-slate-950/80 px-3.5 py-2 border border-white/5">
-              <span className="text-[10px] text-slate-400 block">Revenue Bracket:</span>
+              <span className="text-[10px] text-slate-400 block">Revenue Criterion:</span>
               <span className="font-bold text-emerald-400">{msmeClassification.annualRevenueCriteria}</span>
             </div>
             <div className="rounded-xl bg-slate-950/80 px-3.5 py-2 border border-white/5">
-              <span className="text-[10px] text-slate-400 block">Max Assets:</span>
+              <span className="text-[10px] text-slate-400 block">Net Asset Criterion:</span>
               <span className="font-bold text-cyan-400">{msmeClassification.netAssetCriteria}</span>
             </div>
           </div>
@@ -160,7 +159,7 @@ export function TabExecutiveHealth({ diagnostic }: TabExecutiveHealthProps) {
         </div>
       </div>
 
-      {/* 5-Pillar Diagnostic Radar Chart */}
+      {/* 6-Axis Pillar Diagnostic Radar Chart */}
       <div className="health-card">
         <GlowCard glowColor="cyan">
           <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
@@ -169,10 +168,10 @@ export function TabExecutiveHealth({ diagnostic }: TabExecutiveHealthProps) {
                 <Target className="h-4 w-4" />
               </div>
               <h3 className="text-sm font-bold text-white font-heading">
-                5-Pillar Comprehensive Diagnostic Radar
+                6-Axis Business Pillar Diagnostic Radar
               </h3>
             </div>
-            <span className="text-[11px] font-semibold text-slate-400">Scale 0 - 100</span>
+            <span className="text-[11px] font-semibold text-slate-400">Score Scale 0 - 100</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
@@ -183,8 +182,8 @@ export function TabExecutiveHealth({ diagnostic }: TabExecutiveHealthProps) {
             <div className="lg:col-span-4 space-y-2.5 text-xs">
               <div className="rounded-xl bg-slate-950/60 p-3 border border-white/5 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] text-slate-400 uppercase font-bold block">1. Financial Health</span>
-                  <span className="text-xs text-slate-300">Cash Flow & Margins</span>
+                  <span className="text-[10px] text-slate-400 uppercase font-bold block">1. Financial Management</span>
+                  <span className="text-xs text-slate-300">Cash Flow & Profit Margins</span>
                 </div>
                 <span className="font-extrabold text-indigo-400 text-sm">{pillarScores.financialHealth}%</span>
               </div>
@@ -192,23 +191,23 @@ export function TabExecutiveHealth({ diagnostic }: TabExecutiveHealthProps) {
               <div className="rounded-xl bg-slate-950/60 p-3 border border-white/5 flex items-center justify-between">
                 <div>
                   <span className="text-[10px] text-slate-400 uppercase font-bold block">2. Operational Efficiency</span>
-                  <span className="text-xs text-slate-300">SOPs & Turnaround Speed</span>
+                  <span className="text-xs text-slate-300">SOPs & Waste Control</span>
                 </div>
                 <span className="font-extrabold text-cyan-400 text-sm">{pillarScores.operationalEfficiency}%</span>
               </div>
 
               <div className="rounded-xl bg-slate-950/60 p-3 border border-white/5 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] text-slate-400 uppercase font-bold block">3. Marketing & Sales</span>
-                  <span className="text-xs text-slate-300">Acquisition & Retention</span>
+                  <span className="text-[10px] text-slate-400 uppercase font-bold block">3. Digital Marketing</span>
+                  <span className="text-xs text-slate-300">Customer Acquisition</span>
                 </div>
                 <span className="font-extrabold text-purple-400 text-sm">{pillarScores.marketingAndSales}%</span>
               </div>
 
               <div className="rounded-xl bg-slate-950/60 p-3 border border-white/5 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] text-slate-400 uppercase font-bold block">4. Human Capital & SOP</span>
-                  <span className="text-xs text-slate-300">Productivity & Roles</span>
+                  <span className="text-[10px] text-slate-400 uppercase font-bold block">4. HR & Team Readiness</span>
+                  <span className="text-xs text-slate-300">Staff Productivity & SOPs</span>
                 </div>
                 <span className="font-extrabold text-amber-400 text-sm">{pillarScores.humanCapitalAndSop}%</span>
               </div>
@@ -216,39 +215,35 @@ export function TabExecutiveHealth({ diagnostic }: TabExecutiveHealthProps) {
               <div className="rounded-xl bg-slate-950/60 p-3 border border-white/5 flex items-center justify-between">
                 <div>
                   <span className="text-[10px] text-slate-400 uppercase font-bold block">5. Legal & Compliance</span>
-                  <span className="text-xs text-slate-300">Permits, Tax & NIB</span>
+                  <span className="text-xs text-slate-300">NIB, Tax & Certification</span>
                 </div>
                 <span className="font-extrabold text-emerald-400 text-sm">{pillarScores.legalAndCompliance}%</span>
+              </div>
+
+              <div className="rounded-xl bg-slate-950/60 p-3 border border-white/5 flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] text-slate-400 uppercase font-bold block">6. Scalability Potential</span>
+                  <span className="text-xs text-slate-300">Expansion & Growth Readiness</span>
+                </div>
+                <span className="font-extrabold text-rose-400 text-sm">{radarMetricsData.monetizationSpeed}%</span>
               </div>
             </div>
           </div>
         </GlowCard>
       </div>
 
-      {/* Top Critical Risk Cards with 3D Flip */}
+      {/* Red Flags & Critical Bottlenecks (Static Text-Fitting Bento Cards - No Flip/Scroll) */}
       <div className="health-card space-y-4">
         <div className="flex items-center gap-2">
-          <ShieldAlert className="h-4 w-4 text-rose-400" />
-          <h3 className="text-sm font-bold text-white font-heading">
-            Top Vulnerabilities & Tactical Solutions (3D Flip Cards)
+          <ShieldAlert className="h-5 w-5 text-rose-400" />
+          <h3 className="text-base font-bold text-white font-heading">
+            Red Flags & Critical Vulnerabilities (Tactical Remediation Cards)
           </h3>
         </div>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {criticalGaps.slice(0, 3).map((gap, idx) => (
-            <CardFlip
-              key={idx}
-              index={idx}
-              riskItem={{
-                risk: `${gap.pillar}: ${gap.issue}`,
-                severity: gap.severity.includes("Critical")
-                  ? "Critical"
-                  : gap.severity.includes("High")
-                  ? "High"
-                  : "Medium",
-                mitigationStrategy: `${gap.actionableFix} (Est. Time: ${gap.estimatedTimeToSolve}, ROI: ${gap.expectedBusinessImpact})`,
-              }}
-            />
+          {criticalGaps.map((gap, idx) => (
+            <RedFlagsCard key={idx} gap={gap} index={idx} />
           ))}
         </div>
       </div>
