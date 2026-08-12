@@ -63,39 +63,65 @@ ${input.monetizationType ? `- Model Monetisasi: ${input.monetizationType}` : ""}
 Kembalikan format HANYA JSON murni yang sesuai skema.`;
 
   if (!GEMINI_API_KEY) {
-    console.warn("GEMINI_API_KEY tidak dikonfigurasi, mengaktifkan generator fallback cerdas Bahasa Indonesia.");
-    return generateFallbackAnalysis(input);
+    console.warn("⚠️ [GEMINI DEBUG] GEMINI_API_KEY tidak dikonfigurasi di .env.local!");
+    return generateFallbackAnalysis(input, "API Key belum diisi di .env.local");
   }
 
-  try {
-    const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash",
-      generationConfig: {
-        responseMimeType: "application/json",
-        temperature: 0.3,
-      },
-    });
+  // List candidate model identifiers to try in order
+  const candidateModels = [
+    "gemini-1.5-flash",
+    "gemini-1.5-pro",
+    "gemini-2.0-flash-exp",
+    "gemini-1.0-pro",
+  ];
 
-    const result = await model.generateContent(prompt);
-    const responseText = result.response.text();
-    const parsedJson = JSON.parse(responseText);
+  const errorLogs: string[] = [];
 
-    const validatedData = BusinessAnalysisSchema.parse(parsedJson);
+  for (const modelName of candidateModels) {
+    try {
+      console.log(`📡 [GEMINI DEBUG] Mencoba memanggil model Google AI Studio: ${modelName}...`);
+      const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+      const model = genAI.getGenerativeModel({
+        model: modelName,
+        generationConfig: {
+          responseMimeType: "application/json",
+          temperature: 0.3,
+        },
+      });
 
-    return {
-      ...validatedData,
-      slug: generateSlug(input.ideaName),
-      input,
-      createdAt: new Date().toISOString(),
-    };
-  } catch (error) {
-    console.error("Gagal memanggil API Gemini / parsing JSON, menggunakan generator fallback:", error);
-    return generateFallbackAnalysis(input);
+      const result = await model.generateContent(prompt);
+      const responseText = result.response.text();
+      console.log(`✅ [GEMINI DEBUG] Respon sukses dari model: ${modelName}!`);
+
+      const parsedJson = JSON.parse(responseText);
+      const validatedData = BusinessAnalysisSchema.parse(parsedJson);
+
+      return {
+        ...validatedData,
+        slug: generateSlug(input.ideaName),
+        input,
+        createdAt: new Date().toISOString(),
+        meta: {
+          ...validatedData.meta,
+          scoreVerdict: `${validatedData.meta.scoreVerdict} (Live API: ${modelName})`,
+        },
+      };
+    } catch (err: any) {
+      const errMsg = `Model '${modelName}' gagal: status ${err?.status || "unk"} - ${err?.message || String(err)}`;
+      console.error(`❌ [GEMINI DEBUG] ${errMsg}`);
+      errorLogs.push(errMsg);
+    }
   }
+
+  // If all live models failed, return fallback with explicit debug info
+  console.warn("⚠️ [GEMINI DEBUG] Seluruh model candidate Gemini merespon error. Mengaktifkan fallback engine.");
+  return generateFallbackAnalysis(input, errorLogs.join(" | "));
 }
 
-export function generateFallbackAnalysis(input: AnalysisInputFormData): BusinessAnalysisResult {
+export function generateFallbackAnalysis(
+  input: AnalysisInputFormData,
+  debugInfo?: string
+): BusinessAnalysisResult {
   const isB2B =
     input.targetMarket.toLowerCase().includes("b2b") ||
     input.industry.toLowerCase().includes("saas") ||
@@ -109,9 +135,9 @@ export function generateFallbackAnalysis(input: AnalysisInputFormData): Business
     createdAt: new Date().toISOString(),
     meta: {
       tagline: `Solusi Kecerdasan Terintegrasi untuk ${input.targetMarket}`,
-      executiveSummary: `${input.ideaName} dirancang untuk menyelesaikan masalah: "${input.problemStatement}" pada sektor ${input.industry}. Memanfaatkan skala modal ${input.budget} dan kekuatan founder pada ${input.founderStrengths.join(", ") || "Generalist"}, bisnis ini memiliki potensi pasar lokal yang kuat jika fokus pada validasi langsung ke 10 pelanggan pertama.`,
+      executiveSummary: `${input.ideaName} dirancang untuk menyelesaikan masalah: "${input.problemStatement}" pada sektor ${input.industry}. Memanfaatkan skala modal ${input.budget} dan kekuatan founder pada ${input.founderStrengths.join(", ") || "Generalist"}, bisnis ini memiliki potensi pasar lokal yang kuat jika fokus pada validasi langsung ke 10 pelanggan pertama.${debugInfo ? ` [Debug Info: ${debugInfo}]` : ""}`,
       viabilityScore: 7.9,
-      scoreVerdict: "Peluang Sangat Bagus dengan Eksekusi Niche Terfokus",
+      scoreVerdict: "Peluang Sangat Bagus dengan Eksekusi Niche Terfokus (Engine Fallback Cerdas)",
       executionDifficulty: "Moderate",
       timeToMarketMonths: 2.5,
       estimatedInitialCapital: input.budget || "Rp 10.000.000 - Rp 50.000.000",
