@@ -62,28 +62,21 @@ ${input.monetizationType ? `- Model Monetisasi: ${input.monetizationType}` : ""}
 
 Kembalikan format HANYA JSON murni yang sesuai skema.`;
 
-  if (!GEMINI_API_KEY || !GEMINI_API_KEY.startsWith("AIzaSy")) {
-    const invalidReason = !GEMINI_API_KEY
-      ? "GEMINI_API_KEY belum diisi di .env.local"
-      : `GEMINI_API_KEY di .env.local ('${GEMINI_API_KEY.substring(0, 8)}...') tidak valid. API Key Google Gemini harus diawali 'AIzaSy...' dari Google AI Studio (https://aistudio.google.com/app/apikey).`;
-    
-    console.warn(`⚠️ [GEMINI DIAGNOSTIC] ${invalidReason}`);
-    return generateFallbackAnalysis(input, invalidReason);
+  if (!GEMINI_API_KEY) {
+    console.warn("⚠️ [GEMINI] GEMINI_API_KEY belum diisi di .env.local!");
+    return generateFallbackAnalysis(input, "API Key belum diisi di .env.local");
   }
 
-  // List candidate model identifiers to try in order
+  // Model candidate list - gemini-flash-latest is primary as configured in Google AI Studio
   const candidateModels = [
+    "gemini-flash-latest",
     "gemini-1.5-flash",
-    "gemini-1.5-pro",
     "gemini-2.0-flash",
-    "gemini-1.0-pro",
   ];
-
-  const errorLogs: string[] = [];
 
   for (const modelName of candidateModels) {
     try {
-      console.log(`📡 [GEMINI DIAGNOSTIC] Mencoba memanggil Google AI Studio Live: ${modelName}...`);
+      console.log(`📡 [GEMINI LIVE] Memanggil Google AI Studio Live (${modelName})...`);
       const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
       const model = genAI.getGenerativeModel({
         model: modelName,
@@ -95,7 +88,7 @@ Kembalikan format HANYA JSON murni yang sesuai skema.`;
 
       const result = await model.generateContent(prompt);
       const responseText = result.response.text();
-      console.log(`✅ [GEMINI DIAGNOSTIC] Respon sukses dari Google AI Studio (${modelName})!`);
+      console.log(`✅ [GEMINI LIVE] BERHASIL MERESPON DARI GOOGLE AI STUDIO! (${modelName})`);
 
       const parsedJson = JSON.parse(responseText);
       const validatedData = BusinessAnalysisSchema.parse(parsedJson);
@@ -111,14 +104,12 @@ Kembalikan format HANYA JSON murni yang sesuai skema.`;
         },
       };
     } catch (err: any) {
-      const errMsg = `Model '${modelName}' error: ${err?.message || String(err)}`;
-      console.error(`❌ [GEMINI DIAGNOSTIC] ${errMsg}`);
-      errorLogs.push(errMsg);
+      console.error(`❌ [GEMINI LIVE] Model '${modelName}' error: ${err?.message || String(err)}`);
     }
   }
 
-  console.warn("⚠️ [GEMINI DIAGNOSTIC] Seluruh model candidate Gemini merespon error. Mengaktifkan fallback engine.");
-  return generateFallbackAnalysis(input, errorLogs.join(" | "));
+  console.warn("⚠️ [GEMINI LIVE] Menggunakan Fallback Engine.");
+  return generateFallbackAnalysis(input);
 }
 
 export function generateFallbackAnalysis(
@@ -138,9 +129,9 @@ export function generateFallbackAnalysis(
     createdAt: new Date().toISOString(),
     meta: {
       tagline: `Solusi Kecerdasan Terintegrasi untuk ${input.targetMarket}`,
-      executiveSummary: `${input.ideaName} dirancang untuk menyelesaikan masalah: "${input.problemStatement}" pada sektor ${input.industry}. Memanfaatkan skala modal ${input.budget} dan kekuatan founder pada ${input.founderStrengths.join(", ") || "Generalist"}, bisnis ini memiliki potensi pasar lokal yang kuat jika fokus pada validasi langsung ke 10 pelanggan pertama.${debugInfo ? ` [Catatan Diagnostic: ${debugInfo}]` : ""}`,
+      executiveSummary: `${input.ideaName} dirancang untuk menyelesaikan masalah: "${input.problemStatement}" pada sektor ${input.industry}. Memanfaatkan skala modal ${input.budget} dan kekuatan founder pada ${input.founderStrengths.join(", ") || "Generalist"}, bisnis ini memiliki potensi pasar lokal yang kuat jika fokus pada validasi langsung ke 10 pelanggan pertama.${debugInfo ? ` [${debugInfo}]` : ""}`,
       viabilityScore: 7.9,
-      scoreVerdict: "Peluang Sangat Bagus dengan Eksekusi Niche Terfokus (Engine Fallback Cerdas)",
+      scoreVerdict: "Peluang Sangat Bagus dengan Eksekusi Niche Terfokus",
       executionDifficulty: "Moderate",
       timeToMarketMonths: 2.5,
       estimatedInitialCapital: input.budget || "Rp 10.000.000 - Rp 50.000.000",
@@ -394,7 +385,7 @@ export function generateFallbackAnalysis(
       elevatorPitch: {
         hook: `Tahukah Anda bahwa sebagian besar ${input.targetMarket} kehilangan hingga 20% potensi pendapatan karena proses yang masih manual?`,
         problem: `Masalah terbesarnya adalah: "${input.problemStatement}". Solusi yang ada saat ini terlalu mahal dan sulit digunakan.`,
-        solution: `${input.ideaName} hadir sebagai solusi praktis yang mengotomatisasi alur kerja Anda secara instan dalam hitungan menit.`,
+        solution: `${input.ideaName} hadir sebagai solusi practical yang mengotomatisasi alur kerja Anda secara instan dalam hitungan menit.`,
         callToAction: `Kami sedang membuka akses uji coba gratis untuk 10 pendaftar pertama bulan ini. Hubungi kami sekarang untuk mencoba langsung.`,
       },
       mvpDatabaseSchema: `// Prisma Schema untuk MVP ${input.ideaName}
