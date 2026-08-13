@@ -43,7 +43,7 @@ export function HistoryDrawer({
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
           <div className="flex items-center gap-2">
-            <div className="rounded-lg bg-orange-500/20 p-2 text-orange-400">
+            <div className="rounded-lg bg-red-500/20 p-2 text-red-400">
               <History className="h-4 w-4" />
             </div>
             <div>
@@ -77,11 +77,11 @@ export function HistoryDrawer({
                   onSelectDiagnostic(item);
                   onClose();
                 }}
-                className="group cursor-pointer rounded-2xl border border-white/10 bg-slate-950/60 p-4 transition-all duration-200 hover:border-orange-500/50 hover:bg-slate-950 hover:shadow-lg"
+                className="group cursor-pointer rounded-2xl border border-white/10 bg-slate-950/60 p-4 transition-all duration-200 hover:border-red-500/50 hover:bg-slate-950 hover:shadow-lg"
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <h4 className="text-sm font-bold text-white group-hover:text-orange-300 transition-colors">
+                    <h4 className="text-sm font-bold text-white group-hover:text-red-300 transition-colors">
                       {item.input?.businessName || "Business Diagnostic"}
                     </h4>
                     <p className="text-xs text-slate-400 mt-0.5 line-clamp-1">
@@ -96,7 +96,7 @@ export function HistoryDrawer({
 
                 <div className="mt-3 flex items-center justify-between border-t border-white/5 pt-2 text-[10px] text-slate-500">
                   <span>{item.input?.industrySector}</span>
-                  <div className="flex items-center gap-1 text-orange-400 group-hover:translate-x-0.5 transition-transform">
+                  <div className="flex items-center gap-1 text-red-400 group-hover:translate-x-0.5 transition-transform">
                     <span>Open Report</span>
                     <ChevronRight className="h-3 w-3" />
                   </div>

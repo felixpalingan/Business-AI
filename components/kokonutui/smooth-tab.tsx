@@ -41,7 +41,7 @@ export function SmoothTab({ tabs, activeTab, onChange, className }: SmoothTabPro
             {isActive && (
               <motion.div
                 layoutId="activeTabIndicator"
-                className="absolute inset-0 rounded-xl bg-gradient-to-r from-orange-600 via-orange-500 to-red-600 shadow-lg shadow-orange-600/30"
+                className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-600 via-red-500 to-red-600 shadow-lg shadow-red-600/30"
                 transition={{ type: "spring", stiffness: 350, damping: 30 }}
               />
             )}

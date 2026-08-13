@@ -18,10 +18,10 @@ export function BentoGrid() {
           className="md:col-span-2 md:row-span-1"
         >
           <div className="flex items-center gap-2 mb-3">
-            <div className="rounded-xl bg-orange-600/20 p-2 text-orange-400">
+            <div className="rounded-xl bg-red-600/20 p-2 text-red-400">
               <Compass className="h-5 w-5" />
             </div>
-            <span className="rounded-full bg-orange-500/20 px-2.5 py-0.5 text-[10px] font-bold text-orange-300">
+            <span className="rounded-full bg-red-500/20 px-2.5 py-0.5 text-[10px] font-bold text-red-300">
               Diagnostic Pillar 1
             </span>
           </div>

@@ -27,10 +27,10 @@ export function RiskAlertCard({ riskItem, index }: RiskAlertCardProps) {
       iconColor: "text-amber-400",
     },
     Medium: {
-      badgeBg: "bg-orange-500/10 text-orange-400 border-orange-500/30",
-      accentBg: "border-l-orange-500",
+      badgeBg: "bg-red-500/10 text-red-400 border-red-500/30",
+      accentBg: "border-l-red-500",
       icon: AlertTriangle,
-      iconColor: "text-orange-400",
+      iconColor: "text-red-400",
     },
   };
 

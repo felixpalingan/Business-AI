@@ -62,7 +62,7 @@ export function FinancialGrowthChart({ data, currency = "USD" }: FinancialGrowth
             onClick={() => setMetricView("revenue")}
             className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 font-medium transition-all ${
               metricView === "revenue"
-                ? "bg-orange-600 text-white shadow-sm"
+                ? "bg-red-600 text-white shadow-sm"
                 : "text-slate-400 hover:text-slate-200"
             }`}
           >
@@ -73,7 +73,7 @@ export function FinancialGrowthChart({ data, currency = "USD" }: FinancialGrowth
             onClick={() => setMetricView("users")}
             className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 font-medium transition-all ${
               metricView === "users"
-                ? "bg-orange-600 text-white shadow-sm"
+                ? "bg-red-600 text-white shadow-sm"
                 : "text-slate-400 hover:text-slate-200"
             }`}
           >
@@ -84,7 +84,7 @@ export function FinancialGrowthChart({ data, currency = "USD" }: FinancialGrowth
             onClick={() => setMetricView("all")}
             className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 font-medium transition-all ${
               metricView === "all"
-                ? "bg-orange-600 text-white shadow-sm"
+                ? "bg-red-600 text-white shadow-sm"
                 : "text-slate-400 hover:text-slate-200"
             }`}
           >

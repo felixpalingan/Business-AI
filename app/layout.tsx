@@ -15,9 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className="antialiased selection:bg-orange-500 selection:text-white">
+      <body className="antialiased selection:bg-red-700 selection:text-white">
         {/* Navigation Navbar */}
-        <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl no-print">
+        <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/85 backdrop-blur-xl no-print">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
             <div className="flex items-center gap-3">
               {/* OK OCE & USCM Partner Logos */}
@@ -29,7 +29,7 @@ export default function RootLayout({
 
               <div className="flex flex-col">
                 <span className="text-sm font-extrabold text-white font-heading tracking-tight">
-                  Business <span className="text-orange-400">Diagnostic</span>
+                  Business <span className="text-red-500">Diagnostic</span>
                 </span>
                 <span className="text-[10px] text-slate-400 font-medium">
                   Health & Mentorship Gateway
@@ -38,8 +38,8 @@ export default function RootLayout({
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="hidden sm:flex items-center gap-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-[11px] font-semibold text-orange-300">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="hidden sm:flex items-center gap-1.5 rounded-full border border-red-500/30 bg-red-950/40 px-3 py-1 text-[11px] font-semibold text-red-200">
+                <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
                 <span>UU UMKM & PP 7/2021 Standard</span>
               </div>
             </div>

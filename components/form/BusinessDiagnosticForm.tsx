@@ -114,7 +114,7 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
     <div className="relative mx-auto max-w-4xl">
       {/* Quick Demo Presets Bar */}
       <div className="mb-6 flex flex-wrap items-center gap-2">
-        <div className="flex items-center gap-1.5 text-xs font-semibold text-orange-400">
+        <div className="flex items-center gap-1.5 text-xs font-semibold text-red-400">
           <Zap className="h-3.5 w-3.5" />
           <span>Quick Demo Profiles:</span>
         </div>
@@ -123,10 +123,10 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
             key={idx}
             type="button"
             onClick={() => handleApplyPreset(preset)}
-            className="flex items-center gap-1.5 rounded-full border border-white/10 bg-slate-900/70 px-3.5 py-1.5 text-xs text-slate-300 transition-all hover:border-orange-500/50 hover:bg-slate-800 hover:text-white"
+            className="flex items-center gap-1.5 rounded-full border border-white/10 bg-slate-900/70 px-3.5 py-1.5 text-xs text-slate-300 transition-all hover:border-red-500/50 hover:bg-slate-800 hover:text-white"
           >
             <span className="font-medium">{preset.name}</span>
-            <span className="rounded-full bg-orange-500/20 px-2 py-0.2 text-[10px] text-orange-300 font-semibold">
+            <span className="rounded-full bg-red-500/20 px-2 py-0.2 text-[10px] text-red-300 font-semibold">
               {preset.tag}
             </span>
           </button>
@@ -139,7 +139,7 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
       >
         <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between border-b border-white/10 pb-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-600/20 text-orange-400 border border-orange-500/30">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-600/20 text-red-400 border border-red-500/30">
               <Building2 className="h-5 w-5" />
             </div>
             <div>
@@ -151,22 +151,22 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
               </p>
             </div>
           </div>
-          <span className="rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1 text-[11px] font-semibold text-orange-300 w-fit">
+          <span className="rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-[11px] font-semibold text-red-300 w-fit">
             UU UMKM & PP 7/2021 Aligned
           </span>
         </div>
 
         {/* Section 1: Business Identity & Legal Scope */}
         <div className="space-y-4">
-          <h3 className="text-xs font-bold text-orange-300 uppercase tracking-wider flex items-center gap-1.5">
-            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-orange-500/20 text-[10px] text-orange-400">1</span>
+          <h3 className="text-xs font-bold text-red-300 uppercase tracking-wider flex items-center gap-1.5">
+            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-red-500/20 text-[10px] text-red-400">1</span>
             Business Identity & Industry Scope
           </h3>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-1.5">
               <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
-                <Building2 className="h-3.5 w-3.5 text-orange-400" />
+                <Building2 className="h-3.5 w-3.5 text-red-400" />
                 Registered / Trading Business Name <span className="text-rose-400">*</span>
               </label>
               <input
@@ -175,7 +175,7 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
                 placeholder="e.g. Kopi Nusantara Roastery, Batik Kreasi, etc."
                 value={formData.businessName}
                 onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
-                className="w-full rounded-xl border border-white/10 bg-slate-950/60 px-4 py-2.5 text-sm text-white placeholder-slate-500 backdrop-blur-md transition-colors focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+                className="w-full rounded-xl border border-white/10 bg-slate-950/60 px-4 py-2.5 text-sm text-white placeholder-slate-500 backdrop-blur-md transition-colors focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
               />
             </div>
 
@@ -187,7 +187,7 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
               <select
                 value={formData.industrySector}
                 onChange={(e) => setFormData({ ...formData, industrySector: e.target.value })}
-                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-4 py-2.5 text-sm text-white backdrop-blur-md transition-colors focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-4 py-2.5 text-sm text-white backdrop-blur-md transition-colors focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
               >
                 <option value="Food & Beverage (F&B)">Food & Beverage (F&B)</option>
                 <option value="Retail & E-Commerce">Retail & E-Commerce</option>
@@ -210,7 +210,7 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
               <select
                 value={formData.operatingYears}
                 onChange={(e) => setFormData({ ...formData, operatingYears: e.target.value })}
-                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-3.5 py-2.5 text-sm text-white backdrop-blur-md focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-3.5 py-2.5 text-sm text-white backdrop-blur-md focus:border-red-500 focus:outline-none"
               >
                 <option value="< 1 Year (Early Stage)">Under 1 Year (Early Stage)</option>
                 <option value="1 - 3 Years (Growth Phase)">1 - 3 Years (Growth Phase)</option>
@@ -227,7 +227,7 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
               <select
                 value={formData.legalEntityStatus}
                 onChange={(e) => setFormData({ ...formData, legalEntityStatus: e.target.value })}
-                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-3.5 py-2.5 text-sm text-white backdrop-blur-md focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-3.5 py-2.5 text-sm text-white backdrop-blur-md focus:border-red-500 focus:outline-none"
               >
                 <option value="Individual / Unregistered Entity">Individual / Unregistered</option>
                 <option value="PT Perorangan (Sole Proprietorship PT)">PT Perorangan (Sole Proprietorship)</option>
@@ -247,7 +247,7 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
                 placeholder="e.g. Jabodetabek, Surabaya, etc."
                 value={formData.targetMarketLocation}
                 onChange={(e) => setFormData({ ...formData, targetMarketLocation: e.target.value })}
-                className="w-full rounded-xl border border-white/10 bg-slate-950/60 px-3.5 py-2.5 text-sm text-white backdrop-blur-md focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-slate-950/60 px-3.5 py-2.5 text-sm text-white backdrop-blur-md focus:border-red-500 focus:outline-none"
               />
             </div>
           </div>
@@ -255,8 +255,8 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
 
         {/* Section 2: Scale & MSME Law Bracket */}
         <div className="space-y-3 pt-3 border-t border-white/10">
-          <label className="flex items-center gap-1.5 text-xs font-bold text-orange-300 uppercase tracking-wider">
-            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-orange-500/20 text-[10px] text-orange-400">2</span>
+          <label className="flex items-center gap-1.5 text-xs font-bold text-red-300 uppercase tracking-wider">
+            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-red-500/20 text-[10px] text-red-400">2</span>
             Annual Revenue Scale (Indonesian MSME Law Criteria)
           </label>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -268,13 +268,13 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
                   onClick={() => setFormData((prev) => ({ ...prev, annualRevenue: opt.id }))}
                   className={`cursor-pointer rounded-2xl border p-3.5 transition-all duration-200 ${
                     isSelected
-                      ? "border-orange-500 bg-orange-950/60 shadow-lg shadow-orange-500/30 -translate-y-1 ring-1 ring-orange-400"
+                      ? "border-red-500 bg-red-950/60 shadow-lg shadow-red-500/30 -translate-y-1 ring-1 ring-red-400"
                       : "border-white/10 bg-slate-950/40 hover:border-slate-700 hover:bg-slate-900/60"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-white">{opt.label}</span>
-                    {isSelected && <CheckCircle2 className="h-3.5 w-3.5 text-orange-400" />}
+                    {isSelected && <CheckCircle2 className="h-3.5 w-3.5 text-red-400" />}
                   </div>
                   <p className="mt-1 text-xs font-extrabold text-emerald-400">{opt.range}</p>
                   <p className="mt-0.5 text-[10px] text-slate-400">{opt.desc}</p>
@@ -292,7 +292,7 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
               <select
                 value={formData.netAssetValue}
                 onChange={(e) => setFormData({ ...formData, netAssetValue: e.target.value })}
-                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-3.5 py-2.5 text-sm text-white backdrop-blur-md focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-3.5 py-2.5 text-sm text-white backdrop-blur-md focus:border-red-500 focus:outline-none"
               >
                 <option value="< Rp 500 Million">Under Rp 500 Million</option>
                 <option value="Rp 500 Million - Rp 1 Billion">Rp 500M - Rp 1 Billion</option>
@@ -314,19 +314,19 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
                 required
                 value={formData.totalEmployees}
                 onChange={(e) => setFormData({ ...formData, totalEmployees: parseInt(e.target.value) || 1 })}
-                className="w-full rounded-xl border border-white/10 bg-slate-950/60 px-3.5 py-2.5 text-sm text-white backdrop-blur-md focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-slate-950/60 px-3.5 py-2.5 text-sm text-white backdrop-blur-md focus:border-red-500 focus:outline-none"
               />
             </div>
 
             <div className="space-y-1.5">
               <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
-                <FileSpreadsheet className="h-3.5 w-3.5 text-orange-400" />
+                <FileSpreadsheet className="h-3.5 w-3.5 text-red-400" />
                 Financial Bookkeeping Rigor
               </label>
               <select
                 value={formData.financialRecordQuality}
                 onChange={(e) => setFormData({ ...formData, financialRecordQuality: e.target.value })}
-                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-3.5 py-2.5 text-sm text-white backdrop-blur-md focus:border-orange-500 focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-slate-950/80 px-3.5 py-2.5 text-sm text-white backdrop-blur-md focus:border-red-500 focus:outline-none"
               >
                 <option value="Cash Notes & Basic WhatsApp Invoices">Cash Notes & Informal Invoices</option>
                 <option value="Simple Excel Spreadsheet (Owner Managed)">Simple Excel Spreadsheet</option>
@@ -339,8 +339,8 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
 
         {/* Section 3: Primary Bottleneck & Pain Point */}
         <div className="space-y-2 pt-3 border-t border-white/10">
-          <label className="flex items-center gap-1.5 text-xs font-bold text-orange-300 uppercase tracking-wider">
-            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-orange-500/20 text-[10px] text-orange-400">3</span>
+          <label className="flex items-center gap-1.5 text-xs font-bold text-red-300 uppercase tracking-wider">
+            <span className="flex h-4 w-4 items-center justify-center rounded-full bg-red-500/20 text-[10px] text-red-400">3</span>
             Primary Strategic Bottleneck & Diagnostic Pain Point <span className="text-rose-400">*</span>
           </label>
           <textarea
@@ -349,7 +349,7 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
             placeholder="Describe your current biggest operational, cash flow, staff, sales, or regulatory bottleneck..."
             value={formData.primaryChallenge}
             onChange={(e) => setFormData({ ...formData, primaryChallenge: e.target.value })}
-            className="w-full rounded-xl border border-white/10 bg-slate-950/60 p-3.5 text-sm text-white placeholder-slate-500 backdrop-blur-md transition-colors focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+            className="w-full rounded-xl border border-white/10 bg-slate-950/60 p-3.5 text-sm text-white placeholder-slate-500 backdrop-blur-md transition-colors focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
           />
         </div>
 

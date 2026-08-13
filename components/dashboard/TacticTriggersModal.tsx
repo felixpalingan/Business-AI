@@ -40,7 +40,7 @@ export function TacticTriggersModal({
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
           <div className="flex items-center gap-2.5">
-            <div className="rounded-lg bg-orange-600/20 p-2 text-orange-400 border border-orange-500/30">
+            <div className="rounded-lg bg-red-600/20 p-2 text-red-400 border border-red-500/30">
               <Rocket className="h-4 w-4" />
             </div>
             <div>
@@ -66,7 +66,7 @@ export function TacticTriggersModal({
               onClick={() => setActiveTab("sop")}
               className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all ${
                 activeTab === "sop"
-                  ? "bg-orange-600 text-white shadow-sm"
+                  ? "bg-red-600 text-white shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -77,7 +77,7 @@ export function TacticTriggersModal({
               onClick={() => setActiveTab("cashflow")}
               className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all ${
                 activeTab === "cashflow"
-                  ? "bg-orange-600 text-white shadow-sm"
+                  ? "bg-red-600 text-white shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -88,7 +88,7 @@ export function TacticTriggersModal({
               onClick={() => setActiveTab("financing")}
               className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all ${
                 activeTab === "financing"
-                  ? "bg-orange-600 text-white shadow-sm"
+                  ? "bg-red-600 text-white shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -99,7 +99,7 @@ export function TacticTriggersModal({
               onClick={() => setActiveTab("questions")}
               className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-all ${
                 activeTab === "questions"
-                  ? "bg-orange-600 text-white shadow-sm"
+                  ? "bg-red-600 text-white shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -122,14 +122,14 @@ export function TacticTriggersModal({
                   onClick={() =>
                     copyToClipboard(tacticDeliverables.standardOperatingProcedureSnippet, "sop")
                   }
-                  className="flex items-center gap-1.5 rounded-lg bg-orange-600/20 px-3 py-1.5 text-xs font-semibold text-orange-400 border border-orange-500/30 hover:bg-orange-600 hover:text-white transition-all"
+                  className="flex items-center gap-1.5 rounded-lg bg-red-600/20 px-3 py-1.5 text-xs font-semibold text-red-400 border border-red-500/30 hover:bg-red-600 hover:text-white transition-all"
                 >
                   {copied === "sop" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                   <span>{copied === "sop" ? "Copied!" : "Copy SOP Template"}</span>
                 </button>
               </div>
 
-              <pre className="overflow-x-auto rounded-2xl border border-white/10 bg-slate-950 p-4 font-mono text-xs text-orange-200 leading-relaxed whitespace-pre-wrap">
+              <pre className="overflow-x-auto rounded-2xl border border-white/10 bg-slate-950 p-4 font-mono text-xs text-red-200 leading-relaxed whitespace-pre-wrap">
                 {tacticDeliverables.standardOperatingProcedureSnippet}
               </pre>
             </div>
@@ -146,7 +146,7 @@ export function TacticTriggersModal({
                   onClick={() =>
                     copyToClipboard(tacticDeliverables.cashFlowManagementGuideline, "cashflow")
                   }
-                  className="flex items-center gap-1.5 rounded-lg bg-orange-600/20 px-3 py-1.5 text-xs font-semibold text-orange-400 border border-orange-500/30 hover:bg-orange-600 hover:text-white transition-all"
+                  className="flex items-center gap-1.5 rounded-lg bg-red-600/20 px-3 py-1.5 text-xs font-semibold text-red-400 border border-red-500/30 hover:bg-red-600 hover:text-white transition-all"
                 >
                   {copied === "cashflow" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                   <span>{copied === "cashflow" ? "Copied!" : "Copy Guideline"}</span>
@@ -170,7 +170,7 @@ export function TacticTriggersModal({
                   onClick={() =>
                     copyToClipboard(tacticDeliverables.pitchOrFinancingReadinessSummary, "financing")
                   }
-                  className="flex items-center gap-1.5 rounded-lg bg-orange-600/20 px-3 py-1.5 text-xs font-semibold text-orange-400 border border-orange-500/30 hover:bg-orange-600 hover:text-white transition-all"
+                  className="flex items-center gap-1.5 rounded-lg bg-red-600/20 px-3 py-1.5 text-xs font-semibold text-red-400 border border-red-500/30 hover:bg-red-600 hover:text-white transition-all"
                 >
                   {copied === "financing" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                   <span>{copied === "financing" ? "Copied!" : "Copy Readiness Summary"}</span>
@@ -192,7 +192,7 @@ export function TacticTriggersModal({
                 </p>
                 <button
                   onClick={() => copyToClipboard(formattedQuestions, "questions")}
-                  className="flex items-center gap-1.5 rounded-lg bg-orange-600/20 px-3 py-1.5 text-xs font-semibold text-orange-400 border border-orange-500/30 hover:bg-orange-600 hover:text-white transition-all"
+                  className="flex items-center gap-1.5 rounded-lg bg-red-600/20 px-3 py-1.5 text-xs font-semibold text-red-400 border border-red-500/30 hover:bg-red-600 hover:text-white transition-all"
                 >
                   {copied === "questions" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                   <span>{copied === "questions" ? "Copied!" : "Copy All Questions"}</span>
@@ -206,7 +206,7 @@ export function TacticTriggersModal({
                     className="rounded-2xl border border-white/10 bg-slate-950/80 p-4 space-y-2"
                   >
                     <div className="flex items-start gap-2.5">
-                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-orange-500/20 text-xs font-bold text-orange-400">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-red-500/20 text-xs font-bold text-red-400">
                         {idx + 1}
                       </span>
                       <div>

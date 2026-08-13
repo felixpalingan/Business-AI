@@ -111,11 +111,11 @@ How can I assist you with your 14-day action plan or operational roadmap today? 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn no-print">
-      <div className="relative flex h-[85vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-orange-500/30 bg-slate-900 shadow-2xl">
+      <div className="relative flex h-[85vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-red-500/30 bg-slate-900 shadow-2xl">
         {/* Modal Header */}
-        <div className="flex items-center justify-between border-b border-white/10 bg-orange-950/40 px-6 py-4">
+        <div className="flex items-center justify-between border-b border-white/10 bg-red-950/40 px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-orange-600 text-white shadow-md shadow-orange-500/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-red-600 text-white shadow-md shadow-red-500/20">
               <Bot className="h-5 w-5" />
             </div>
             <div>
@@ -145,7 +145,7 @@ How can I assist you with your 14-day action plan or operational roadmap today? 
         <div className="flex items-center justify-between border-b border-white/10 bg-slate-950/60 px-6 py-2 text-xs">
           <div className="flex items-center gap-4 text-slate-300">
             <span className="flex items-center gap-1">
-              <Building className="h-3.5 w-3.5 text-orange-400" />
+              <Building className="h-3.5 w-3.5 text-red-400" />
               <strong>Tier:</strong> {diagnostic.msmeClassification.category}
             </span>
             <span className="flex items-center gap-1">
@@ -153,7 +153,7 @@ How can I assist you with your 14-day action plan or operational roadmap today? 
               <strong>Score:</strong> {diagnostic.executiveOverview.overallHealthScore}/100
             </span>
           </div>
-          <span className="hidden sm:block text-[11px] text-orange-300 font-semibold">
+          <span className="hidden sm:block text-[11px] text-red-300 font-semibold">
             Track: {diagnostic.okoceMentorship.recommendedTrack}
           </span>
         </div>
@@ -170,7 +170,7 @@ How can I assist you with your 14-day action plan or operational roadmap today? 
               <div
                 className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-xs font-bold ${
                   msg.role === "user"
-                    ? "bg-orange-600 text-white"
+                    ? "bg-red-600 text-white"
                     : "bg-emerald-600/30 text-emerald-300 border border-emerald-500/40"
                 }`}
               >
@@ -180,7 +180,7 @@ How can I assist you with your 14-day action plan or operational roadmap today? 
               <div
                 className={`max-w-2xl rounded-2xl p-4 text-xs leading-relaxed ${
                   msg.role === "user"
-                    ? "bg-orange-600 text-white rounded-tr-none"
+                    ? "bg-red-600 text-white rounded-tr-none"
                     : "bg-slate-950/80 border border-white/10 text-slate-200 rounded-tl-none space-y-2"
                 }`}
               >
@@ -197,7 +197,7 @@ How can I assist you with your 14-day action plan or operational roadmap today? 
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-600/30 text-emerald-300 border border-emerald-500/40">
                 <Bot className="h-4 w-4" />
               </div>
-              <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-xs text-orange-300">
+              <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-xs text-red-300">
                 <Loader2 className="h-4 w-4 animate-spin" />
                 <span>OK OCE AI Mentor is analyzing your prompt...</span>
               </div>
@@ -217,9 +217,9 @@ How can I assist you with your 14-day action plan or operational roadmap today? 
               <button
                 key={idx}
                 onClick={() => handleSendMessage(promptText)}
-                className="flex items-center gap-1 rounded-xl border border-white/10 bg-slate-900/80 px-3 py-1.5 text-[11px] text-slate-300 hover:border-orange-500/50 hover:bg-slate-800 hover:text-white whitespace-nowrap transition-all"
+                className="flex items-center gap-1 rounded-xl border border-white/10 bg-slate-900/80 px-3 py-1.5 text-[11px] text-slate-300 hover:border-red-500/50 hover:bg-slate-800 hover:text-white whitespace-nowrap transition-all"
               >
-                <MessageSquare className="h-3 w-3 text-orange-400 shrink-0" />
+                <MessageSquare className="h-3 w-3 text-red-400 shrink-0" />
                 <span>{promptText}</span>
               </button>
             ))}
@@ -240,12 +240,12 @@ How can I assist you with your 14-day action plan or operational roadmap today? 
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             disabled={isTyping}
-            className="flex-1 rounded-xl border border-white/10 bg-slate-900 px-4 py-3 text-xs text-white placeholder-slate-500 focus:border-orange-500 focus:outline-none focus:ring-1 focus:ring-orange-500"
+            className="flex-1 rounded-xl border border-white/10 bg-slate-900 px-4 py-3 text-xs text-white placeholder-slate-500 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
           />
           <button
             type="submit"
             disabled={!inputMessage.trim() || isTyping}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-600 text-white hover:bg-orange-500 disabled:opacity-50 transition-colors shadow-md shadow-orange-500/20"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-600 text-white hover:bg-red-500 disabled:opacity-50 transition-colors shadow-md shadow-red-500/20"
           >
             <Send className="h-4 w-4" />
           </button>
