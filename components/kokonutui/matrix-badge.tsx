@@ -18,7 +18,7 @@ export function MatrixBadge({
   className,
 }: MatrixBadgeProps) {
   const variantStyles = {
-    indigo: "border-indigo-500/30 bg-indigo-950/40 text-indigo-300 shadow-indigo-500/10",
+    indigo: "border-orange-500/30 bg-orange-950/40 text-orange-300 shadow-orange-500/10",
     emerald: "border-emerald-500/30 bg-emerald-950/40 text-emerald-300 shadow-emerald-500/10",
     amber: "border-amber-500/30 bg-amber-950/40 text-amber-300 shadow-amber-500/10",
     rose: "border-rose-500/30 bg-rose-950/40 text-rose-300 shadow-rose-500/10",
@@ -26,7 +26,7 @@ export function MatrixBadge({
   };
 
   const dotColors = {
-    indigo: "bg-indigo-400",
+    indigo: "bg-orange-400",
     emerald: "bg-emerald-400",
     amber: "bg-amber-400",
     rose: "bg-rose-400",

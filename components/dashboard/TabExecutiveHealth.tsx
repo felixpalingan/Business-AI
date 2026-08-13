@@ -66,7 +66,7 @@ export function TabExecutiveHealth({ diagnostic }: TabExecutiveHealthProps) {
           <GlowCard glowColor="indigo" className="flex h-full flex-col justify-between">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <div className="flex items-center gap-2">
-                <div className="rounded-lg bg-indigo-500/20 p-1.5 text-indigo-400">
+                <div className="rounded-lg bg-orange-500/20 p-1.5 text-orange-400">
                   <Compass className="h-4 w-4" />
                 </div>
                 <h3 className="text-sm font-bold text-white font-heading">
@@ -106,10 +106,10 @@ export function TabExecutiveHealth({ diagnostic }: TabExecutiveHealthProps) {
       </div>
 
       {/* Official Indonesian MSME Law Classification Banner */}
-      <div className="health-card rounded-3xl border border-indigo-500/30 bg-indigo-950/30 p-6 md:p-8 backdrop-blur-2xl shadow-xl space-y-6">
+      <div className="health-card rounded-3xl border border-orange-500/30 bg-orange-950/30 p-6 md:p-8 backdrop-blur-2xl shadow-xl space-y-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-white/10 pb-5">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-indigo-600/30 text-indigo-300 border border-indigo-500/40">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-600/30 text-orange-300 border border-orange-500/40">
               <Building className="h-6 w-6" />
             </div>
             <div>
@@ -121,7 +121,7 @@ export function TabExecutiveHealth({ diagnostic }: TabExecutiveHealthProps) {
                   Official Tier (PP 7/2021)
                 </span>
               </div>
-              <p className="text-xs text-indigo-300 mt-0.5">
+              <p className="text-xs text-orange-300 mt-0.5">
                 Legal Basis: {msmeClassification.legalBasis}
               </p>
             </div>
@@ -185,7 +185,7 @@ export function TabExecutiveHealth({ diagnostic }: TabExecutiveHealthProps) {
                   <span className="text-[10px] text-slate-400 uppercase font-bold block">1. Financial Management</span>
                   <span className="text-xs text-slate-300">Cash Flow & Profit Margins</span>
                 </div>
-                <span className="font-extrabold text-indigo-400 text-sm">{pillarScores.financialHealth}%</span>
+                <span className="font-extrabold text-orange-400 text-sm">{pillarScores.financialHealth}%</span>
               </div>
 
               <div className="rounded-xl bg-slate-950/60 p-3 border border-white/5 flex items-center justify-between">

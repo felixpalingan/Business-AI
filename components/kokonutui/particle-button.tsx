@@ -48,9 +48,9 @@ export function ParticleButton({
         className={cn(
           "group relative flex items-center justify-center gap-2 overflow-hidden rounded-xl font-bold transition-all duration-300 active:scale-95 disabled:pointer-events-none disabled:opacity-50",
           variant === "primary" &&
-            "bg-gradient-to-r from-indigo-600 via-indigo-500 to-violet-600 px-6 py-3 text-sm text-white shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 hover:brightness-110",
+            "bg-gradient-to-r from-orange-600 via-orange-500 to-red-600 px-6 py-3 text-sm text-white shadow-lg shadow-orange-600/30 hover:shadow-orange-500/50 hover:brightness-110",
           variant === "glow" &&
-            "border border-indigo-500/40 bg-slate-900/80 px-4 py-2 text-xs text-indigo-300 backdrop-blur-md hover:border-indigo-400 hover:bg-indigo-950/60 hover:text-white",
+            "border border-orange-500/40 bg-slate-900/80 px-4 py-2 text-xs text-orange-300 backdrop-blur-md hover:border-orange-400 hover:bg-orange-950/60 hover:text-white",
           className
         )}
         {...props}
@@ -62,7 +62,7 @@ export function ParticleButton({
           children
         ) : (
           <>
-            <Sparkles className="h-4 w-4 text-indigo-200 group-hover:rotate-12 transition-transform" />
+            <Sparkles className="h-4 w-4 text-orange-200 group-hover:rotate-12 transition-transform" />
             <span>Mulai Analisis Kecerdasan Bisnis</span>
             <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
           </>
@@ -81,7 +81,7 @@ export function ParticleButton({
             y: p.y + (Math.random() - 0.5) * 80 - 20,
           }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="pointer-events-none absolute h-1.5 w-1.5 rounded-full bg-indigo-400 shadow-sm shadow-indigo-300"
+          className="pointer-events-none absolute h-1.5 w-1.5 rounded-full bg-orange-400 shadow-sm shadow-orange-300"
           style={{ left: 0, top: 0 }}
         />
       ))}

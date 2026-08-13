@@ -123,9 +123,9 @@ export default function HomePage() {
               />
               <button
                 onClick={() => setHistoryOpen(true)}
-                className="flex items-center gap-1.5 rounded-full border border-white/10 bg-slate-900/70 px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:border-indigo-500/50 hover:text-white transition-all"
+                className="flex items-center gap-1.5 rounded-full border border-white/10 bg-slate-900/70 px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:border-orange-500/50 hover:text-white transition-all"
               >
-                <History className="h-3.5 w-3.5 text-indigo-400" />
+                <History className="h-3.5 w-3.5 text-orange-400" />
                 <span>Diagnostic History</span>
               </button>
             </div>

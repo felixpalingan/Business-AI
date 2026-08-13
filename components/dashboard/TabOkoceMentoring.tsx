@@ -28,7 +28,7 @@ interface TabOkoceMentoringProps {
 }
 
 const OKOCE_7_TOP_STAGES = [
-  { id: "P1", title: "P1 - Pendaftaran", desc: "Registrasi anggota OK OCE & legalitas dasar enterprise.", color: "text-indigo-400" },
+  { id: "P1", title: "P1 - Pendaftaran", desc: "Registrasi anggota OK OCE & legalitas dasar enterprise.", color: "text-orange-400" },
   { id: "P2", title: "P2 - Pelatihan", desc: "Pelatihan kewirausahaan & manajemen risiko operasional.", color: "text-cyan-400" },
   { id: "P3", title: "P3 - Pendampingan", desc: "1-on-1 Mentoring teknis bersama praktisi berpengalaman.", color: "text-emerald-400" },
   { id: "P4", title: "P4 - Perizinan", desc: "Pengurusan NIB, Halal, BPOM, & Hak Kekayaan Intelektual.", color: "text-purple-400" },
@@ -63,11 +63,11 @@ export function TabOkoceMentoring({ diagnostic }: TabOkoceMentoringProps) {
   return (
     <div className="space-y-8">
       {/* Primary In-App AI Mentoring Call-To-Action Banner */}
-      <div className="mentoring-card rounded-3xl border border-indigo-500/40 bg-gradient-to-br from-indigo-950/60 via-slate-900/90 to-slate-950/90 p-6 md:p-8 backdrop-blur-2xl shadow-2xl space-y-6">
+      <div className="mentoring-card rounded-3xl border border-orange-500/40 bg-gradient-to-br from-orange-950/60 via-slate-900/90 to-slate-950/90 p-6 md:p-8 backdrop-blur-2xl shadow-2xl space-y-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 border-b border-white/10 pb-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="rounded-full bg-indigo-500/20 border border-indigo-500/40 px-3 py-0.5 text-[11px] font-bold text-indigo-300">
+              <span className="rounded-full bg-orange-500/20 border border-orange-500/40 px-3 py-0.5 text-[11px] font-bold text-orange-300">
                 Interactive AI Coaching Active
               </span>
             </div>
@@ -82,7 +82,7 @@ export function TabOkoceMentoring({ diagnostic }: TabOkoceMentoringProps) {
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => setChatOpen(true)}
-              className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-3 text-xs font-bold text-white shadow-lg shadow-indigo-500/25 hover:from-indigo-500 hover:to-violet-500 transition-all hover:scale-[1.02]"
+              className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-orange-600 to-red-600 px-5 py-3 text-xs font-bold text-white shadow-lg shadow-orange-500/25 hover:from-orange-500 hover:to-red-500 transition-all hover:scale-[1.02]"
             >
               <Bot className="h-4 w-4" />
               <span>Start AI Mentoring Session</span>
@@ -102,7 +102,7 @@ export function TabOkoceMentoring({ diagnostic }: TabOkoceMentoringProps) {
         {/* Recommended Track & Matched Specialty */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="rounded-2xl border border-white/5 bg-slate-950/60 p-5 space-y-3">
-            <div className="flex items-center gap-2 text-indigo-300 text-xs font-bold uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-orange-300 text-xs font-bold uppercase tracking-wider">
               <UserCheck className="h-4 w-4" />
               <span>Matched OK OCE Mentor Specialty</span>
             </div>
@@ -135,7 +135,7 @@ export function TabOkoceMentoring({ diagnostic }: TabOkoceMentoringProps) {
       <div className="mentoring-card rounded-3xl border border-white/10 bg-slate-900/80 p-6 md:p-8 backdrop-blur-2xl shadow-xl space-y-4">
         <div className="flex items-center justify-between border-b border-white/10 pb-4">
           <div className="flex items-center gap-2.5">
-            <div className="rounded-xl bg-indigo-500/20 p-2 text-indigo-400 border border-indigo-500/30">
+            <div className="rounded-xl bg-orange-500/20 p-2 text-orange-400 border border-orange-500/30">
               <GraduationCap className="h-5 w-5" />
             </div>
             <div>
@@ -148,7 +148,7 @@ export function TabOkoceMentoring({ diagnostic }: TabOkoceMentoringProps) {
             </div>
           </div>
 
-          <span className="rounded-full bg-indigo-500/20 border border-indigo-500/30 px-3 py-1 text-[11px] font-bold text-indigo-300">
+          <span className="rounded-full bg-orange-500/20 border border-orange-500/30 px-3 py-1 text-[11px] font-bold text-orange-300">
             7 Tahapan OK OCE
           </span>
         </div>
@@ -162,7 +162,7 @@ export function TabOkoceMentoring({ diagnostic }: TabOkoceMentoringProps) {
                 key={stage.id}
                 className={`flex flex-col justify-between rounded-2xl border p-3.5 transition-all ${
                   isRecommended
-                    ? "border-indigo-500 bg-indigo-950/60 shadow-lg shadow-indigo-500/20 ring-1 ring-indigo-400"
+                    ? "border-orange-500 bg-orange-950/60 shadow-lg shadow-orange-500/20 ring-1 ring-orange-400"
                     : "border-white/5 bg-slate-950/60 hover:border-slate-700"
                 }`}
               >

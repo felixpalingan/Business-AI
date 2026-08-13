@@ -28,10 +28,10 @@ export function CardFlip({ riskItem, index }: CardFlipProps) {
       iconColor: "text-amber-400",
     },
     Medium: {
-      badgeBg: "bg-indigo-500/20 text-indigo-300 border-indigo-500/40",
-      accentBg: "border-indigo-500/40 bg-indigo-950/30",
+      badgeBg: "bg-orange-500/20 text-orange-300 border-orange-500/40",
+      accentBg: "border-orange-500/40 bg-orange-950/30",
       icon: AlertTriangle,
-      iconColor: "text-indigo-400",
+      iconColor: "text-orange-400",
     },
   };
 

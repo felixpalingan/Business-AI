@@ -59,7 +59,7 @@ export function StatChip({
     default: "border-white/10 bg-slate-800/60 text-slate-300",
     emerald: "border-emerald-500/30 bg-emerald-950/30 text-emerald-300",
     amber: "border-amber-500/30 bg-amber-950/30 text-amber-300",
-    indigo: "border-indigo-500/30 bg-indigo-950/30 text-indigo-300",
+    indigo: "border-orange-500/30 bg-orange-950/30 text-orange-300",
     rose: "border-rose-500/30 bg-rose-950/30 text-rose-300",
   };
 

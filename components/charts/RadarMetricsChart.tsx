@@ -38,7 +38,7 @@ export function RadarMetricsChart({ metrics }: RadarMetricsProps) {
       return (
         <div className="rounded-lg border border-white/10 bg-slate-900/90 p-2.5 shadow-xl backdrop-blur-md">
           <p className="text-xs font-semibold text-white">{payload[0].payload.subject}</p>
-          <p className="text-xs text-indigo-400 font-bold">Score: {payload[0].value}/100</p>
+          <p className="text-xs text-orange-400 font-bold">Score: {payload[0].value}/100</p>
         </div>
       );
     }

@@ -47,7 +47,7 @@ export function DashboardHeader({ diagnostic, onReset, onOpenHistory }: Dashboar
                 onClick={onOpenHistory}
                 className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-slate-800/80 px-4 py-2 text-xs font-semibold text-slate-200 transition-all hover:bg-slate-700 hover:text-white whitespace-nowrap"
               >
-                <History className="h-4 w-4 text-indigo-400" />
+                <History className="h-4 w-4 text-orange-400" />
                 <span>Diagnostic History</span>
               </button>
             )}
@@ -61,9 +61,9 @@ export function DashboardHeader({ diagnostic, onReset, onOpenHistory }: Dashboar
         </div>
 
         {/* Top Control Bar 2: OK OCE Strategic Deliverables */}
-        <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-indigo-500/20 bg-indigo-950/20 p-4 no-print">
-          <span className="text-xs font-bold uppercase tracking-wider text-indigo-300 mr-2 flex items-center gap-1.5">
-            <Sparkles className="h-4 w-4 text-indigo-400" />
+        <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-orange-500/20 bg-orange-950/20 p-4 no-print">
+          <span className="text-xs font-bold uppercase tracking-wider text-orange-300 mr-2 flex items-center gap-1.5">
+            <Sparkles className="h-4 w-4 text-orange-400" />
             <span>Strategic Deliverables:</span>
           </span>
 
@@ -101,7 +101,7 @@ export function DashboardHeader({ diagnostic, onReset, onOpenHistory }: Dashboar
               </h1>
               <ViabilityBadge score={diagnostic.executiveOverview.overallHealthScore / 10} />
             </div>
-            <p className="text-sm font-semibold text-indigo-300 md:text-base">
+            <p className="text-sm font-semibold text-orange-300 md:text-base">
               {diagnostic.executiveOverview.headline}
             </p>
             <p className="max-w-4xl text-xs text-slate-300 leading-relaxed md:text-sm">

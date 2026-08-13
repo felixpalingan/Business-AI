@@ -113,11 +113,11 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
       <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 h-full w-full opacity-40" />
 
       <div className="relative z-10 text-center space-y-2">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-600/30 text-indigo-400 border border-indigo-500/40">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-600/30 text-orange-400 border border-orange-500/40">
           <Sparkles className="h-6 w-6 animate-spin-slow" />
         </div>
         <h3 className="text-xl font-bold text-white font-heading">
-          Diagnosing Enterprise Health: <span className="text-indigo-400">{ideaName}</span>
+          Diagnosing Enterprise Health: <span className="text-orange-400">{ideaName}</span>
         </h3>
         <p className="text-xs text-slate-400">
           OK OCE AI Diagnostic Specialist is evaluating financial, operational, and regulatory health...
@@ -136,7 +136,7 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
               key={idx}
               className={`flex items-start gap-3 rounded-2xl border p-3.5 transition-all duration-300 ${
                 isCurrent
-                  ? "border-indigo-500/60 bg-indigo-950/40 shadow-lg shadow-indigo-500/10 scale-[1.01]"
+                  ? "border-orange-500/60 bg-orange-950/40 shadow-lg shadow-orange-500/10 scale-[1.01]"
                   : isDone
                   ? "border-emerald-500/30 bg-emerald-950/20 text-slate-400"
                   : "border-white/5 bg-slate-950/40 opacity-40"
@@ -145,7 +145,7 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
               <div
                 className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl ${
                   isCurrent
-                    ? "bg-indigo-600 text-white"
+                    ? "bg-orange-600 text-white"
                     : isDone
                     ? "bg-emerald-500/20 text-emerald-400"
                     : "bg-slate-800 text-slate-500"

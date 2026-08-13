@@ -119,7 +119,7 @@ export function TabGapAnalysis({ diagnostic }: TabGapAnalysisProps) {
                               ? "bg-rose-500/20 text-rose-300 border border-rose-500/30"
                               : isP1
                               ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
-                              : "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30"
+                              : "bg-orange-500/20 text-orange-300 border border-orange-500/30"
                           }`}
                         >
                           {gap.severity}
@@ -128,7 +128,7 @@ export function TabGapAnalysis({ diagnostic }: TabGapAnalysisProps) {
                       <td className="py-3 pr-4 text-slate-300 max-w-sm leading-relaxed">
                         {gap.actionableFix}
                       </td>
-                      <td className="py-3 pr-2 text-indigo-300 whitespace-nowrap">
+                      <td className="py-3 pr-2 text-orange-300 whitespace-nowrap">
                         {gap.estimatedTimeToSolve}
                       </td>
                       <td className="py-3 text-right font-bold text-emerald-400 whitespace-nowrap">
@@ -164,7 +164,7 @@ export function TabGapAnalysis({ diagnostic }: TabGapAnalysisProps) {
           <div className="flex items-center gap-3">
             <div className="w-36 rounded-full bg-slate-800 h-2.5 overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-emerald-500 to-indigo-500 transition-all duration-300"
+                className="h-full bg-gradient-to-r from-emerald-500 to-orange-500 transition-all duration-300"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -182,7 +182,7 @@ export function TabGapAnalysis({ diagnostic }: TabGapAnalysisProps) {
             >
               <div>
                 <div className="flex items-center justify-between border-b border-white/5 pb-2 mb-3">
-                  <span className="text-xs font-bold text-indigo-300">{phase.phaseTitle}</span>
+                  <span className="text-xs font-bold text-orange-300">{phase.phaseTitle}</span>
                   <span className="rounded-full bg-slate-800 px-2 py-0.5 text-[10px] font-semibold text-slate-400">
                     {phase.timeframe}
                   </span>

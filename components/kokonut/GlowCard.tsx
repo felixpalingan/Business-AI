@@ -18,7 +18,7 @@ export function GlowCard({
   ...props
 }: GlowCardProps) {
   const glowBorderClasses = {
-    indigo: "hover:border-indigo-500/50 hover:shadow-indigo-500/10",
+    indigo: "hover:border-orange-500/50 hover:shadow-orange-500/10",
     emerald: "hover:border-emerald-500/50 hover:shadow-emerald-500/10",
     amber: "hover:border-amber-500/50 hover:shadow-amber-500/10",
     rose: "hover:border-rose-500/50 hover:shadow-rose-500/10",

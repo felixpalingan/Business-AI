@@ -60,14 +60,14 @@ export function AppleActivityCard({
     <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/80 p-6 backdrop-blur-2xl shadow-2xl">
       <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
         <div className="flex items-center gap-2">
-          <div className="rounded-xl bg-indigo-500/20 p-2 text-indigo-400">
+          <div className="rounded-xl bg-orange-500/20 p-2 text-orange-400">
             <Compass className="h-4 w-4" />
           </div>
           <h3 className="text-sm font-bold text-white font-heading">
             Ring Aktivitas Kelayakan Bisnis
           </h3>
         </div>
-        <span className="rounded-full bg-indigo-500/20 px-2.5 py-0.5 text-[10px] font-bold text-indigo-300">
+        <span className="rounded-full bg-orange-500/20 px-2.5 py-0.5 text-[10px] font-bold text-orange-300">
           Metrik Terintegrasi
         </span>
       </div>
@@ -97,10 +97,10 @@ export function AppleActivityCard({
         <div className="flex-1 space-y-3 w-full">
           <div className="flex items-center justify-between rounded-xl bg-slate-950/60 p-2.5 border border-white/5">
             <div className="flex items-center gap-2">
-              <span className="h-3 w-3 rounded-full bg-indigo-500" />
+              <span className="h-3 w-3 rounded-full bg-orange-500" />
               <span className="text-xs font-semibold text-slate-300">Kelayakan Keseluruhan</span>
             </div>
-            <span className="text-xs font-bold text-indigo-300">{(viabilityScore * 10).toFixed(0)}%</span>
+            <span className="text-xs font-bold text-orange-300">{(viabilityScore * 10).toFixed(0)}%</span>
           </div>
 
           <div className="flex items-center justify-between rounded-xl bg-slate-950/60 p-2.5 border border-white/5">

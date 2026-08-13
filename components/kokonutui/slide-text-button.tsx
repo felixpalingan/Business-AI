@@ -20,7 +20,7 @@ export function SlideTextButton({
   ...props
 }: SlideTextButtonProps) {
   const variantStyles = {
-    indigo: "border-indigo-500/40 bg-indigo-950/60 text-indigo-200 hover:border-indigo-400 hover:bg-indigo-900/80 hover:text-white shadow-sm shadow-indigo-500/10",
+    indigo: "border-orange-500/40 bg-orange-950/60 text-orange-200 hover:border-orange-400 hover:bg-orange-900/80 hover:text-white shadow-sm shadow-orange-500/10",
     purple: "border-purple-500/40 bg-purple-950/60 text-purple-200 hover:border-purple-400 hover:bg-purple-900/80 hover:text-white shadow-sm shadow-purple-500/10",
     emerald: "border-emerald-500/40 bg-emerald-950/60 text-emerald-200 hover:border-emerald-400 hover:bg-emerald-900/80 hover:text-white shadow-sm shadow-emerald-500/10",
     cyan: "border-cyan-500/40 bg-cyan-950/60 text-cyan-200 hover:border-cyan-400 hover:bg-cyan-900/80 hover:text-white shadow-sm shadow-cyan-500/10",

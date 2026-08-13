@@ -17,13 +17,13 @@ export function RedFlagsCard({ gap, index }: RedFlagsCardProps) {
     ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
     : isHigh
     ? "bg-amber-500/20 text-amber-300 border-amber-500/40"
-    : "bg-indigo-500/20 text-indigo-300 border-indigo-500/40";
+    : "bg-orange-500/20 text-orange-300 border-orange-500/40";
 
   const cardBorder = isCritical
     ? "border-rose-500/30 bg-gradient-to-b from-rose-950/30 via-slate-900/90 to-slate-950/90"
     : isHigh
     ? "border-amber-500/30 bg-gradient-to-b from-amber-950/30 via-slate-900/90 to-slate-950/90"
-    : "border-indigo-500/30 bg-gradient-to-b from-indigo-950/30 via-slate-900/90 to-slate-950/90";
+    : "border-orange-500/30 bg-gradient-to-b from-orange-950/30 via-slate-900/90 to-slate-950/90";
 
   const IconComp = isCritical ? Flame : AlertTriangle;
 
@@ -75,7 +75,7 @@ export function RedFlagsCard({ gap, index }: RedFlagsCardProps) {
       {/* Footer Metrics */}
       <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-3 text-[11px]">
         <span className="text-slate-400">
-          Est. Time: <strong className="text-indigo-300">{gap.estimatedTimeToSolve}</strong>
+          Est. Time: <strong className="text-orange-300">{gap.estimatedTimeToSolve}</strong>
         </span>
         <span className="text-emerald-400 font-bold">
           ROI: {gap.expectedBusinessImpact}

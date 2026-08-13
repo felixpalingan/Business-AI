@@ -60,14 +60,14 @@ export function HoldButton({
       type="button"
       className={cn(
         "relative overflow-hidden rounded-xl border border-white/10 bg-slate-800/80 px-4 py-2 text-xs font-semibold text-slate-300 transition-all select-none no-print",
-        isHolding && "border-indigo-500/50 text-white scale-98",
+        isHolding && "border-orange-500/50 text-white scale-98",
         completed && "border-emerald-500/50 bg-emerald-950/40 text-emerald-300",
         className
       )}
     >
       {/* Progress fill animation */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-violet-600 opacity-60 transition-all duration-75"
+        className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-600 opacity-60 transition-all duration-75"
         style={{ width: `${progress}%` }}
       />
 
