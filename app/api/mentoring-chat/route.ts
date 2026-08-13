@@ -57,7 +57,7 @@ ${redFlags}
         contents: [{ parts: [{ text: fullPrompt }] }],
         generationConfig: {
           temperature: 0.4,
-          maxOutputTokens: 1000,
+          maxOutputTokens: 4096,
         },
       }),
     });
