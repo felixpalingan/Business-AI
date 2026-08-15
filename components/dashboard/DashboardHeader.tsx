@@ -36,18 +36,18 @@ export function DashboardHeader({ diagnostic, onReset, onOpenHistory }: Dashboar
 
   return (
     <>
-      <div className="flex flex-col gap-8 rounded-3xl border border-white/10 bg-slate-900/70 p-6 backdrop-blur-2xl md:p-8 shadow-2xl">
+      <div className="flex flex-col gap-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl md:p-8">
         {/* Top Control Bar 1: Workspace Actions */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6 no-print">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-6 no-print">
           <div className="flex items-center gap-3">
             <HoldButton onHoldComplete={onReset} text="Hold to Reset Assessment" />
 
             {onOpenHistory && (
               <button
                 onClick={onOpenHistory}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-slate-800/80 px-4 py-2 text-xs font-semibold text-slate-200 transition-all hover:bg-slate-700 hover:text-white whitespace-nowrap"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-700 shadow-2xs transition-all hover:bg-slate-100 hover:text-slate-900 whitespace-nowrap"
               >
-                <History className="h-4 w-4 text-red-400" />
+                <History className="h-4 w-4 text-red-600" />
                 <span>Diagnostic History</span>
               </button>
             )}
@@ -60,96 +60,124 @@ export function DashboardHeader({ diagnostic, onReset, onOpenHistory }: Dashboar
           </div>
         </div>
 
-        {/* Top Control Bar 2: OK OCE Strategic Deliverables */}
-        <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-red-500/20 bg-red-950/20 p-4 no-print">
-          <span className="text-xs font-bold uppercase tracking-wider text-red-300 mr-2 flex items-center gap-1.5">
-            <Sparkles className="h-4 w-4 text-red-400" />
-            <span>Strategic Deliverables:</span>
-          </span>
-
-          <SlideTextButton
-            text="SOP Template"
-            hoverText="Copy SOP Framework"
-            icon={FileText}
-            variant="cyan"
-            onClick={() => openToolkit("sop")}
-          />
-
-          <SlideTextButton
-            text="Cash Flow Rules"
-            hoverText="Copy Cash Guideline"
-            icon={DollarSign}
-            variant="emerald"
-            onClick={() => openToolkit("cashflow")}
-          />
-
-          <SlideTextButton
-            text="Mentorship Questions"
-            hoverText="View Discussion Points"
-            icon={GraduationCap}
-            variant="indigo"
-            onClick={() => openToolkit("questions")}
-          />
-        </div>
-
-        {/* Hero Title & Executive Summary */}
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between pt-2">
-          <div className="space-y-2">
-            <div className="flex flex-wrap items-center gap-3">
-              <h1 className="text-2xl font-black text-white font-heading md:text-3xl lg:text-4xl tracking-tight">
-                {diagnostic.input.businessName}
-              </h1>
-              <ViabilityBadge score={diagnostic.executiveOverview.overallHealthScore / 10} />
+        {/* Main Header Block: Business Identity + Health Badge */}
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <span className="rounded-full bg-red-50 border border-red-200 px-3 py-0.5 text-xs font-bold text-red-700">
+                {diagnostic.input.industrySector}
+              </span>
+              <span className="rounded-full bg-sky-50 border border-sky-200 px-3 py-0.5 text-xs font-bold text-sky-700">
+                {diagnostic.msmeClassification.category}
+              </span>
+              <span className="rounded-full bg-slate-100 border border-slate-200 px-3 py-0.5 text-xs font-semibold text-slate-600">
+                {diagnostic.input.operatingYears}
+              </span>
             </div>
-            <p className="text-sm font-semibold text-red-300 md:text-base">
-              {diagnostic.executiveOverview.headline}
-            </p>
-            <p className="max-w-4xl text-xs text-slate-300 leading-relaxed md:text-sm">
+
+            <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 font-heading sm:text-4xl md:text-5xl">
+              {diagnostic.input.businessName}
+            </h1>
+
+            <p className="max-w-3xl text-sm text-slate-600 leading-relaxed">
               {diagnostic.executiveOverview.executiveSummary}
             </p>
           </div>
+
+          {/* Viability Gauge Score Badge */}
+          <div className="flex shrink-0">
+            <ViabilityBadge
+              score={diagnostic.executiveOverview.overallHealthScore / 10}
+              verdict={diagnostic.executiveOverview.healthVerdict}
+            />
+          </div>
         </div>
 
-        {/* Quick Stat Chips */}
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 border-t border-white/10 pt-6">
+        {/* Tactical Deliverables Quick Launch Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 p-4 no-print">
+          <div className="flex items-center gap-2">
+            <div className="rounded-lg bg-red-100 p-1.5 text-red-700">
+              <Sparkles className="h-4 w-4" />
+            </div>
+            <div>
+              <span className="text-xs font-bold text-slate-900 block">
+                Instant Tactical Toolkit Ready
+              </span>
+              <span className="text-[11px] text-slate-500">
+                SOP templates, cash flow guidelines & financing pitch summaries
+              </span>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <SlideTextButton
+              onClick={() => openToolkit("sop")}
+              icon={FileText}
+              primaryText="Operational SOP"
+              secondaryText="View Template"
+            />
+            <SlideTextButton
+              onClick={() => openToolkit("cashflow")}
+              icon={DollarSign}
+              primaryText="Cash Flow Rule"
+              secondaryText="View Checklist"
+            />
+            <SlideTextButton
+              onClick={() => openToolkit("financing")}
+              icon={Briefcase}
+              primaryText="Bank Pitch Doc"
+              secondaryText="View Summary"
+            />
+          </div>
+        </div>
+
+        {/* Bottom Control Bar 2: Core Key Metrics Strip */}
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6 border-t border-slate-100 pt-6">
           <StatChip
-            label="UU UMKM Classification"
-            value={diagnostic.msmeClassification.category.split("(")[0].trim()}
+            label="Health Index"
+            value={`${diagnostic.executiveOverview.overallHealthScore}/100`}
+            icon={TrendingUp}
+            variant="emerald"
+          />
+          <StatChip
+            label="UU UMKM Scale"
+            value={diagnostic.msmeClassification.category.split(" ")[0]}
             icon={Building}
+            variant="cyan"
+          />
+          <StatChip
+            label="Gross Margin"
+            value={diagnostic.financialDiagnostics.grossMarginAssessment.split(" ")[1] || "Healthy"}
+            icon={DollarSign}
+            variant="emerald"
+          />
+          <StatChip
+            label="Cash Runway"
+            value={`${diagnostic.financialDiagnostics.burnRateRunwayMonths} Mo`}
+            icon={Briefcase}
+            variant="amber"
+          />
+          <StatChip
+            label="Workforce"
+            value={`${diagnostic.input.totalEmployees} Staff`}
+            icon={GraduationCap}
             variant="indigo"
           />
           <StatChip
-            label="Overall Health Status"
-            value={diagnostic.executiveOverview.healthVerdict}
-            icon={TrendingUp}
-            variant={
-              diagnostic.executiveOverview.overallHealthScore >= 75
-                ? "emerald"
-                : diagnostic.executiveOverview.overallHealthScore >= 50
-                ? "indigo"
-                : "amber"
-            }
-          />
-          <StatChip
-            label="Annual Revenue Scale"
-            value={diagnostic.input.annualRevenue.split("(")[0].trim()}
-            icon={DollarSign}
-            variant="default"
-          />
-          <StatChip
-            label="Recommended Mentorship Track"
-            value={diagnostic.okoceMentorship.recommendedTrack.split("&")[0].trim()}
-            icon={GraduationCap}
-            variant="emerald"
+            label="Debt Risk"
+            value={diagnostic.financialDiagnostics.debtLeverageRisk.split(" ")[0] || "Low"}
+            icon={Sparkles}
+            variant="purple"
           />
         </div>
       </div>
 
+      {/* Tactic Triggers Modal */}
       <TacticTriggersModal
-        diagnostic={diagnostic}
-        initialTab={modalTab}
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
+        initialTab={modalTab}
+        diagnostic={diagnostic}
       />
     </>
   );

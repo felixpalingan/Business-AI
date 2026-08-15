@@ -21,7 +21,7 @@ export function SmoothTab({ tabs, activeTab, onChange, className }: SmoothTabPro
   return (
     <div
       className={cn(
-        "relative flex items-center gap-1.5 rounded-2xl border border-white/10 bg-slate-950/70 p-1.5 backdrop-blur-xl no-print",
+        "relative flex items-center gap-1.5 rounded-2xl border border-slate-200 bg-white p-1.5 shadow-sm no-print",
         className
       )}
     >
@@ -35,13 +35,13 @@ export function SmoothTab({ tabs, activeTab, onChange, className }: SmoothTabPro
             onClick={() => onChange(tab.id)}
             className={cn(
               "relative flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-colors duration-200 md:text-sm",
-              isActive ? "text-white" : "text-slate-400 hover:text-slate-200"
+              isActive ? "text-white" : "text-slate-600 hover:text-slate-900"
             )}
           >
             {isActive && (
               <motion.div
                 layoutId="activeTabIndicator"
-                className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-600 via-red-500 to-red-600 shadow-lg shadow-red-600/30"
+                className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-700 via-red-600 to-red-700 shadow-md shadow-red-700/25"
                 transition={{ type: "spring", stiffness: 350, damping: 30 }}
               />
             )}

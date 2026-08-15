@@ -123,39 +123,39 @@ export default function HomePage() {
               />
               <button
                 onClick={() => setHistoryOpen(true)}
-                className="flex items-center gap-1.5 rounded-full border border-white/10 bg-slate-900/70 px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:border-red-500/50 hover:text-white transition-all"
+                className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-slate-700 shadow-xs hover:border-red-500 hover:text-red-700 transition-all"
               >
-                <History className="h-3.5 w-3.5 text-red-400" />
+                <History className="h-3.5 w-3.5 text-red-600" />
                 <span>Diagnostic History</span>
               </button>
             </div>
 
-            <h1 className="text-3xl font-black tracking-tight text-white font-heading sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-black tracking-tight text-slate-900 font-heading sm:text-5xl lg:text-6xl">
               Enterprise Health Check & <span className="glow-gradient-text">MSME Diagnostic Engine</span>
             </h1>
 
-            <p className="mx-auto max-w-2xl text-sm text-slate-300 sm:text-base leading-relaxed">
+            <p className="mx-auto max-w-2xl text-sm text-slate-600 sm:text-base leading-relaxed">
               Assess your enterprise health index, classify official scale under Indonesian MSME Law (*UU UMKM No. 20/2008 & PP 7/2021*), identify operational gaps, and unlock a tailored OK OCE Mentorship Pathway.
             </p>
           </div>
 
           {/* Offline / Error Diagnostic Banner */}
           {error && (
-            <div className="mx-auto max-w-3xl rounded-3xl border border-rose-500/40 bg-rose-950/50 p-6 text-xs text-rose-200 backdrop-blur-xl shadow-2xl space-y-3">
-              <div className="flex items-center gap-2 text-rose-400 font-bold text-sm">
+            <div className="mx-auto max-w-3xl rounded-3xl border border-rose-200 bg-rose-50 p-6 text-xs text-rose-800 shadow-xl space-y-3">
+              <div className="flex items-center gap-2 text-rose-600 font-bold text-sm">
                 <WifiOff className="h-5 w-5" />
                 <span>AI Diagnostic Engine Offline / Service Notice:</span>
               </div>
-              <p className="leading-relaxed bg-black/30 p-3.5 rounded-xl font-mono text-[11px] text-rose-300">
+              <p className="leading-relaxed bg-white/80 border border-rose-200 p-3.5 rounded-xl font-mono text-[11px] text-rose-700">
                 {error}
               </p>
               <div className="flex items-center justify-between pt-1">
-                <span className="text-[11px] text-slate-400">
+                <span className="text-[11px] text-slate-500">
                   Please verify your network connection or try selecting a Quick Demo Profile below.
                 </span>
                 <button
                   onClick={() => setError(null)}
-                  className="rounded-lg bg-rose-600/30 px-3 py-1 text-xs font-semibold text-white hover:bg-rose-600/50 transition-colors"
+                  className="rounded-lg bg-rose-600 px-3 py-1 text-xs font-semibold text-white hover:bg-rose-700 transition-colors shadow-xs"
                 >
                   Dismiss
                 </button>

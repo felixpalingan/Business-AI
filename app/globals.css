@@ -5,14 +5,14 @@
 @tailwind utilities;
 
 :root {
-  --background: 350 70% 3%;
-  --foreground: 0 0% 98%;
+  --background: 210 40% 98%;
+  --foreground: 222.2 84% 4.9%;
 
-  --card: 350 60% 5%;
-  --card-foreground: 0 0% 98%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
 
-  --popover: 350 70% 3%;
-  --popover-foreground: 0 0% 98%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
 
   --primary: 350 100% 30%; /* USC Cardinal Red #990000 */
   --primary-foreground: 0 0% 100%;
@@ -20,17 +20,17 @@
   --secondary: 45 100% 50%; /* USC Gold #FFCC00 */
   --secondary-foreground: 0 0% 10%;
 
-  --muted: 350 20% 15%;
-  --muted-foreground: 215 20.2% 65.1%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
 
-  --accent: 217 91% 60%; /* OK OCE Blue */
-  --accent-foreground: 0 0% 100%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
 
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
 
-  --border: 350 30% 18%;
-  --input: 350 30% 18%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
   --ring: 350 100% 30%;
 
   --radius: 0.75rem;
@@ -41,8 +41,8 @@
 }
 
 body {
-  color: hsl(var(--foreground));
-  background: radial-gradient(circle at 50% 0%, #200407 0%, #0a0204 60%, #030102 100%);
+  color: #0f172a;
+  background: #f8fafc;
   min-height: 100vh;
   font-family: var(--font-inter);
   overflow-x: hidden;
@@ -53,26 +53,26 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   letter-spacing: -0.02em;
 }
 
-/* Glassmorphism Styles */
+/* Light Glassmorphism Styles */
 .glass-card {
-  background: rgba(28, 8, 12, 0.65);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
 }
 
 .glass-card-hover {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .glass-card-hover:hover {
-  border-color: rgba(153, 0, 0, 0.5);
+  border-color: rgba(153, 0, 0, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 12px 36px 0 rgba(153, 0, 0, 0.25);
+  box-shadow: 0 12px 36px 0 rgba(153, 0, 0, 0.08);
 }
 
 .glow-gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #ffcc00 45%, #990000 100%);
+  background: linear-gradient(135deg, #990000 0%, #dc2626 50%, #d97706 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -85,20 +85,20 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   background: linear-gradient(135deg, #800000 0%, #b30000 50%, #e6b800 100%);
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar for Light Theme */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(10, 2, 4, 0.6);
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(153, 0, 0, 0.4);
+  background: rgba(153, 0, 0, 0.25);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 204, 0, 0.7);
+  background: rgba(153, 0, 0, 0.5);
 }
 
 /* Print / PDF Styles */

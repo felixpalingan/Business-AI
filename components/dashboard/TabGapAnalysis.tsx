@@ -71,16 +71,16 @@ export function TabGapAnalysis({ diagnostic }: TabGapAnalysisProps) {
       {/* Gap Analysis Matrix Table */}
       <div className="gap-card">
         <GlowCard glowColor="indigo">
-          <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
             <div className="flex items-center gap-2">
-              <div className="rounded-lg bg-rose-500/20 p-1.5 text-rose-400">
+              <div className="rounded-lg bg-rose-100 p-1.5 text-rose-700">
                 <AlertOctagon className="h-4 w-4" />
               </div>
-              <h3 className="text-sm font-bold text-white font-heading">
+              <h3 className="text-sm font-bold text-slate-900 font-heading">
                 Comprehensive Gap Analysis & Priority Matrix
               </h3>
             </div>
-            <span className="text-[11px] font-semibold text-slate-400">
+            <span className="text-[11px] font-semibold text-slate-500">
               Ranked by Urgency & ROI
             </span>
           </div>
@@ -88,7 +88,7 @@ export function TabGapAnalysis({ diagnostic }: TabGapAnalysisProps) {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-white/10 text-slate-400">
+                <tr className="border-b border-slate-200 text-slate-500">
                   <th className="pb-3 font-semibold">Diagnostic Pillar</th>
                   <th className="pb-3 font-semibold">Identified Vulnerability</th>
                   <th className="pb-3 font-semibold">Priority</th>
@@ -97,41 +97,41 @@ export function TabGapAnalysis({ diagnostic }: TabGapAnalysisProps) {
                   <th className="pb-3 font-semibold text-right">Expected ROI</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-slate-100">
                 {criticalGaps.map((gap, idx) => {
                   const isP0 = gap.severity.includes("Critical") || gap.severity.includes("P0");
                   const isP1 = gap.severity.includes("High") || gap.severity.includes("P1");
 
                   return (
-                    <tr key={idx} className="text-slate-200 hover:bg-slate-900/40">
+                    <tr key={idx} className="text-slate-700 hover:bg-slate-50/80">
                       <td className="py-3 pr-2">
-                        <span className="rounded-md bg-slate-800 px-2 py-0.5 text-[10px] font-semibold text-slate-300">
+                        <span className="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-700 border border-slate-200">
                           {gap.pillar}
                         </span>
                       </td>
-                      <td className="py-3 pr-4 font-medium text-white max-w-xs">
+                      <td className="py-3 pr-4 font-medium text-slate-900 max-w-xs">
                         {gap.issue}
                       </td>
                       <td className="py-3 pr-2">
                         <span
                           className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
                             isP0
-                              ? "bg-rose-500/20 text-rose-300 border border-rose-500/30"
+                              ? "bg-rose-50 text-rose-700 border border-rose-200"
                               : isP1
-                              ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
-                              : "bg-red-500/20 text-red-300 border border-red-500/30"
+                              ? "bg-amber-50 text-amber-800 border border-amber-200"
+                              : "bg-red-50 text-red-700 border border-red-200"
                           }`}
                         >
                           {gap.severity}
                         </span>
                       </td>
-                      <td className="py-3 pr-4 text-slate-300 max-w-sm leading-relaxed">
+                      <td className="py-3 pr-4 text-slate-600 max-w-sm leading-relaxed">
                         {gap.actionableFix}
                       </td>
-                      <td className="py-3 pr-2 text-red-300 whitespace-nowrap">
+                      <td className="py-3 pr-2 text-red-700 font-semibold whitespace-nowrap">
                         {gap.estimatedTimeToSolve}
                       </td>
-                      <td className="py-3 text-right font-bold text-emerald-400 whitespace-nowrap">
+                      <td className="py-3 text-right font-bold text-emerald-700 whitespace-nowrap">
                         {gap.expectedBusinessImpact}
                       </td>
                     </tr>
@@ -144,17 +144,17 @@ export function TabGapAnalysis({ diagnostic }: TabGapAnalysisProps) {
       </div>
 
       {/* 30-Day Turnaround & Remediation Sprint */}
-      <div className="gap-card rounded-3xl border border-white/10 bg-slate-900/80 p-6 md:p-8 backdrop-blur-2xl shadow-2xl">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-white/10 pb-5">
+      <div className="gap-card rounded-3xl border border-slate-200 bg-white p-6 md:p-8 shadow-xl">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-slate-100 pb-5">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700 border border-emerald-200">
               <Calendar className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white font-heading md:text-lg">
+              <h3 className="text-base font-bold text-slate-900 font-heading md:text-lg">
                 30-Day Operational Turnaround & Remediation Sprint
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500">
                 Chronological action plan to fix critical leaks before scaling or entering OK OCE Mentorship.
               </p>
             </div>
@@ -162,13 +162,13 @@ export function TabGapAnalysis({ diagnostic }: TabGapAnalysisProps) {
 
           {/* Progress Bar */}
           <div className="flex items-center gap-3">
-            <div className="w-36 rounded-full bg-slate-800 h-2.5 overflow-hidden">
+            <div className="w-36 rounded-full bg-slate-100 h-2.5 overflow-hidden border border-slate-200">
               <div
-                className="h-full bg-gradient-to-r from-emerald-500 to-red-500 transition-all duration-300"
+                className="h-full bg-gradient-to-r from-emerald-500 to-red-600 transition-all duration-300"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
-            <span className="text-xs font-bold text-emerald-400">
+            <span className="text-xs font-bold text-emerald-700">
               {doneTasks}/{totalTasks} Completed ({progressPercent}%)
             </span>
           </div>
@@ -178,12 +178,12 @@ export function TabGapAnalysis({ diagnostic }: TabGapAnalysisProps) {
           {turnaroundPlan.phases.map((phase, pIdx) => (
             <div
               key={pIdx}
-              className="rounded-2xl border border-white/5 bg-slate-950/60 p-4 space-y-3 flex flex-col justify-between"
+              className="rounded-2xl border border-slate-200 bg-slate-50/70 p-4 space-y-3 flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between border-b border-white/5 pb-2 mb-3">
-                  <span className="text-xs font-bold text-red-300">{phase.phaseTitle}</span>
-                  <span className="rounded-full bg-slate-800 px-2 py-0.5 text-[10px] font-semibold text-slate-400">
+                <div className="flex items-center justify-between border-b border-slate-200 pb-2 mb-3">
+                  <span className="text-xs font-bold text-red-700">{phase.phaseTitle}</span>
+                  <span className="rounded-full bg-white border border-slate-200 px-2 py-0.5 text-[10px] font-semibold text-slate-600 shadow-2xs">
                     {phase.timeframe}
                   </span>
                 </div>
@@ -199,32 +199,32 @@ export function TabGapAnalysis({ diagnostic }: TabGapAnalysisProps) {
                         onClick={() => toggleTask(taskId)}
                         className={`group flex cursor-pointer items-start gap-2.5 rounded-xl border p-3 transition-all ${
                           isChecked
-                            ? "border-emerald-500/30 bg-emerald-950/20 text-slate-400"
-                            : "border-white/5 bg-slate-900/60 hover:border-slate-700 text-slate-200"
+                            ? "border-emerald-200 bg-emerald-50 text-slate-500"
+                            : "border-slate-200 bg-white hover:border-red-300 text-slate-800 shadow-2xs"
                         }`}
                       >
                         <button
                           type="button"
-                          className="mt-0.5 shrink-0 text-slate-400 group-hover:text-emerald-400"
+                          className="mt-0.5 shrink-0 text-slate-400 group-hover:text-emerald-600"
                         >
                           {isChecked ? (
-                            <CheckSquare className="h-4 w-4 text-emerald-400" />
+                            <CheckSquare className="h-4 w-4 text-emerald-600" />
                           ) : (
-                            <Square className="h-4 w-4" />
+                            <Square className="h-4 w-4 text-slate-400" />
                           )}
                         </button>
                         <div className="space-y-1">
                           <p
                             className={`text-xs font-semibold ${
-                              isChecked ? "line-through text-slate-400" : "text-slate-100"
+                              isChecked ? "line-through text-slate-400" : "text-slate-900"
                             }`}
                           >
                             {task.taskTitle}
                           </p>
-                          <p className="text-[11px] text-slate-400 leading-snug">
+                          <p className="text-[11px] text-slate-600 leading-snug">
                             {task.actionDetails}
                           </p>
-                          <p className="text-[10px] text-emerald-400 pt-0.5">
+                          <p className="text-[10px] text-emerald-700 font-semibold pt-0.5">
                             <strong>Deliverable:</strong> {task.deliverable}
                           </p>
                         </div>

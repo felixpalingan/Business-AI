@@ -25,14 +25,14 @@ export function ViabilityGaugeChart({ score, verdict }: ViabilityGaugeChartProps
 
   // Determine color theme
   let strokeColor = "#10b981"; // Emerald
-  let glowColor = "rgba(16, 185, 129, 0.4)";
+  let glowColor = "rgba(16, 185, 129, 0.25)";
 
   if (score < 5) {
     strokeColor = "#f43f5e"; // Rose
-    glowColor = "rgba(244, 63, 94, 0.4)";
+    glowColor = "rgba(244, 63, 94, 0.25)";
   } else if (score < 7.5) {
     strokeColor = "#f59e0b"; // Amber
-    glowColor = "rgba(245, 158, 11, 0.4)";
+    glowColor = "rgba(245, 158, 11, 0.25)";
   }
 
   return (
@@ -46,7 +46,7 @@ export function ViabilityGaugeChart({ score, verdict }: ViabilityGaugeChartProps
               <stop offset="100%" stopColor="#10b981" />
             </linearGradient>
             <filter id="gaugeGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="0" stdDeviation="6" floodColor={glowColor} />
+              <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor={glowColor} />
             </filter>
           </defs>
 
@@ -54,7 +54,7 @@ export function ViabilityGaugeChart({ score, verdict }: ViabilityGaugeChartProps
           <path
             d="M 25 105 A 75 75 0 0 1 175 105"
             fill="none"
-            stroke="rgba(255, 255, 255, 0.08)"
+            stroke="rgba(0, 0, 0, 0.08)"
             strokeWidth="14"
             strokeLinecap="round"
           />
@@ -78,21 +78,23 @@ export function ViabilityGaugeChart({ score, verdict }: ViabilityGaugeChartProps
           <div className="flex items-baseline">
             <span
               ref={numberRef}
-              className="text-4xl font-extrabold tracking-tight text-white font-heading"
+              className="text-4xl font-extrabold tracking-tight text-slate-900 font-heading"
             >
               {score.toFixed(1)}
             </span>
-            <span className="ml-1 text-sm font-semibold text-slate-400">/ 10</span>
+            <span className="ml-1 text-sm font-semibold text-slate-500">/ 10</span>
           </div>
-          <span className="mt-1 text-[11px] font-medium uppercase tracking-wider text-slate-400">
-            Viability Score
+          <span className="mt-1 text-[11px] font-medium uppercase tracking-wider text-slate-500">
+            Health Score
           </span>
         </div>
       </div>
 
-      <p className="mt-1 max-w-[260px] text-center text-xs font-medium text-slate-300">
+      <p className="mt-1 max-w-[260px] text-center text-xs font-medium text-slate-600">
         {verdict}
       </p>
     </div>
   );
 }
+
+export default ViabilityGaugeChart;

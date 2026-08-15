@@ -33,10 +33,10 @@ export function FlowField() {
     }> = [];
 
     const colors = [
-      "rgba(99, 102, 241, 0.4)",  // Indigo
-      "rgba(139, 92, 246, 0.35)", // Violet
-      "rgba(6, 182, 212, 0.3)",   // Cyan
-      "rgba(16, 185, 129, 0.25)", // Emerald
+      "rgba(153, 0, 0, 0.15)",  // USC Cardinal Red
+      "rgba(255, 204, 0, 0.25)", // USC Gold
+      "rgba(2, 132, 199, 0.15)",  // OK OCE Blue
+      "rgba(220, 38, 38, 0.12)", // OK OCE Crimson
     ];
 
     const numParticles = 65;
@@ -57,7 +57,7 @@ export function FlowField() {
 
     const render = () => {
       time += 0.004;
-      ctx.fillStyle = "rgba(9, 10, 18, 0.2)";
+      ctx.fillStyle = "rgba(248, 250, 252, 0.25)";
       ctx.fillRect(0, 0, width, height);
 
       particles.forEach((p) => {
@@ -109,7 +109,7 @@ export function FlowField() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none absolute inset-0 h-full w-full opacity-65"
+      className="pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-60"
     />
   );
 }

@@ -38,36 +38,39 @@ export function HistoryDrawer({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-slate-950/70 backdrop-blur-sm animate-fadeIn no-print">
-      <div className="relative flex h-full w-full max-w-md flex-col border-l border-white/10 bg-slate-900 shadow-2xl">
+    <div className="fixed inset-0 z-50 flex justify-end bg-slate-900/40 backdrop-blur-xs animate-fadeIn no-print">
+      <div className="relative flex h-full w-full max-w-md flex-col border-l border-slate-200 bg-white shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
+        <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4 bg-slate-50">
           <div className="flex items-center gap-2">
-            <div className="rounded-lg bg-red-500/20 p-2 text-red-400">
+            <div className="rounded-lg bg-red-100 p-2 text-red-700">
               <History className="h-4 w-4" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white font-heading">
+              <h3 className="text-base font-bold text-slate-900 font-heading">
                 Diagnostic History
               </h3>
-              <p className="text-xs text-slate-400">Past business health assessments</p>
+              <p className="text-xs text-slate-500">Past business health assessments</p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white transition-colors"
+            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-200 hover:text-slate-700 transition-colors"
           >
-            <X className="h-4 w-4" />
+            <X className="h-5 w-5" />
           </button>
         </div>
 
-        {/* Content List */}
+        {/* History List */}
         <div className="flex-1 overflow-y-auto p-6 space-y-3">
           {historyList.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-16 text-center text-slate-400 space-y-3">
-              <Clock className="h-8 w-8 text-slate-600" />
-              <p className="text-xs">No past business diagnostics found.</p>
+            <div className="flex flex-col items-center justify-center py-16 text-center text-slate-500">
+              <History className="h-10 w-10 text-slate-300 mb-3" />
+              <p className="text-sm font-medium text-slate-700">No Assessment History Found</p>
+              <p className="text-xs mt-1 text-slate-500 max-w-[220px]">
+                Your past business diagnostics will automatically be stored here.
+              </p>
             </div>
           ) : (
             historyList.map((item, idx) => (
@@ -77,30 +80,31 @@ export function HistoryDrawer({
                   onSelectDiagnostic(item);
                   onClose();
                 }}
-                className="group cursor-pointer rounded-2xl border border-white/10 bg-slate-950/60 p-4 transition-all duration-200 hover:border-red-500/50 hover:bg-slate-950 hover:shadow-lg"
+                className="group flex cursor-pointer items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 p-4 transition-all hover:border-red-400 hover:bg-red-50/50 hover:shadow-sm"
               >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h4 className="text-sm font-bold text-white group-hover:text-red-300 transition-colors">
-                      {item.input?.businessName || "Business Diagnostic"}
-                    </h4>
-                    <p className="text-xs text-slate-400 mt-0.5 line-clamp-1">
-                      {item.msmeClassification?.category || item.input?.industrySector}
-                    </p>
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-slate-900 text-sm group-hover:text-red-700 transition-colors">
+                      {item.input?.businessName || "Unnamed Enterprise"}
+                    </span>
+                    <span className="rounded-full bg-red-100 px-2 py-0.5 text-[9px] font-bold text-red-700">
+                      Score: {item.executiveOverview?.overallHealthScore || 0}
+                    </span>
                   </div>
-                  <span className="flex items-center gap-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 text-[10px] font-bold text-emerald-400">
-                    <Sparkles className="h-3 w-3" />
-                    {item.executiveOverview?.overallHealthScore || 75}%
-                  </span>
+
+                  <p className="text-xs text-slate-600">
+                    {item.msmeClassification?.category || "MSME"} • {item.input?.industrySector}
+                  </p>
+
+                  <div className="flex items-center gap-1 text-[10px] text-slate-400">
+                    <Clock className="h-3 w-3" />
+                    <span>
+                      {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "Recent"}
+                    </span>
+                  </div>
                 </div>
 
-                <div className="mt-3 flex items-center justify-between border-t border-white/5 pt-2 text-[10px] text-slate-500">
-                  <span>{item.input?.industrySector}</span>
-                  <div className="flex items-center gap-1 text-red-400 group-hover:translate-x-0.5 transition-transform">
-                    <span>Open Report</span>
-                    <ChevronRight className="h-3 w-3" />
-                  </div>
-                </div>
+                <ChevronRight className="h-4 w-4 text-slate-400 group-hover:translate-x-1 group-hover:text-red-700 transition-all" />
               </div>
             ))
           )}
@@ -108,10 +112,11 @@ export function HistoryDrawer({
 
         {/* Footer */}
         {historyList.length > 0 && (
-          <div className="border-t border-white/10 p-4">
+          <div className="border-t border-slate-100 p-4 bg-slate-50 flex items-center justify-between">
+            <span className="text-xs text-slate-500">{historyList.length} assessment(s)</span>
             <button
               onClick={handleClearHistory}
-              className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-rose-500/20 bg-rose-950/20 py-2 text-xs font-semibold text-rose-400 hover:bg-rose-900/40 transition-colors"
+              className="flex items-center gap-1 text-xs font-semibold text-rose-600 hover:text-rose-700 transition-colors"
             >
               <Trash2 className="h-3.5 w-3.5" />
               <span>Clear History</span>

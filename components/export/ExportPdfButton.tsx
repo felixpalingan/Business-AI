@@ -26,17 +26,17 @@ export function ExportPdfButton({ ideaName }: ExportPdfButtonProps) {
     <button
       onClick={handleExportPdf}
       disabled={isExporting}
-      className="inline-flex items-center gap-2 rounded-xl border border-red-500/40 bg-red-600/20 px-4 py-2 text-xs font-bold text-red-200 backdrop-blur-md shadow-sm transition-all hover:bg-red-600 hover:text-white active:scale-95 disabled:opacity-50 whitespace-nowrap no-print"
-      title="Download Dashboard Analisis Bisnis Menjadi PDF"
+      className="inline-flex items-center gap-1.5 rounded-xl border border-red-200 bg-red-50 px-3.5 py-2 text-xs font-bold text-red-700 shadow-2xs transition-all hover:bg-red-700 hover:text-white active:scale-95 disabled:opacity-50 whitespace-nowrap no-print"
+      title="Download Full Diagnostic Audit to PDF"
     >
       {isExporting ? (
-        <Loader2 className="h-4 w-4 animate-spin text-red-300" />
+        <Loader2 className="h-3.5 w-3.5 animate-spin text-red-700" />
       ) : exported ? (
-        <Check className="h-4 w-4 text-emerald-400" />
+        <Check className="h-3.5 w-3.5 text-emerald-600" />
       ) : (
-        <Download className="h-4 w-4 text-red-400" />
+        <Download className="h-3.5 w-3.5 text-red-700" />
       )}
-      <span>{isExporting ? "Menyiapkan PDF..." : exported ? "PDF Siap!" : "Ekspor PDF"}</span>
+      <span>{isExporting ? "Preparing PDF..." : exported ? "PDF Ready!" : "Export PDF"}</span>
     </button>
   );
 }

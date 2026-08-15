@@ -36,9 +36,9 @@ export function RadarMetricsChart({ metrics }: RadarMetricsProps) {
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="rounded-lg border border-white/10 bg-slate-900/90 p-2.5 shadow-xl backdrop-blur-md">
-          <p className="text-xs font-semibold text-white">{payload[0].payload.subject}</p>
-          <p className="text-xs text-red-400 font-bold">Score: {payload[0].value}/100</p>
+        <div className="rounded-xl border border-slate-200 bg-white p-2.5 shadow-xl">
+          <p className="text-xs font-bold text-slate-900">{payload[0].payload.subject}</p>
+          <p className="text-xs text-red-700 font-bold">Score: {payload[0].value}/100</p>
         </div>
       );
     }
@@ -50,35 +50,37 @@ export function RadarMetricsChart({ metrics }: RadarMetricsProps) {
       <div className="h-64 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart cx="50%" cy="50%" outerRadius="75%" data={data}>
-            <PolarGrid stroke="rgba(255, 255, 255, 0.12)" />
+            <PolarGrid stroke="rgba(0, 0, 0, 0.08)" />
             <PolarAngleAxis
               dataKey="subject"
-              tick={{ fill: "#94a3b8", fontSize: 11, fontWeight: 500 }}
+              tick={{ fill: "#334155", fontSize: 11, fontWeight: 600 }}
             />
             <PolarRadiusAxis
               angle={30}
               domain={[0, 100]}
               tick={{ fill: "#64748b", fontSize: 9 }}
-              stroke="rgba(255, 255, 255, 0.1)"
+              stroke="rgba(0, 0, 0, 0.06)"
             />
             <Tooltip content={<CustomTooltip />} />
             <Radar
-              name="Idea Score"
+              name="Health Score"
               dataKey="score"
-              stroke="#6366f1"
-              strokeWidth={2}
-              fill="#6366f1"
-              fillOpacity={0.45}
+              stroke="#990000"
+              strokeWidth={2.5}
+              fill="#990000"
+              fillOpacity={0.25}
             />
           </RadarChart>
         </ResponsiveContainer>
       </div>
 
       {metrics.summaryVerdict && (
-        <p className="mt-1 text-center text-xs text-slate-400 max-w-sm">
+        <p className="mt-2 text-center text-xs font-semibold text-slate-600">
           {metrics.summaryVerdict}
         </p>
       )}
     </div>
   );
 }
+
+export default RadarMetricsChart;

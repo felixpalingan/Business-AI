@@ -53,8 +53,8 @@ export default function SharedDiagnosticPage() {
   if (loading) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-3">
-        <Loader2 className="h-8 w-8 animate-spin text-indigo-400" />
-        <p className="text-xs text-slate-400">Loading OK OCE Business Diagnostic Report...</p>
+        <Loader2 className="h-8 w-8 animate-spin text-red-700" />
+        <p className="text-xs text-slate-500">Loading OK OCE Business Diagnostic Report...</p>
       </div>
     );
   }
@@ -62,16 +62,16 @@ export default function SharedDiagnosticPage() {
   if (error || !diagnostic) {
     return (
       <div className="mx-auto max-w-xl py-20 px-4 text-center space-y-4">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/20 text-amber-400">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-800">
           <AlertCircle className="h-6 w-6" />
         </div>
-        <h2 className="text-xl font-bold text-white font-heading">
+        <h2 className="text-xl font-bold text-slate-900 font-heading">
           Report Not Found
         </h2>
-        <p className="text-xs text-slate-400">{error}</p>
+        <p className="text-xs text-slate-500">{error}</p>
         <button
           onClick={() => router.push("/")}
-          className="brand-gradient brand-gradient-hover inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-bold text-white"
+          className="brand-gradient brand-gradient-hover inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-bold text-white shadow-md"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Return to Diagnostic Home</span>
@@ -85,12 +85,12 @@ export default function SharedDiagnosticPage() {
       <div className="mb-4 flex items-center justify-between no-print">
         <button
           onClick={() => router.push("/")}
-          className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-slate-900/60 px-3.5 py-1.5 text-xs font-semibold text-slate-300 hover:text-white transition-all"
+          className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 shadow-2xs transition-all"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           <span>Assess Your Own Business</span>
         </button>
-        <span className="text-[11px] text-indigo-300 font-semibold bg-indigo-950/40 border border-indigo-500/30 rounded-full px-3 py-0.5">
+        <span className="text-[11px] text-red-700 font-semibold bg-red-50 border border-red-200 rounded-full px-3 py-0.5">
           OK OCE Shared Mentoring Report
         </span>
       </div>

@@ -15,22 +15,22 @@ export function RiskAlertCard({ riskItem, index }: RiskAlertCardProps) {
 
   const severityConfig = {
     Critical: {
-      badgeBg: "bg-rose-500/10 text-rose-400 border-rose-500/30",
-      accentBg: "border-l-rose-500",
+      badgeBg: "bg-rose-50 text-rose-700 border-rose-200",
+      accentBg: "border-l-rose-600",
       icon: Flame,
-      iconColor: "text-rose-400",
+      iconColor: "text-rose-600",
     },
     High: {
-      badgeBg: "bg-amber-500/10 text-amber-400 border-amber-500/30",
+      badgeBg: "bg-amber-50 text-amber-800 border-amber-200",
       accentBg: "border-l-amber-500",
       icon: AlertTriangle,
-      iconColor: "text-amber-400",
+      iconColor: "text-amber-600",
     },
     Medium: {
-      badgeBg: "bg-red-500/10 text-red-400 border-red-500/30",
-      accentBg: "border-l-red-500",
+      badgeBg: "bg-red-50 text-red-700 border-red-200",
+      accentBg: "border-l-red-600",
       icon: AlertTriangle,
-      iconColor: "text-red-400",
+      iconColor: "text-red-700",
     },
   };
 
@@ -40,19 +40,19 @@ export function RiskAlertCard({ riskItem, index }: RiskAlertCardProps) {
   return (
     <div
       className={cn(
-        "group relative overflow-hidden rounded-xl border border-white/10 bg-slate-900/70 p-4 transition-all duration-300 border-l-4",
+        "group relative overflow-hidden rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 border-l-4",
         config.accentBg,
-        "hover:border-slate-700 hover:bg-slate-900/90"
+        "hover:border-slate-300 hover:shadow-md"
       )}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3">
-          <div className={cn("mt-0.5 rounded-lg p-1.5 bg-slate-800", config.iconColor)}>
+          <div className={cn("mt-0.5 rounded-lg p-1.5 bg-slate-100", config.iconColor)}>
             <IconComponent className="h-4 w-4" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold text-slate-400">Risk #{index + 1}</span>
+              <span className="text-xs font-semibold text-slate-500">Risk #{index + 1}</span>
               <span
                 className={cn(
                   "inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider",
@@ -62,28 +62,32 @@ export function RiskAlertCard({ riskItem, index }: RiskAlertCardProps) {
                 {riskItem.severity}
               </span>
             </div>
-            <h4 className="mt-1 text-sm font-semibold text-slate-100">{riskItem.risk}</h4>
+            <h4 className="mt-1 text-sm font-bold text-slate-900">{riskItem.risk}</h4>
           </div>
         </div>
 
         <button
           onClick={() => setExpanded(!expanded)}
-          className="rounded-md p-1 text-slate-400 transition-colors hover:bg-slate-800 hover:text-white"
-          aria-label="Toggle mitigation details"
+          className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
+          title={expanded ? "Hide Mitigation" : "Show Mitigation"}
         >
           {expanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
         </button>
       </div>
 
       {expanded && (
-        <div className="mt-3 rounded-lg border border-emerald-500/20 bg-emerald-950/20 p-3 pt-2 text-xs text-slate-300">
-          <div className="mb-1 flex items-center gap-1.5 font-medium text-emerald-400">
-            <ShieldCheck className="h-3.5 w-3.5" />
-            <span>Tactical Mitigation Strategy:</span>
+        <div className="mt-3 rounded-lg border border-emerald-200 bg-emerald-50/60 p-3 text-xs animate-fadeIn">
+          <div className="flex items-start gap-2">
+            <ShieldCheck className="mt-0.5 h-3.5 w-3.5 text-emerald-600 shrink-0" />
+            <div>
+              <span className="font-bold text-emerald-800">Tactical Mitigation Strategy:</span>
+              <p className="mt-0.5 text-slate-700 leading-relaxed">{riskItem.mitigationStrategy}</p>
+            </div>
           </div>
-          <p className="leading-relaxed text-slate-300">{riskItem.mitigationStrategy}</p>
         </div>
       )}
     </div>
   );
 }
+
+export default RiskAlertCard;

@@ -46,7 +46,7 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
       color: string;
     }> = [];
 
-    const colors = ["#6366f1", "#8b5cf6", "#06b6d4", "#10b981", "#ec4899"];
+    const colors = ["#990000", "#FFCC00", "#0284c7", "#10b981", "#dc2626"];
 
     for (let i = 0; i < 35; i++) {
       particles.push({
@@ -71,7 +71,7 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
 
           if (dist < 90) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(99, 102, 241, ${0.2 * (1 - dist / 90)})`;
+            ctx.strokeStyle = `rgba(153, 0, 0, ${0.15 * (1 - dist / 90)})`;
             ctx.lineWidth = 0.8;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -91,10 +91,7 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = p.color;
         ctx.fill();
-        ctx.shadowBlur = 0;
       });
 
       animationFrameId = requestAnimationFrame(render);
@@ -108,24 +105,24 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
   }, []);
 
   return (
-    <div className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-white/10 bg-slate-900/80 p-6 md:p-8 backdrop-blur-2xl shadow-2xl space-y-6">
-      {/* Anime.js Background Canvas */}
-      <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 h-full w-full opacity-40" />
+    <div className="relative mx-auto max-w-2xl overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 md:p-8 shadow-2xl space-y-6">
+      {/* Background Canvas */}
+      <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 h-full w-full opacity-30" />
 
       <div className="relative z-10 text-center space-y-2">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-red-600/30 text-red-400 border border-red-500/40">
-          <Sparkles className="h-6 w-6 animate-spin-slow" />
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-red-100 text-red-700 border border-red-200 shadow-xs">
+          <Sparkles className="h-6 w-6 animate-spin" style={{ animationDuration: "3s" }} />
         </div>
-        <h3 className="text-xl font-bold text-white font-heading">
-          Diagnosing Enterprise Health: <span className="text-red-400">{ideaName}</span>
+        <h3 className="text-xl font-bold text-slate-900 font-heading">
+          Diagnosing Enterprise Health: <span className="text-red-700">{ideaName}</span>
         </h3>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate-500">
           OK OCE AI Diagnostic Specialist is evaluating financial, operational, and regulatory health...
         </p>
       </div>
 
       {/* Progress Steps */}
-      <div className="relative z-10 space-y-3 border-t border-white/10 pt-4">
+      <div className="relative z-10 space-y-3 border-t border-slate-100 pt-4">
         {steps.map((step, idx) => {
           const isDone = idx < activeStep;
           const isCurrent = idx === activeStep;
@@ -136,29 +133,29 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
               key={idx}
               className={`flex items-start gap-3 rounded-2xl border p-3.5 transition-all duration-300 ${
                 isCurrent
-                  ? "border-red-500/60 bg-red-950/40 shadow-lg shadow-red-500/10 scale-[1.01]"
+                  ? "border-red-500 bg-red-50/80 shadow-md ring-1 ring-red-500 scale-[1.01]"
                   : isDone
-                  ? "border-emerald-500/30 bg-emerald-950/20 text-slate-400"
-                  : "border-white/5 bg-slate-950/40 opacity-40"
+                  ? "border-emerald-200 bg-emerald-50 text-slate-600"
+                  : "border-slate-100 bg-slate-50 opacity-50"
               }`}
             >
               <div
                 className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl ${
                   isCurrent
-                    ? "bg-red-600 text-white"
+                    ? "bg-red-700 text-white shadow-xs"
                     : isDone
-                    ? "bg-emerald-500/20 text-emerald-400"
-                    : "bg-slate-800 text-slate-500"
+                    ? "bg-emerald-100 text-emerald-700"
+                    : "bg-slate-200 text-slate-400"
                 }`}
               >
                 {isDone ? <CheckCircle2 className="h-4 w-4" /> : <StepIcon className="h-4 w-4" />}
               </div>
 
               <div className="space-y-0.5">
-                <p className={`text-xs font-bold ${isCurrent ? "text-white" : isDone ? "text-slate-300" : "text-slate-500"}`}>
+                <p className={`text-xs font-bold ${isCurrent ? "text-red-900" : isDone ? "text-slate-800" : "text-slate-500"}`}>
                   {step.title}
                 </p>
-                <p className="text-[11px] text-slate-400">{step.desc}</p>
+                <p className="text-[11px] text-slate-500">{step.desc}</p>
               </div>
             </div>
           );

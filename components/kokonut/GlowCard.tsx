@@ -28,15 +28,17 @@ export function GlowCard({
   return (
     <div
       className={cn(
-        "relative rounded-2xl border border-white/10 bg-slate-900/60 p-6 backdrop-blur-xl transition-all duration-300",
-        hoverEffect && "hover:-translate-y-1 hover:shadow-2xl",
+        "relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm backdrop-blur-xl transition-all duration-300",
+        hoverEffect && "hover:-translate-y-0.5 hover:shadow-md",
         hoverEffect && glowBorderClasses[glowColor],
         className
       )}
       {...props}
     >
-      <div className="absolute -top-px left-10 right-10 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      <div className="absolute -top-px left-10 right-10 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
       {children}
     </div>
   );
 }
+
+export default GlowCard;

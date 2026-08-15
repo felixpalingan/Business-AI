@@ -6,26 +6,27 @@ import { cn } from "@/lib/utils";
 
 interface ViabilityBadgeProps {
   score: number;
+  verdict?: string;
   className?: string;
 }
 
-export function ViabilityBadge({ score, className }: ViabilityBadgeProps) {
-  let colorStyle = "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
+export function ViabilityBadge({ score, verdict, className }: ViabilityBadgeProps) {
+  let colorStyle = "bg-emerald-50 text-emerald-800 border-emerald-200";
   let icon = CheckCircle2;
-  let label = "High Viability";
+  let label = verdict || "Optimal Health";
 
   if (score < 5) {
-    colorStyle = "bg-rose-500/10 text-rose-400 border-rose-500/30";
+    colorStyle = "bg-rose-50 text-rose-800 border-rose-200";
     icon = AlertOctagon;
-    label = "Low Viability / High Risk";
+    label = verdict || "Critical Risk";
   } else if (score < 7.5) {
-    colorStyle = "bg-amber-500/10 text-amber-400 border-amber-500/30";
+    colorStyle = "bg-amber-50 text-amber-900 border-amber-200";
     icon = TrendingUp;
-    label = "Moderate Viability";
+    label = verdict || "Moderate Health";
   } else {
-    colorStyle = "bg-emerald-500/10 text-emerald-400 border-emerald-500/30";
+    colorStyle = "bg-emerald-50 text-emerald-800 border-emerald-200";
     icon = Sparkles;
-    label = "Excellent Opportunity";
+    label = verdict || "Scale Ready";
   }
 
   const IconComp = icon;
@@ -33,12 +34,12 @@ export function ViabilityBadge({ score, className }: ViabilityBadgeProps) {
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold backdrop-blur-md",
+        "inline-flex items-center gap-2 rounded-2xl border px-4 py-2 text-xs font-bold shadow-xs",
         colorStyle,
         className
       )}
     >
-      <IconComp className="h-3.5 w-3.5" />
+      <IconComp className="h-4 w-4 shrink-0" />
       <span>{label}</span>
     </div>
   );
@@ -53,28 +54,32 @@ export function StatChip({
   label: string;
   value: string | number;
   icon?: any;
-  variant?: "default" | "emerald" | "amber" | "indigo" | "rose";
+  variant?: "default" | "emerald" | "amber" | "indigo" | "rose" | "cyan" | "purple";
 }) {
   const variantStyles = {
-    default: "border-white/10 bg-slate-800/60 text-slate-300",
-    emerald: "border-emerald-500/30 bg-emerald-950/30 text-emerald-300",
-    amber: "border-amber-500/30 bg-amber-950/30 text-amber-300",
-    indigo: "border-red-500/30 bg-red-950/30 text-red-300",
-    rose: "border-rose-500/30 bg-rose-950/30 text-rose-300",
+    default: "border-slate-200 bg-slate-50 text-slate-800",
+    emerald: "border-emerald-200 bg-emerald-50 text-emerald-800",
+    amber: "border-amber-200 bg-amber-50 text-amber-900",
+    indigo: "border-red-200 bg-red-50 text-red-800",
+    rose: "border-rose-200 bg-rose-50 text-rose-800",
+    cyan: "border-sky-200 bg-sky-50 text-sky-800",
+    purple: "border-purple-200 bg-purple-50 text-purple-800",
   };
 
   return (
     <div
       className={cn(
-        "flex items-center gap-2.5 rounded-xl border px-3.5 py-2 text-xs font-medium backdrop-blur-md",
-        variantStyles[variant]
+        "flex items-center gap-2.5 rounded-xl border px-3.5 py-2 text-xs font-medium shadow-2xs",
+        variantStyles[variant] || variantStyles.default
       )}
     >
-      {Icon && <Icon className="h-4 w-4 opacity-80" />}
-      <div className="flex flex-col">
-        <span className="text-[10px] uppercase tracking-wider text-slate-400">{label}</span>
-        <span className="font-semibold text-slate-100">{value}</span>
+      {Icon && <Icon className="h-4 w-4 opacity-80 shrink-0" />}
+      <div className="flex flex-col min-w-0">
+        <span className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold truncate">{label}</span>
+        <span className="font-bold text-slate-900 truncate">{value}</span>
       </div>
     </div>
   );
 }
+
+export default ViabilityBadge;

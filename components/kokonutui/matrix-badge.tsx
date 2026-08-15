@@ -18,25 +18,25 @@ export function MatrixBadge({
   className,
 }: MatrixBadgeProps) {
   const variantStyles = {
-    indigo: "border-red-500/30 bg-red-950/40 text-red-300 shadow-red-500/10",
-    emerald: "border-emerald-500/30 bg-emerald-950/40 text-emerald-300 shadow-emerald-500/10",
-    amber: "border-amber-500/30 bg-amber-950/40 text-amber-300 shadow-amber-500/10",
-    rose: "border-rose-500/30 bg-rose-950/40 text-rose-300 shadow-rose-500/10",
-    cyan: "border-cyan-500/30 bg-cyan-950/40 text-cyan-300 shadow-cyan-500/10",
+    indigo: "border-red-200 bg-red-50 text-red-700 shadow-xs",
+    emerald: "border-emerald-200 bg-emerald-50 text-emerald-700 shadow-xs",
+    amber: "border-amber-200 bg-amber-50 text-amber-800 shadow-xs",
+    rose: "border-rose-200 bg-rose-50 text-rose-700 shadow-xs",
+    cyan: "border-cyan-200 bg-cyan-50 text-cyan-700 shadow-xs",
   };
 
   const dotColors = {
-    indigo: "bg-red-400",
-    emerald: "bg-emerald-400",
-    amber: "bg-amber-400",
-    rose: "bg-rose-400",
-    cyan: "bg-cyan-400",
+    indigo: "bg-red-600",
+    emerald: "bg-emerald-600",
+    amber: "bg-amber-600",
+    rose: "bg-rose-600",
+    cyan: "bg-cyan-600",
   };
 
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold shadow-lg backdrop-blur-xl transition-all duration-300 hover:scale-105",
+        "inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold shadow-xs transition-all duration-300 hover:scale-105",
         variantStyles[variant],
         className
       )}
