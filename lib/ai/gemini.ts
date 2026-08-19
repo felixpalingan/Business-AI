@@ -148,40 +148,58 @@ Conform strictly to this JSON schema template:
 
 Return ONLY a pure JSON object conforming strictly to the requested schema. Ensure arrays have enough items as requested (e.g. 12 items for twelveMonthForecast).`;
 
-  const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent";
+  const candidateModels = [
+    "gemini-3.6-flash",
+    "gemini-3.5-flash",
+    "gemini-3.5-flash-lite",
+    "gemini-flash-latest"
+  ];
 
-  console.log(`📡 [OK OCE AI] Querying Google AI Studio (gemini-flash-latest)...`);
+  let rawText: string | null = null;
+  let lastErrorMessage = "";
 
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-goog-api-key": GEMINI_API_KEY,
-    },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: {
-        responseMimeType: "application/json",
-        temperature: 0.25,
-      },
-    }),
-  });
+  for (const model of candidateModels) {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+    console.log(`📡 [OK OCE AI] Querying Google AI Studio (${model})...`);
 
-  if (!response.ok) {
-    const errorJson = await response.json().catch(() => ({}));
-    const errorMessage = errorJson?.error?.message || response.statusText || `HTTP ${response.status}`;
-    console.error(`❌ [OK OCE AI] Google AI API Error: ${errorMessage}`);
-    throw new Error(`Google AI Studio Error: ${errorMessage}`);
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-goog-api-key": GEMINI_API_KEY,
+        },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            responseMimeType: "application/json",
+            temperature: 0.25,
+          },
+        }),
+      });
+
+      if (response.ok) {
+        const resultData = await response.json();
+        const output = resultData?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (output) {
+          rawText = output;
+          console.log(`✅ [OK OCE AI] Successfully generated diagnostic via [${model}]!`);
+          break;
+        }
+      } else {
+        const errorJson = await response.json().catch(() => ({}));
+        lastErrorMessage = errorJson?.error?.message || response.statusText || `HTTP ${response.status}`;
+        console.warn(`⚠️ [OK OCE AI] Model ${model} returned error (${response.status}): ${lastErrorMessage}. Trying fallback...`);
+      }
+    } catch (fetchErr: any) {
+      lastErrorMessage = fetchErr.message;
+      console.warn(`⚠️ [OK OCE AI] Network error connecting to ${model}: ${lastErrorMessage}. Trying fallback...`);
+    }
   }
-
-  const resultData = await response.json();
-  const rawText = resultData?.candidates?.[0]?.content?.parts?.[0]?.text;
 
   if (!rawText) {
-    throw new Error("No output received from Google AI Studio. Please retry.");
+    throw new Error(`Google AI Studio Error: ${lastErrorMessage || "Unable to reach diagnostic model. Please try again."}`);
   }
-
-  console.log(`✅ [OK OCE AI] Successfully received response from Google AI Studio!`);
 
   const parsedJson = JSON.parse(rawText);
   const validatedData = BusinessDiagnosticSchema.parse(parsedJson);

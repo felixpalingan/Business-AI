@@ -45,30 +45,52 @@ ${redFlags}
     const conversationHistory = messages.map((m: any) => `${m.role === "user" ? "USER (Business Owner)" : "OK OCE AI MENTOR"}: ${m.content}`).join("\n\n");
     const fullPrompt = `${systemPrompt}\n\n=== CONVERSATION HISTORY ===\n${conversationHistory}\n\nOK OCE AI MENTOR:`;
 
-    const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent";
+    const candidateModels = [
+      "gemini-3.6-flash",
+      "gemini-3.5-flash",
+      "gemini-3.5-flash-lite",
+      "gemini-flash-latest"
+    ];
 
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-goog-api-key": GEMINI_API_KEY,
-      },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: fullPrompt }] }],
-        generationConfig: {
-          temperature: 0.4,
-          maxOutputTokens: 4096,
-        },
-      }),
-    });
+    let replyText: string | null = null;
+    let lastError = "";
 
-    if (!response.ok) {
-      const errText = await response.text();
-      return NextResponse.json({ error: `Google AI Studio Error: ${errText}` }, { status: 500 });
+    for (const model of candidateModels) {
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-goog-api-key": GEMINI_API_KEY,
+          },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: fullPrompt }] }],
+            generationConfig: {
+              temperature: 0.4,
+              maxOutputTokens: 4096,
+            },
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          replyText = data?.candidates?.[0]?.content?.parts?.[0]?.text || null;
+          if (replyText) {
+            break;
+          }
+        } else {
+          lastError = await response.text();
+        }
+      } catch (err: any) {
+        lastError = err.message;
+      }
     }
 
-    const data = await response.json();
-    const replyText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Hello! I am ready to help you optimize your business health. What question do you have today?";
+    if (!replyText) {
+      return NextResponse.json({ error: `Google AI Studio Error: ${lastError || "High demand on Google servers. Please try again."}` }, { status: 500 });
+    }
 
     return NextResponse.json({ reply: replyText });
   } catch (error: any) {
