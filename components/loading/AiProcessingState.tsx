@@ -135,7 +135,7 @@ export function AiProcessingState({ ideaName }: AiProcessingStateProps) {
                 isCurrent
                   ? "border-red-500 bg-red-50/80 shadow-md ring-1 ring-red-500 scale-[1.01]"
                   : isDone
-                  ? "border-emerald-200 bg-emerald-50 text-slate-600"
+                  ? "border-emerald-200 bg-emerald-50 text-emerald-900"
                   : "border-slate-100 bg-slate-50 opacity-50"
               }`}
             >

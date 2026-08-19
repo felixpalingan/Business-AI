@@ -199,7 +199,7 @@ export function TabGapAnalysis({ diagnostic }: TabGapAnalysisProps) {
                         onClick={() => toggleTask(taskId)}
                         className={`group flex cursor-pointer items-start gap-2.5 rounded-xl border p-3 transition-all ${
                           isChecked
-                            ? "border-emerald-200 bg-emerald-50 text-slate-500"
+                            ? "border-emerald-200 bg-emerald-50 text-emerald-800"
                             : "border-slate-200 bg-white hover:border-red-300 text-slate-800 shadow-2xs"
                         }`}
                       >

@@ -217,7 +217,7 @@ How can I assist you with your 14-day action plan or operational roadmap today? 
               <button
                 key={idx}
                 onClick={() => handleSendMessage(promptText)}
-                className="flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-700 hover:border-red-400 hover:bg-red-50 hover:text-red-800 whitespace-nowrap transition-all shadow-2xs"
+                className="flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-700 hover:border-red-400 hover:bg-red-50/80 hover:text-red-900 whitespace-nowrap transition-all shadow-2xs"
               >
                 <MessageSquare className="h-3 w-3 text-red-700 shrink-0" />
                 <span>{promptText}</span>
