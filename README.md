@@ -1,180 +1,144 @@
 # OK OCE Business Diagnostic & Health Check Tool
 
-An AI-powered **Business Diagnostic & Health Check Tool** built for **OK OCE Indonesia** and **USCM**. This platform helps Indonesian MSMEs (Usaha Mikro, Kecil, dan Menengah) assess their business health, identify critical vulnerabilities, and receive tailored mentorship recommendations aligned with the official **7 TOP OK OCE Curriculum** and **Indonesian MSME Law (UU UMKM No. 20/2008 & PP No. 7/2021)**.
+An AI-powered **Enterprise Health Diagnostic & MSME Scaling Platform** built for **OK OCE Indonesia** and **USCM**. This platform empowers Indonesian MSMEs (*Usaha Mikro, Kecil, dan Menengah*) to perform a rigorous 5-pillar health check, identify critical operational bottlenecks, receive formal classification under **Indonesian MSME Law (*UU UMKM No. 20/2008 & PP No. 7/2021*)**, and unlock a personalized mentorship pathway mapped to the official **7 TOP OK OCE Curriculum**.
 
-![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=nextdotjs)
+![Next.js](https://img.shields.io/badge/Next.js-15.5-black?style=for-the-badge&logo=nextdotjs)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38bdf8?style=for-the-badge&logo=tailwindcss)
-![Gemini AI](https://img.shields.io/badge/Google_Gemini-Flash-8e44ad?style=for-the-badge&logo=google)
+![Gemini AI](https://img.shields.io/badge/Google_Gemini-3.6_Flash-8e44ad?style=for-the-badge&logo=google)
 ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ecf8e?style=for-the-badge&logo=supabase)
 ![Vercel](https://img.shields.io/badge/Vercel-Deployed-000?style=for-the-badge&logo=vercel)
 
-🌐 **Live Demo:** [business-ai-flame.vercel.app](https://business-ai-flame.vercel.app)
+🌐 **Live Production URL:** [business-ai-flame.vercel.app](https://business-ai-flame.vercel.app)
 
 ---
 
-## 🌟 Key Features
+## 🎨 Visual Identity & Design System
 
-### 1. Multi-Step Business Diagnostic Form (5-Pillar Assessment)
+The application features a clean, bright, professional enterprise interface designed with authentic institutional branding:
 
-A guided assessment wizard organized into **5 business pillars** to minimize cognitive overload:
-
-| Pillar | Area | Key Questions |
-|--------|------|---------------|
-| **P1** | Profile & Legality | Business name, industry sector, operating years, legal entity status, net assets, annual revenue |
-| **P2** | Financial Health | Transaction recording system, account separation, profit margin awareness, cash runway |
-| **P3** | Operations & HR | SOP maturity, inventory management, team size & structure |
-| **P4** | Marketing & Sales | Sales channels, digital presence, customer retention |
-| **P5** | Goals & Bottlenecks | Primary challenge, 12-month business target |
-
-- Quick-start **Demo Profiles** (e.g., *Kopi Nusantara Roastery*, *Batik Heritage Craft*) for instant preview.
-- Full Zod validation on both client and server.
-
-### 2. AI-Powered Business Diagnostic Engine (Google Gemini)
-
-Powered by the **Google Gemini API** (via REST), the engine generates a comprehensive diagnostic report:
-
-- **Overall Health Score (0–100)** with Donut Gauge Chart visualization.
-- **UU UMKM Classification Badge** — color-coded tier classification:
-  - 🟢 Usaha Mikro (Emerald) · 🔵 Usaha Kecil (Cyan) · 🟣 Usaha Menengah (Purple) · 🟡 Usaha Besar (Amber)
-- **6-Axis Business Pillar Radar Chart** — Legal & Compliance, Financial Management, Operational Efficiency, Digital Marketing, HR & Team Readiness, Scalability Potential.
-- **Red Flags & Critical Vulnerabilities** — Static Bento-style cards with severity badges (P0/P1/P2), tactical action plans, estimated fix timelines, and projected ROI.
-
-### 3. Gap Analysis & 30-Day Turnaround Plan
-
-- **Financial Diagnostics** — Burn rate, gross margin, cash flow verdict, debt leverage risk, revenue per employee.
-- **3-Phase Turnaround Plan** — Days 1–7 (Emergency Audit), Days 8–21 (SOP & Controls), Days 22–30 (Performance Tracking).
-- **12-Month Health Recovery & Revenue Forecast** — Interactive line/area chart showing projected health score and revenue improvements.
-
-### 4. OK OCE 7 TOP Mentorship Integration
-
-Recommendations are mapped to the official **7 Tahapan OK OCE (7 TOP)**:
-
-| Stage | Name | Description |
-|-------|------|-------------|
-| **P1** | Pendaftaran | Member registration & basic legal formalization |
-| **P2** | Pelatihan | Entrepreneurship & risk management training |
-| **P3** | Pendampingan | 1-on-1 mentoring with experienced practitioners |
-| **P4** | Perizinan | NIB, Halal, BPOM, & intellectual property licensing |
-| **P5** | Pemasaran | Digital marketing, B2B reseller, & export expansion |
-| **P6** | Pelaporan Keuangan | Standardized bookkeeping & P&L reporting |
-| **P7** | Permodalan | Banking readiness, KUR loans, & investor capital |
-
-- **Recommended Track** — AI selects the most impactful mentorship module.
-- **Pre-Mentoring Action Items** — Preparation tasks before meeting the mentor.
-- **Discussion Questions for Mentor** — Contextualized prompts for the coaching session.
-- **Direct WhatsApp Mentor Consultation** — 1-click CTA to contact an OK OCE mentor.
-
-### 5. Interactive AI Mentoring Assistant (In-App Chat)
-
-A conversational 1-on-1 coaching experience powered by Gemini AI:
-
-- **Automatic Context Ingestion** — The AI mentor reads the full diagnostic report (business name, MSME tier, health score, red flags, recommended OK OCE stage) before responding.
-- **Guided Quick-Prompt Chips** — Pre-built questions like:
-  - 💬 *"How can I separate personal and business bank accounts easily?"*
-  - 💬 *"Help me draft a simple daily SOP for my staff."*
-  - 💬 *"What steps do I need to advance from P4 (Licensing) to P7 (Capital Access)?"*
-- **Real-time Chat** — Streamed responses for an interactive coaching feel.
-
-### 6. Tactical Deliverables & PDF Export
-
-- **Standard Operating Procedure (SOP) Snippet** — AI-generated, ready-to-use operational checklist.
-- **Cash Flow Management Guideline** — Practical 1-page cash flow rules.
-- **Pitch / Financing Readiness Summary** — Executive summary for bank loan or investor meetings.
-- **1-Click PDF Export** — Print-ready diagnostic report for offline mentoring sessions.
+- **Theme**: Clean Bright Theme (pure white `#ffffff` and subtle slate `#f8fafc` backgrounds) with gentle glassmorphism cards and micro-animations.
+- **Brand Colors**:
+  - **USC Cardinal Red (`#990000` / `red-700`)**: Primary actions, active navigation states, and priority badges.
+  - **USC Gold (`#FFCC00` / `amber-500`)**: Highlight accents, concentric health rings, and chart focus areas.
+  - **OK OCE Blue & Crimson (`#0284c7` & `#dc2626`)**: 7 TOP curriculum stages, radar chart axes, and formal regulatory statuses.
+- **Typography Pairing**:
+  - **Display / Headings**: **Outfit** (modern geometric sans).
+  - **Body / Interface**: **DM Sans** (open counters and superior editorial clarity).
+  - **Metrics & Figures**: **JetBrains Mono** + `tabular-nums` for jitter-free score counters.
 
 ---
 
-## 🚀 Tech Stack
+## 🌟 Core Features & Modules
 
-| Layer | Technology |
-|-------|-----------|
-| **Frontend** | Next.js 15 (App Router), TypeScript, Tailwind CSS |
-| **UI Components** | Lucide Icons, Shadcn UI primitives, Kokonut UI cards, Glassmorphism dark theme |
-| **Charts** | Recharts (Gauge, Radar, Area/Bar financial charts) |
-| **Animations** | Anime.js (particle canvas, staggered reveals, count-up numbers), canvas-confetti |
-| **AI Engine** | Google Gemini API (REST via `X-goog-api-key`) + Zod Schema Validation |
-| **Database** | Supabase (PostgreSQL, `@supabase/supabase-js`, `@supabase/ssr`) |
-| **Hosting** | Vercel (automatic deployments from `main` branch) |
-| **Analytics** | `@vercel/analytics` |
+### 1. Multi-Step Assessment Wizard (5 Business Pillars)
+
+A structured, low-friction diagnostic form divided into 5 core business pillars:
+
+| Pillar | Area | Key Inputs |
+|:------:|------|------------|
+| **P1** | **Profile & Legality** | Business name, sector, operational years, legal entity (Perorangan, CV, PT, Koperasi), asset scale, revenue. |
+| **P2** | **Financial Rigor** | Bookkeeping method, account separation, gross profit margin awareness, working capital runway. |
+| **P3** | **Operations & HR** | SOP maturity, inventory leak tracking, workforce count, workflow bottlenecks. |
+| **P4** | **Marketing & Reach** | Acquisition channels, digital presence, repeat order retention rate. |
+| **P5** | **Goals & Vulnerabilities** | Primary strategic pain point, 12-month scaling targets. |
+
+- Includes instant **1-Click Demo Profiles** (*Kopi Nusantara Roastery*, *Batik Kreasi Mandiri*, *AutoTech Precision Parts*).
+- Full client-side and server-side schema validation via **Zod**.
 
 ---
 
-## 📂 Project Structure
+### 2. AI Diagnostic Engine with Multi-Model Fallback Pool
+
+Evaluates enterprise input via Google AI Studio with automated high-availability fallback (`gemini-3.6-flash` ➡️ `gemini-3.5-flash` ➡️ `gemini-3.5-flash-lite` ➡️ `gemini-flash-latest`) to eliminate 503 traffic spikes:
+
+- **Overall Health Index (0–100)** visualized via an interactive concentric gauge and activity rings.
+- **UU UMKM Legal Classification**:
+  - 🟢 **Usaha Mikro** (Revenue < Rp 2M / Assets < Rp 1M)
+  - 🔵 **Usaha Kecil** (Revenue Rp 2M - 15M / Assets Rp 1M - 5M)
+  - 🟣 **Usaha Menengah** (Revenue Rp 15M - 50M / Assets Rp 5M - 10M)
+  - 🟡 **Usaha Besar** (> Rp 50M)
+- **6-Axis Spider Radar Chart**: Visualizes balance across Financials, Operations, Marketing, HR, Legality, and Scalability.
+- **Prioritized Red Flags (Bento Grid)**: P0 (Critical), P1 (High), and P2 (Medium) vulnerabilities detailing specific causes, actionable step-by-step fixes, estimated time-to-solve, and expected business ROI.
+
+---
+
+### 3. Gap Analysis & 30-Day Turnaround Sprint
+
+- **Financial Health Audit**: Burn rate, gross margin assessment, cash flow status, working capital buffer, and debt leverage risk.
+- **Interactive 30-Day Action Sprint**: Chronological daily task checklists (*Days 1–7: Emergency Leak Plugging*, *Days 8–21: SOP & Financial Controls*, *Days 22–30: Mentorship & Tracking*).
+- **12-Month Simulation Curve**: Interactive chart projecting month-over-month health score recovery and revenue growth.
+
+---
+
+### 4. OK OCE 7 TOP Mentorship & In-App AI Coach
+
+Direct alignment with the official **7 Tahapan OK OCE (7 TOP)**:
 
 ```
-├── app/
-│   ├── api/
-│   │   ├── analyze/          # POST — AI diagnostic generation endpoint
-│   │   ├── mentoring-chat/   # POST — Interactive AI mentoring chat endpoint
-│   │   ├── save/             # POST — Save diagnostic results to Supabase
-│   │   └── idea/[id]/        # GET  — Retrieve saved diagnostic by ID
-│   ├── diagnostic/[id]/      # Dynamic dashboard page (diagnostic results)
-│   ├── layout.tsx            # Root layout (header, footer, analytics)
-│   └── page.tsx              # Landing page with diagnostic form
-├── components/
-│   ├── charts/               # ViabilityGaugeChart, RadarMetricsChart, FinancialGrowthChart
-│   ├── dashboard/            # TabExecutiveHealth, TabGapAnalysis, TabOkoceMentoring,
-│   │                         # RedFlagsCard, OkoceAiMentorChat, DashboardHeader
-│   ├── form/                 # BusinessDiagnosticForm (5-pillar wizard)
-│   ├── export/               # PDF export utilities
-│   ├── kokonut/              # GlowCard, RiskAlertCard (custom card components)
-│   └── kokonutui/            # apple-activity-card, card-flip (3rd party UI)
-├── lib/
-│   ├── ai/gemini.ts          # Gemini API integration (REST-based)
-│   └── schemas/analysis.ts   # Zod validation schemas
-├── types/
-│   └── business-analysis.ts  # TypeScript type definitions
-├── public/
-│   ├── okoce.png             # OK OCE Indonesia official logo
-│   └── uscm.png              # USCM official logo
-└── supabase/                 # Supabase configuration & migrations
+[P1 Pendaftaran] ➔ [P2 Pelatihan] ➔ [P3 Pendampingan] ➔ [P4 Perizinan] ➔ [P5 Pemasaran] ➔ [P6 Pelaporan Keuangan] ➔ [P7 Permodalan]
 ```
 
----
-
-## 🛠️ Local Development Setup
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/felixpalingan/Business-AI.git
-   cd Business-AI
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment Variables (`.env.local`):**
-   ```env
-   GEMINI_API_KEY=your_gemini_api_key
-   NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_publishable_key
-   ```
-
-4. **Run Development Server:**
-   ```bash
-   npm run dev
-   ```
-   Open `http://localhost:3000` in your browser.
-
-5. **Build for Production:**
-   ```bash
-   npm run build
-   ```
+- **Interactive 1-on-1 AI Mentoring Modal**: Real-time conversational coach initialized with complete diagnostic context (health score, red flags, revenue scale, and matched OK OCE track).
+- **Guided Prompt Suggestions**: Pre-built tactical questions for quick exploration.
+- **WhatsApp Escalation CTA**: Direct link to connect with official OK OCE human mentors.
 
 ---
 
-## 🤝 Partners
+### 5. Tactical Toolkit & Export Suite
 
-Built in collaboration with:
-
-- **[OK OCE Indonesia](https://ofrfrfrfkoceindonesia.id)** — Social Movement for Job Creation & MSME Advancement.
-- **USCM** — Supporting MSME digital transformation and capacity building.
+- **Ready-to-Use SOP Snippet**: Autogenerated operational workflow checklist.
+- **Cash Flow Rulebook**: 1-page financial hygiene guideline for business owners.
+- **Bank / Financing Readiness Pitch**: Executive summary formatted for KUR loans or investors.
+- **1-Click PDF Export**: Clean, print-ready document for offline mentoring and bank reviews.
 
 ---
 
-## 🛡️ License
+## 🛠️ Tech Stack & Architecture
 
-Distributed under the MIT License. Built for Indonesian MSMEs, mentors, and the OK OCE ecosystem.
+- **Framework**: Next.js 15.5 (App Router, React 19)
+- **Language & Types**: TypeScript 5 with strict mode
+- **Styling**: Tailwind CSS 3.4 + CSS Variables
+- **Icons & Graphics**: Lucide React, Canvas Confetti
+- **Charts**: Recharts (Radar, Area, Bar, Gauge charts)
+- **Validation**: Zod
+- **AI Integration**: Google Gemini API via REST with Multi-Model Fallback
+- **Database**: Supabase PostgreSQL (client & server-side persistence)
+- **Deployment**: Vercel CI/CD
+
+---
+
+## ⚙️ Getting Started Locally
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/felixpalingan/Business-AI.git
+cd Business-AI
+```
+
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+Create a `.env.local` file in the root directory:
+```env
+GEMINI_API_KEY=your_google_ai_studio_key_here
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+```
+
+### 4. Run the development server
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 📄 License
+
+Developed for **OK OCE Indonesia** & **USCM**. All rights reserved.

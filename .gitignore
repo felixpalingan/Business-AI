@@ -32,3 +32,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# agent & skills
+.agent/
+.claude/
+.gemini/
+.impeccable/
+PRODUCT.md
+scratch/
