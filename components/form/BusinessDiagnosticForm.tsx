@@ -123,10 +123,10 @@ export function BusinessDiagnosticForm({ onSubmit, isLoading }: BusinessDiagnost
             key={idx}
             type="button"
             onClick={() => handleApplyPreset(preset)}
-            className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs text-slate-700 shadow-xs transition-all hover:border-red-500 hover:bg-red-50/50 hover:text-red-700"
+            className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs text-slate-800 shadow-xs transition-all hover:border-red-500 hover:bg-red-50/80 hover:text-red-900"
           >
             <span className="font-medium">{preset.name}</span>
-            <span className="rounded-full bg-red-100 px-2 py-0.5 text-[10px] text-red-700 font-semibold">
+            <span className="rounded-full bg-red-100/80 border border-red-200 px-2 py-0.5 text-[10px] text-red-800 font-semibold">
               {preset.tag}
             </span>
           </button>

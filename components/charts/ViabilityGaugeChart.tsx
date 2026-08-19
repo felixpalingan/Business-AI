@@ -78,7 +78,7 @@ export function ViabilityGaugeChart({ score, verdict }: ViabilityGaugeChartProps
           <div className="flex items-baseline">
             <span
               ref={numberRef}
-              className="text-4xl font-extrabold tracking-tight text-slate-900 font-heading"
+              className="text-4xl font-extrabold tracking-tight text-slate-900 font-heading tabular-nums"
             >
               {score.toFixed(1)}
             </span>

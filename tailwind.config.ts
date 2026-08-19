@@ -98,8 +98,9 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        heading: ["var(--font-outfit)", "sans-serif"],
+        sans: ["var(--font-sans)", "sans-serif"],
+        heading: ["var(--font-heading)", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
       },
       keyframes: {
         "accordion-down": {

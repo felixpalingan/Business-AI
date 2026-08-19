@@ -40,8 +40,7 @@ export function RiskAlertCard({ riskItem, index }: RiskAlertCardProps) {
   return (
     <div
       className={cn(
-        "group relative overflow-hidden rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 border-l-4",
-        config.accentBg,
+        "group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300",
         "hover:border-slate-300 hover:shadow-md"
       )}
     >

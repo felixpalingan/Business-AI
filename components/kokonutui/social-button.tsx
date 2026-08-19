@@ -55,7 +55,7 @@ export function SocialButton({ ideaName, slug }: SocialButtonProps) {
 
       <button
         onClick={copyLink}
-        className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 hover:border-red-300 hover:bg-red-50 hover:text-red-700 transition-all whitespace-nowrap shadow-2xs"
+        className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 hover:border-red-300 hover:bg-red-50/80 hover:text-red-900 transition-all whitespace-nowrap shadow-2xs"
         title="Copy Link"
       >
         {copied ? (
